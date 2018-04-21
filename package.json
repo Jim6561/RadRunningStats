@@ -1,0 +1,22 @@
+{
+  "name": "rad-running-stats",
+  "version": "1.0.0",
+  "description": "Expose graphs and analytics on race results in the local area.",
+  "main": "index.js",
+  "scripts": {
+    "scrapeData": "node importTasks/scraper.js",
+    "saveData": "node importTasks/saveResultsToDatabase.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jim Woodward",
+  "license": "ISC",
+  "devDependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "request": "^2.85.0"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.225.1",
+    "pg": "^7.4.1",
+    "jsonfile": "^4.0.0"
+  }
+}
