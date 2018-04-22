@@ -1,18 +1,19 @@
--- Table: public."Race"
+-- Table: public."race"
 
--- DROP TABLE public."Race";
+-- DROP TABLE public."race";
 
-CREATE TABLE public."Race"
+CREATE TABLE public."race"
 (
-    "Id" integer NOT NULL DEFAULT nextval('"Race_Id_seq"'::regclass),
-    racename character varying(255) COLLATE pg_catalog."default",
-    event_date date,
-    CONSTRAINT "Race_pkey" PRIMARY KEY ("Id")
+    race_id serial,
+    event_date date NOT NULL,
+    distance character varying(255)  NOT NULL COLLATE pg_catalog."default",
+    race_name character varying(255)  NOT NULL COLLATE pg_catalog."default",
+    CONSTRAINT "Race_pkey" PRIMARY KEY ("race_id")
 )
 WITH (
     OIDS = FALSE
 )
 TABLESPACE pg_default;
 
-ALTER TABLE public."Race"
+ALTER TABLE public."race"
     OWNER to gvapenbnrbmadi;
