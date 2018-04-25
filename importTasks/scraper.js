@@ -100,7 +100,7 @@ locateColumns = ($headers) => {
 	var results = {};
 	var $query = $headers.first();
 	while (columnIndex < $headers.length) {
-		results[columnIndex] = $query.text().trim();
+		results[columnIndex] = $query.text().trim().toLowerCase().replace(/[/]/g, '');
 		$query = $query.next();
 		columnIndex++;
 	}
