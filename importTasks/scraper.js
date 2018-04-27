@@ -100,7 +100,7 @@ locateColumns = ($headers) => {
 	var results = {};
 	var $query = $headers.first();
 	while (columnIndex < $headers.length) {
-		results[columnIndex] = $query.text().trim().toLowerCase().replace(/[/]/g, '');
+		results[columnIndex] = $query.text().trim().toLowerCase().replace(/[./]/g, '');
 		$query = $query.next();
 		columnIndex++;
 	}
@@ -144,9 +144,10 @@ extractRow = ($rowTableData, columnHeaders) => {
 }
 
 convertDataTypes = (columnHeader, rawData) => {
-	if (columnHeader == 'Net'
-	  || columnHeader == 'Gun'
-	  || columnHeader == 'Pace') {
+	if (columnHeader == 'net'
+	  || columnHeader == 'gun'
+	  || columnHeader == 'pace'
+	  || columnHeader == 'split') {
 	  	var timeParts = rawData.split(":");
 	  	if (timeParts.length === 2) {
 	  		return parseInt(timeParts[0]) * 60 + parseInt(timeParts);

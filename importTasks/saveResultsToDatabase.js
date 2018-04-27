@@ -1,7 +1,11 @@
 const pg = require('pg');
 const jsonfile = require('jsonfile');
 
-const fileToLoad = 'data/scrapedRaces/HOPS&HALFSHELLSTrailRunWalk_5K.json';
+//const fileToLoad = 'data/scrapedRaces/HOPS&HALFSHELLSTrailRunWalk_5K.json';
+//const fileToLoad = 'data/scrapedRaces/Springtime10K5K1Mile_10K.json';
+//const fileToLoad = 'data/scrapedRaces/Springtime10K5K1Mile_1M.json';
+//const fileToLoad = 'data/scrapedRaces/Springtime10K5K1Mile_5K.json';
+const fileToLoad = 'data/scrapedRaces/WormGruntinFestival5KSopchoppyFL_5K.json';
 
 var envParams = jsonfile.readFileSync('.env');
 var dataToSave = jsonfile.readFileSync(fileToLoad);
@@ -30,12 +34,22 @@ generateResultSql = function(raceId) {
 
 	return dataToSave.results.map((result, index, arr) => {
 		return {
-			text: 'INSERT INTO runner_result(race_id, name, sex, age) VALUES ($1, $2, $3, $4)',
+			text: 'INSERT INTO runner_result(race_id, name, sex, age, city, state, place, div_tot, div, bib_number, net_time, gun_time, split_time, pace) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)',
 			values: [
 				raceId,
 				result.name,
 				result.sex,
-				result.age
+				result.age == '' ? null : result.age,
+				result.city,
+				result.state,
+				result.place,
+				result.divtot,
+				result.div,
+				result.no,
+				result.net,
+				result.gun,
+				result.split,
+				result.pace
 			]
 		};
 	});
@@ -49,23 +63,24 @@ pool.connect()
 
 	client.query(insertRaceSql)
 	.then((result) => {
-		console.log('query completed');
-		//console.log(result);
-
 		raceId = result.rows[0].race_id;
-		console.log('finding Id');
-		console.log(raceId);
-
 	})
 	.then(() => {
-		console.log('ready to insert more data for race: ' + raceId);
-
 		var runnerSql = generateResultSql(raceId);
 		
+		console.log('ready to insert ' +  runnerSql.length + ' for race: ' + raceId);
+
 		runnerSql.forEach((sql, i, arr) => {
 
-			client.query(sql, () => {
+			client.query(sql, (err, result) => {
 				console.log('inserting result: ' + i);
+
+				if (err) {
+					console.log(sql);
+					console.log(err);
+					throw err;
+				}
+
 				if (i === runnerSql.length-1) {
 
 				console.log('releasing');
