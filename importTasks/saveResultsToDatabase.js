@@ -9,9 +9,6 @@ var dataToSave = jsonfile.readFileSync(fileToLoad);
 var databaseUrl = (process.env.DATABASE_URL !== undefined) ? process.env.DATABASE_URL : envParams.DATABASE_URL;
 
 
-// console.log('raceName: ' + dataToSave.raceName);
-// console.log('eventDate: ' + dataToSave.eventDate);
-// console.log('distance: ' + dataToSave.distance);
 console.log('databaseUrl: ' + databaseUrl);
 
 var pool = new pg.Pool({
@@ -44,47 +41,11 @@ generateResultSql = function(raceId) {
 	});
 };
 
-
-//console.log(resultSql);
-
-
-//write a generator function to save the results one at a time in a loop. Easy!
-
-
-/*function* getResultInsertSql(resultsToSave, client) {
-	var i = 0;
-
-	while (i<resultSql.length) {
-		console.log('inserting a result' + i);
-		console.log(resultSql[i]);
-		yield client.query(resultSql[i++]);
-
-	}
-
-	console.log('no more results');
-}*/
-
-
-//console.log(resultSql[0]);
-//console.log(resultSql[1]);
-
-
-//console.log(insertRaceSql);
-
-
-
-
-
-
-
 var raceId;
-
 
 pool.connect()
 .then(client => {
 	console.log('connected');
-
-	//var gen = getResultInsertSql(dataToSave.results, client);
 
 	client.query(insertRaceSql)
 	.then((result) => {
@@ -95,43 +56,24 @@ pool.connect()
 		console.log('finding Id');
 		console.log(raceId);
 
-
-
-		//console.log('releasing');
-		//client.release();
-		//console.log('released');
-		
-
 	})
 	.then(() => {
 		console.log('ready to insert more data for race: ' + raceId);
 
-
-
 		var runnerSql = generateResultSql(raceId);
 		
+		runnerSql.forEach((sql, i, arr) => {
 
-		client.query(runnerSql[0]);
-		console.log('Two');
-		client.query(runnerSql[1], () => {
-			console.log('it\'s a callback - we did the third insert');
+			client.query(sql, () => {
+				console.log('inserting result: ' + i);
+				if (i === runnerSql.length-1) {
 
-			console.log('releasing');
-			client.release();
-			console.log('released');
+				console.log('releasing');
+				client.release();
+				console.log('released');
+				}
+			});
 		});
-		console.log('Three');
-
-		// console.log('releasing');
-		// client.release();
-		// console.log('released');
-
-		//while (!gen.next().done) {
-		//	console.log('doing the thing');
-		//}
-		//console.log(gen.next());
-
-
 
 	})
 })
