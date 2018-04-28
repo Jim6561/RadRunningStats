@@ -6,17 +6,23 @@
   "scripts": {
     "scrapeData": "node importTasks/scraper.js",
     "saveData": "node importTasks/saveResultsToDatabase.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "startdev": "nodemon app.js"
   },
   "author": "Jim Woodward",
   "license": "ISC",
   "devDependencies": {
     "cheerio": "^1.0.0-rc.2",
-    "request": "^2.85.0"
+    "request": "^2.85.0",
+    "nodemon": "^1.14.11"
   },
   "dependencies": {
     "aws-sdk": "^2.225.1",
+    "express": "^4.16.3",
+    "jsonfile": "^4.0.0",
+    "morgan": "^1.9.0",
     "pg": "^7.4.1",
-    "jsonfile": "^4.0.0"
+    "serve-favicon": "^2.5.0"
   }
 }
