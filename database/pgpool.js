@@ -1,7 +1,8 @@
+const fs = require('fs');
 const pg = require('pg');
 const jsonfile = require('jsonfile');
 
-var envParams = jsonfile.readFileSync('.env');
+var envParams = fs.existsSync('.env') ? jsonfile.readFileSync('.env') : {};
 var databaseUrl = (process.env.DATABASE_URL !== undefined) ? process.env.DATABASE_URL : envParams.DATABASE_URL;
 
 
