@@ -6,16 +6,16 @@ var serveStatic = require('serve-static')
 
 var app = express();
 const PORT = process.env.PORT || 5000;
+const rootdir = process.cwd();
 
 
-app.set('views', path.join(__dirname, 'views'));
+console.log('rootdir: ' + rootdir);
+
+app.set('views', path.join(rootdir, 'views'));
 app.set('view engine', 'pug');
 
-
 app.use(require('./app/routers/'));
-
-app.use(serveStatic(__dirname + '/lib'));
-
+app.use(serveStatic(rootdir + '/lib'));
 app.use(logger('dev'));
 
 // catch 404 and forward to error handler
