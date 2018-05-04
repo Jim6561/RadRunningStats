@@ -4,7 +4,7 @@ var express = require('express'),
     router = express.Router();
 
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Cats' });
+  res.render('index', { title: 'Jimmy' });
 });
 
 //router.use('/', require('./test'));
