@@ -7,6 +7,7 @@
     "scrapeData": "node importTasks/scraper.js",
     "saveData": "node importTasks/saveResultsToDatabase.js",
     "build": "webpack --mode production",
+    "postinstall": "webpack --mode production",
     "builddev": "webpack --mode development",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
