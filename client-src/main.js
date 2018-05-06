@@ -3,12 +3,12 @@ import "babel-polyfill";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
-//import {Provider} from 'react-redux';
+import {Provider} from 'react-redux';
 //import { createStore, applyMiddleware } from 'redux'
 //import createSagaMiddleware from 'redux-saga'
 
 
-import AwesomeTable from './components/AwesomeTable';
+import TableHolder from './containers/TableHolder';
 
 import myApp from './reducers'
 import { receiveResults } from './actions/actions'
@@ -30,12 +30,10 @@ store.dispatch(receiveResults(results));
 
 document.addEventListener('DOMContentLoaded', function() {
 
-  
-
   ReactDOM.render(
-    <div>
-      <AwesomeTable data={results}/>
-    </div>
+    <Provider store={store}>
+      <TableHolder/>
+    </Provider>
     ,document.getElementById('mount')
   );
 });
