@@ -2,22 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 var format = require('format-duration');
  
-class TimeValue extends React.Component {
-  constructor(props) {
-    super(props);
+const TimeValue = ({value}) => {
+  var output = '';
+  if (value) {
+    var output = format(value * 1000);
   }
 
-  render() {
-
-    var output = '';
-    if (this.props.value) {
-      var output = format(this.props.value * 1000);
-    }
-
-    return (
-      <div>{output}</div>
-    );
-  }
+  return (
+    <div>{output}</div>
+  );
 }
 
 TimeValue.propTypes = {
