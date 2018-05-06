@@ -44,9 +44,9 @@ Example
 const request = require('request');
 const cheerio = require('cheerio');
 const jsonfile = require('jsonfile');
-
-
 var inputFile = 'data/testSource.json';
+//var inputFile = 'data/2018_04.json';
+
 jsonfile.readFile(inputFile, (err, eventsToScrape) => {
 	if (err) throw err;
 
@@ -134,7 +134,13 @@ extractRow = ($rowTableData, columnHeaders) => {
 	while(columnIndex < $rowTableData.length) {
 		var columnHeader = columnHeaders[columnIndex],
 			rawData = $pointer.text().trim();
-		$rowResult[columnHeader] = convertDataTypes(columnHeader, rawData);
+
+		if (columnHeader === 'time') {
+			$rowResult['net'] = convertDataTypes('time', rawData);
+			$rowResult['gun'] = convertDataTypes('time', rawData);
+		} else {
+			$rowResult[columnHeader] = convertDataTypes(columnHeader, rawData);			
+		}
 
 		$pointer = $pointer.next();
 		columnIndex++;
@@ -147,10 +153,11 @@ convertDataTypes = (columnHeader, rawData) => {
 	if (columnHeader == 'net'
 	  || columnHeader == 'gun'
 	  || columnHeader == 'pace'
-	  || columnHeader == 'split') {
+	  || columnHeader == 'split'
+	  || columnHeader == 'time') {
 	  	var timeParts = rawData.split(":");
 	  	if (timeParts.length === 2) {
-	  		return parseInt(timeParts[0]) * 60 + parseInt(timeParts);
+	  		return parseInt(timeParts[0]) * 60 + parseInt(timeParts[1]);
 	  	}
 	  	else if (timeParts.length === 3) {
 	  		return parseInt(timeParts[0]) * 60 * 60 + parseInt(timeParts[1]) * 60 + parseInt(timeParts[2]);
