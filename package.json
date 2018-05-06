@@ -2,6 +2,10 @@
   "name": "rad-running-stats",
   "version": "1.0.0",
   "description": "Expose graphs and analytics on race results in the local area.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jim6561/RadRunningStats"
+  },
   "main": "index.js",
   "scripts": {
     "scrapeData": "node importTasks/scraper.js",
@@ -28,6 +32,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "express": "^4.16.3",
+    "format-duration": "^1.1.0",
     "jsonfile": "^4.0.0",
     "morgan": "^1.9.0",
     "npm": "^5.7.1",

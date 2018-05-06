@@ -1,11 +1,11 @@
 const pg = require('pg');
 const jsonfile = require('jsonfile');
 
-//const fileToLoad = 'data/scrapedRaces/HOPS&HALFSHELLSTrailRunWalk_5K.json';
+const fileToLoad = 'data/scrapedRaces/HOPS&HALFSHELLSTrailRunWalk_5K.json';
 //const fileToLoad = 'data/scrapedRaces/Springtime10K5K1Mile_10K.json';
 //const fileToLoad = 'data/scrapedRaces/Springtime10K5K1Mile_1M.json';
 //const fileToLoad = 'data/scrapedRaces/Springtime10K5K1Mile_5K.json';
-const fileToLoad = 'data/scrapedRaces/WormGruntinFestival5KSopchoppyFL_5K.json';
+//const fileToLoad = 'data/scrapedRaces/WormGruntinFestival5KSopchoppyFL_5K.json';
 
 var envParams = jsonfile.readFileSync('.env');
 var dataToSave = jsonfile.readFileSync(fileToLoad);
