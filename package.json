@@ -2,21 +2,49 @@
   "name": "rad-running-stats",
   "version": "1.0.0",
   "description": "Expose graphs and analytics on race results in the local area.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jim6561/RadRunningStats"
+  },
   "main": "index.js",
   "scripts": {
     "scrapeData": "node importTasks/scraper.js",
     "saveData": "node importTasks/saveResultsToDatabase.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --mode production",
+    "postinstall": "webpack --mode production",
+    "builddev": "webpack --mode development",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "startdev": "nodemon app.js"
   },
   "author": "Jim Woodward",
   "license": "ISC",
   "devDependencies": {
     "cheerio": "^1.0.0-rc.2",
-    "request": "^2.85.0"
+    "nodemon": "^1.14.11",
+    "request": "^2.85.0",
+    "webpack-cli": "^2.1.2"
   },
   "dependencies": {
     "aws-sdk": "^2.225.1",
+    "babel-loader": "^7.1.4",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "express": "^4.16.3",
+    "format-duration": "^1.1.0",
+    "jsonfile": "^4.0.0",
+    "morgan": "^1.9.0",
+    "npm": "^5.7.1",
     "pg": "^7.4.1",
-    "jsonfile": "^4.0.0"
+    "pug": "^2.0.3",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "redux-saga": "^0.16.0",
+    "serve-favicon": "^2.5.0",
+    "serve-static": "^1.13.2",
+    "webpack": "^4.6.0"
   }
 }
