@@ -1,9 +1,9 @@
-import { call, put } from 'redux-saga/effects'
+import { call, put, select } from 'redux-saga/effects'
 import { receiveResults_success } from '../actions/actions'
 
 export default function* resultFetcher (action) {
-  let runnerName = 'sam';
-  let queryUrl = 'runner?name=' + action.runnerName;
+  let runnerName = yield select(state => state.runnerName);
+  let queryUrl = 'runner?name=' + runnerName;
   let req = {
     method: 'GET'
   };

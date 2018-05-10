@@ -1,6 +1,7 @@
-import {RECEIVE_RESULTS_SUCCESS} from '../actions/actions'
+import {RECEIVE_RESULTS_SUCCESS, SEARCH_FORM_CHANGED} from '../actions/actions'
 
 const initialState = {
+	runnerName: '',
 	records: []
 };
 
@@ -11,6 +12,10 @@ function myApp(state = initialState, action) {
 	    	return Object.assign({}, state, {
 	     		records: action.records
 	     	})
+	    case SEARCH_FORM_CHANGED:
+	    	return Object.assign({}, state, {
+	    		runnerName: action.event.target.value
+	    	})
 	    default:
 	     	return state
  	}
