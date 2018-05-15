@@ -1,55 +1,15 @@
-/*
-I'm looking to get output from step 1 as a javascript object with all the data in it.
-Example
-
-{
-	"raceName": "Springtime 10K/5K/1Mile",
-	"eventDate": a js date object?,
-	"distance": "10K",
-	"results": [
-		{
-			"Name": "Christopher Haynes",
-			"Sex": "M",
-			"Age": 25,
-			"City": "Tallahassee",
-			"State": "FL",
-			"Place": "1",
-			"Div/Tot": "1/36",
-			"Div": "M25-29",
-			"No.": "785",
-			"Split": time in seconds?,
-			"Net": time in seconds?,
-			"Gun": time in seconds?,
-			"Pace": time in seconds?
-		}, {
-			"Name": "Justin Garrard",
-			"Sex": "M",
-			"Age": 31,
-			"City": "Tallahassee",
-			"State": "FL",
-			"Place": "2",
-			"Div/Tot": "1/45",
-			"Div": "M30-34",
-			"No.": "236",
-			"Split": time in seconds?,
-			"Net": time in seconds?,
-			"Gun": time in seconds?,
-			"Pace': time in seconds?	
-		}
-	]
-}
-
- */
-
 const request = require('request');
 const cheerio = require('cheerio');
 const jsonfile = require('jsonfile');
-var inputFile = 'data/testSource.json';
+const htmlScraper = require('./htmlScraper');
+const aspScraper = require('./aspScraper');
+
+//var inputFile = 'data/testSourceHtml.json';
+var inputFile = 'data/testSourceAsp.json';
 //var inputFile = 'data/2018_04.json';
 
 jsonfile.readFile(inputFile, (err, eventsToScrape) => {
 	if (err) throw err;
-
 
 	eventsToScrape.events.forEach((event) => {
 		extractEvent(event);
@@ -61,7 +21,12 @@ jsonfile.readFile(inputFile, (err, eventsToScrape) => {
 extractEvent = (event) => {
 	event.distances.forEach((distancePage) => {
 
-		var myTestThingy = scrapeResultsFromUrl(distancePage.url, (raceResults) => {
+		let config = {
+			url: distancePage.url,
+			pageType: event.pageType
+		}
+
+		var myTestThingy = scrapeResultsFromUrl(config, (raceResults) => {
 			var raceResults = {
 				'raceName': event.raceName,
 				'eventDate': new Date(event.date),
@@ -83,89 +48,78 @@ extractEvent = (event) => {
 /**
  * The request to load the data is asynchronous. So use the call back to save it.
  */
-scrapeResultsFromUrl = (url, callback) => {
-	request(url, function(error, response, body) {
-		$ = cheerio.load(body);
-		var $headers = $('table tr th');
-		var columnHeaders = locateColumns($headers);
-		var $results = $('table tr');
+scrapeResultsFromUrl = (config, callback) => {
 
-		extractResults($results, columnHeaders, callback);
+	request(config.url, function(error, response, body) {
+		var $ = cheerio.load(body);
+		var scraper;
+		if (config.pageType === 'html') {
+			scraper = htmlScraper;
+		} else if (config.pageType === 'asp') {
+			scraper = aspScraper;
+		} else {
+			throw 'unexpected pageType: ' + config.pageType;
+		}
+
+		scraper.scrape($, config, callback);
 	});
+/*
+
+	if (config.pageType === 'html') {
+		scrapeHtml();
+		
+			var $headers = $('table tr th');
+			var columnHeaders = locateColumns($headers);
+			var $results = $('table tr');
+
+			extractResults($results, columnHeaders, callback);
+		});
+	} else if (config.pageType === 'asp') {
+		request(config.url, function(error, response, body) {
+			$ = cheerio.load(body);
+			var data = $('pre').text();
+			var rows = data.split('\n');
+			console.log('let\'s do it');
+			//console.log(rows);
+			var headers = rows[0];
+
+
+			var place = headers.substring(0, 10).trim();
+			var firstName = headers.substring(10, 32).trim();
+			var lastName = headers.substring(32, 56).trim();
+			var sex = headers.substring(56, 68).trim();
+			var age = headers.substring(68, 76).trim();
+			var time = headers.substring(76).trim();
+
+			console.log(place);
+			console.log(firstName);
+			console.log(lastName);
+			console.log(sex);
+			console.log(age);
+			console.log(time);
+
+			var headers1 = rows[1];
+			console.log(headers1);
+
+			var place1 = headers1.substring(0, 10).trim();
+			var firstName1 = headers1.substring(10, 32).trim();
+			var lastName1 = headers1.substring(32, 56).trim();
+			var sex1 = headers1.substring(56, 68).trim();
+			var age1 = headers1.substring(68, 76).trim();
+			var time1 = headers1.substring(76).trim();
+
+			console.log(place1);
+			console.log(firstName1);
+			console.log(lastName1);
+			console.log(sex1);
+			console.log(age1);
+			console.log(time1);
+
+		});
+	} else {
+		
+	}*/
 };
 
 
-locateColumns = ($headers) => {
-	var columnIndex = 0;
-	var results = {};
-	var $query = $headers.first();
-	while (columnIndex < $headers.length) {
-		results[columnIndex] = $query.text().trim().toLowerCase().replace(/[./]/g, '');
-		$query = $query.next();
-		columnIndex++;
-	}
-	return results;
-}
 
-extractResults = ($results, columnHeaders, callback) => {
-	//Let's assume the first row is the headers
-	var resultsData = [];
-
-	var $rowData = $results.first().next();
-	rowIndex = 1; // cos we are skipping the header row.
-
-	while(rowIndex < $results.length) {
-		var rowResult = extractRow($rowData.children(), columnHeaders);
-		resultsData.push(rowResult);
-
-		$rowData = $rowData.next();
-		rowIndex++;
-
-	}
-
-	callback(resultsData);
-}
-
-extractRow = ($rowTableData, columnHeaders) => {
-	var columnIndex = 0;
-	var $rowResult = {};
-	var $pointer = $rowTableData.first();
-
-	while(columnIndex < $rowTableData.length) {
-		var columnHeader = columnHeaders[columnIndex],
-			rawData = $pointer.text().trim();
-
-		if (columnHeader === 'time') {
-			$rowResult['net'] = convertDataTypes('time', rawData);
-			$rowResult['gun'] = convertDataTypes('time', rawData);
-		} else {
-			$rowResult[columnHeader] = convertDataTypes(columnHeader, rawData);			
-		}
-
-		$pointer = $pointer.next();
-		columnIndex++;
-	}
-
-	return $rowResult;
-}
-
-convertDataTypes = (columnHeader, rawData) => {
-	if (columnHeader == 'net'
-	  || columnHeader == 'gun'
-	  || columnHeader == 'pace'
-	  || columnHeader == 'split'
-	  || columnHeader == 'time') {
-	  	var timeParts = rawData.split(":");
-	  	if (timeParts.length === 2) {
-	  		return parseInt(timeParts[0]) * 60 + parseInt(timeParts[1]);
-	  	}
-	  	else if (timeParts.length === 3) {
-	  		return parseInt(timeParts[0]) * 60 * 60 + parseInt(timeParts[1]) * 60 + parseInt(timeParts[2]);
-	  	}
-	  	console.log('Unexpected time: ' + rawData);
-		return rawData + ' in seconds';
-	}
-
-	return rawData;
-
-}

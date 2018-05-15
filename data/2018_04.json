@@ -1,5 +1,26 @@
 {
-	"events": [{
+	"events": [
+		{
+			"raceName": "HOPS & HALF SHELLS Trail Run/Walk",
+			"date": "2018-04-14",
+			"distances": [{
+				"distance": "5K",
+				"url": "http://gulfwinds.org/raceresults/2018/HopsandHalfShell2018.html"
+			}]
+		},
+		//http://gulfwinds.org/raceresults/2018/Epiphany%20Endurance%202018.asp
+		//Has a 10k and a 5k
+
+
+		{
+			"raceName": "Worm Gruntin' Festival 5K, Sopchoppy, FL",
+			"date": "2018-04-07",
+			"distances": [{
+				"distance": "5K",
+				"url": "http://gulfwinds.org/raceresults/2018/Worm%20Gruntin%202018.asp"
+			}]
+		},
+		{
 		"raceName": "Springtime 10K/5K/1Mile",
 		"date": "2018-04-07",
 		"distances": [{
@@ -12,23 +33,6 @@
 				"distance": "1M",
 				"url": "http://gulfwinds.org/raceresults/2018/SpringtimeMile2018.html"
 			}]
-	}, 
-	{
-		"raceName": "Worm Gruntin' Festival 5K, Sopchoppy, FL",
-		"date": "2018-04-07",
-		"distances": [{
-			"distance": "5K",
-			"url": "http://gulfwinds.org/raceresults/2018/Worm%20Gruntin%202018.asp"
-		}]
-	}, 
-	{
-		"raceName": "HOPS & HALF SHELLS Trail Run/Walk",
-		"date": "2018-04-14",
-		"distances": [{
-			"distance": "5K",
-			"url": "http://gulfwinds.org/raceresults/2018/HopsandHalfShell2018.html"
-		}]
-	}
-
-]
+		}
+	]
 }

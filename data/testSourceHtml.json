@@ -1,0 +1,13 @@
+{
+	"events": [
+		{
+			"raceName": "HOPS & HALF SHELLS Trail Run/Walk",
+			"date": "2018-04-14",
+			"pageType": "html",
+			"distances": [{
+				"distance": "5K",
+				"url": "http://gulfwinds.org/raceresults/2018/HopsandHalfShell2018.html"
+			}]
+		}
+	]
+}
