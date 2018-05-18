@@ -1,11 +1,28 @@
 {
 	"events": [
 		{
+			"raceName": "Epiphany Endurance 10K/5K",
+			"date": "2018-04-14",
+			"pageType": "asp",
+			"columnStyle": "C4",
+			"distances": [{
+				"distance": "10K",
+				"metaDistance": "10K",
+				"url": "http://gulfwinds.org/raceresults/2018/Epiphany%20Endurance%202018.asp"
+			}, {
+				"distance": "5K",
+				"metaDistance": "5K",
+				"url": "http://gulfwinds.org/raceresults/2018/Epiphany%20Endurance%202018.asp"
+			}]
+		},
+		{
 			"raceName": "Worm Gruntin' Festival 5K, Sopchoppy, FL",
 			"date": "2018-04-07",
 			"pageType": "asp",
+			"columnStyle": "C6",
 			"distances": [{
 				"distance": "5K",
+				"metaDistance": "5K",
 				"url": "http://gulfwinds.org/raceresults/2018/Worm%20Gruntin%202018.asp"
 			}]
 		}
