@@ -4,18 +4,20 @@ const jsonfile = require('jsonfile');
 const htmlScraper = require('./htmlScraper');
 const aspScraper = require('./aspScraper');
 
-var inputFile = 'data/testSourceHtml.json';
-//var inputFile = 'data/testSourceAsp.json';
-//var inputFile = 'data/2018_04.json';
+
+var myArgs = process.argv.slice(2);
+var inputFile = myArgs[0];
+if (inputFile === undefined) {
+	console.log('Must supply sourceFile parameter');
+	return;
+}
 
 jsonfile.readFile(inputFile, (err, eventsToScrape) => {
 	if (err) throw err;
 
 	eventsToScrape.events.forEach((event) => {
 		extractEvent(event);
-		
-	})
-	
+	});
 });
 
 extractEvent = (event) => {
@@ -33,6 +35,7 @@ extractEvent = (event) => {
 				'raceName': event.raceName,
 				'eventDate': new Date(event.date),
 				'distance': distancePage.distance,
+				'location': event.location,
 				'results': raceResults
 			};
 

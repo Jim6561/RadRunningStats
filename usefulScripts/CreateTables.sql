@@ -7,6 +7,7 @@ CREATE TABLE public."race"
     race_id serial,
     event_date date NOT NULL,
     distance character varying(255)  NOT NULL COLLATE pg_catalog."default",
+    location character varying(255)  COLLATE pg_catalog."default",
     race_name character varying(255)  NOT NULL COLLATE pg_catalog."default",
     CONSTRAINT "Race_pkey" PRIMARY KEY ("race_id")
 )

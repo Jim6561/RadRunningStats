@@ -1,11 +1,13 @@
 const pg = require('pg');
 const jsonfile = require('jsonfile');
 
-const fileToLoad = 'data/scrapedRaces/HOPS&HALFSHELLSTrailRunWalk_5K.json';
+//const fileToLoad = 'data/scrapedRaces/EpiphanyEndurance10K5K_10K.json'
+//const fileToLoad = 'data/scrapedRaces/EpiphanyEndurance10K5K_5K.json'
+//const fileToLoad = 'data/scrapedRaces/HOPS&HALFSHELLSTrailRunWalk_5K.json';
 //const fileToLoad = 'data/scrapedRaces/Springtime10K5K1Mile_10K.json';
 //const fileToLoad = 'data/scrapedRaces/Springtime10K5K1Mile_1M.json';
 //const fileToLoad = 'data/scrapedRaces/Springtime10K5K1Mile_5K.json';
-//const fileToLoad = 'data/scrapedRaces/WormGruntinFestival5KSopchoppyFL_5K.json';
+const fileToLoad = 'data/scrapedRaces/WormGruntinFestival5K_5K.json';
 
 var envParams = jsonfile.readFileSync('.env');
 var dataToSave = jsonfile.readFileSync(fileToLoad);
@@ -21,11 +23,12 @@ var pool = new pg.Pool({
 });
 
 var insertRaceSql = {
-	text: 'INSERT INTO race(race_name, event_date, distance) VALUES ($1, $2, $3) RETURNING race_id',
+	text: 'INSERT INTO race(race_name, event_date, distance, location) VALUES ($1, $2, $3, $4) RETURNING race_id',
 	values: [
 		dataToSave.raceName,
 		dataToSave.eventDate,
-		dataToSave.distance
+		dataToSave.distance,
+		dataToSave.location
 	]
 };
 
