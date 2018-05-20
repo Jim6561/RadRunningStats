@@ -11,10 +11,16 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		onclick: () => {
-			dispatch(resultsRequested())
+			dispatch(resultsRequested());
 		},
 		onchange: (e) => {
 			dispatch(searchFormChanged(e))
+		},
+		onkeyup: (e) => {
+			//13 = enter
+			if (e.keyCode === 13) {
+				dispatch(resultsRequested());
+			}
 		}
 	}
 }
