@@ -34,6 +34,10 @@ module.exports.scrape = function($, config, callback) {
 					if (name === 'time') {
 						startIndex -= 2;
 					}
+					//Oh dear, another hack for a column with sticky-out data
+					if (column === 'Age Group') {
+						startIndex -= 2;
+					}
 
 					columnMetadata.push({
 						'name': name,

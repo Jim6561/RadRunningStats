@@ -25,6 +25,18 @@ module.exports = function(rawData) {
 		delete myReturn.time;
 	}
 
+	if (myReturn.age && isNaN(myReturn.age)) {
+		console.log('unexpected age: ' + myReturn.age);
+	}
+
+	if (myReturn.sex
+	  && myReturn.sex !== 'M'
+	  && myReturn.sex !== 'F'
+	  && myReturn.sex !== 'O'
+	  && myReturn.sex !== 'U') {
+		console.log('unexpected sex: ' + myReturn.sex);
+	}
+
 	myReturn.name = name;
 	return myReturn;
 }
