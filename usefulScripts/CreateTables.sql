@@ -1,22 +1,29 @@
--- Table: public."race"
+-- Table: public.race
 
--- DROP TABLE public."race";
+-- DROP TABLE public.race;
 
-CREATE TABLE public."race"
+CREATE TABLE public.race
 (
-    race_id serial,
+    race_id integer NOT NULL DEFAULT nextval('race_race_id_seq'::regclass),
     event_date date NOT NULL,
-    distance character varying(255)  NOT NULL COLLATE pg_catalog."default",
-    location character varying(255)  COLLATE pg_catalog."default",
-    race_name character varying(255)  NOT NULL COLLATE pg_catalog."default",
-    CONSTRAINT "Race_pkey" PRIMARY KEY ("race_id")
+    distance character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    location character varying(255) COLLATE pg_catalog."default",
+    race_name character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    distance_miles numeric,
+    winning_time integer,
+    first_quartile_time integer,
+    median_time integer,
+    third_quartile_time integer,
+    last_time integer,
+    finishers integer,
+    CONSTRAINT "Race_pkey" PRIMARY KEY (race_id)
 )
 WITH (
     OIDS = FALSE
 )
 TABLESPACE pg_default;
 
-ALTER TABLE public."race"
+ALTER TABLE public.race
     OWNER to gvapenbnrbmadi;
 
 
