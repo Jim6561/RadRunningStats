@@ -14,7 +14,7 @@ const jsonfile = require('jsonfile');
 //const fileToLoad = 'data/scrapedRaces/Springtime10K5K1Mile_10K.json';
 //const fileToLoad = 'data/scrapedRaces/Springtime10K5K1Mile_1M.json';
 //const fileToLoad = 'data/scrapedRaces/Springtime10K5K1Mile_5K.json';
-const fileToLoad = 'data/scrapedRaces/TatesHell5KRunWalk_5K.json';
+//const fileToLoad = 'data/scrapedRaces/TatesHell5KRunWalk_5K.json';
 //const fileToLoad = 'data/scrapedRaces/WormGruntinFestival5K_5K.json';
 
 var envParams = jsonfile.readFileSync('.env');
