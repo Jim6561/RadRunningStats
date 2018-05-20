@@ -1,0 +1,28 @@
+.resultsTable {
+	width: 100%;
+}
+
+.searchForm {
+	margin: 1em;
+}
+
+button:hover {
+	background-color: seagreen;
+}
+
+input {
+	margin-left: 1em;
+	margin-right: 1em;
+}
+
+table thead {
+	font-weight: bold;
+}
+
+tr.dataRow:nth-child(odd) {
+	background: #E0FFF0;
+}
+
+tr.dataRow:hover {
+	background-color: lightgreen;
+}

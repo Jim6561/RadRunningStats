@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const RunnerSearchForm = ({runnerName, onclick, onchange, onkeyup}) => {
   
   return (
-    <div>
+    <div className='searchForm'>
     	Search for a name
     	<input value={runnerName} onChange={onchange} onKeyUp={onkeyup}/>
     	<button onClick={onclick}>Search</button>

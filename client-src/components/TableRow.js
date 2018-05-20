@@ -4,7 +4,7 @@ import TimeValue from './TimeValue';
  
 const TableRow = ({rowdata}) => {
   return (
-    <tr>
+    <tr className='dataRow'>
       <td>{rowdata.race_name}</td>
       <td>{rowdata.distance}</td>
       <td>{new Date(rowdata.event_date).toLocaleDateString()}</td>

@@ -4,7 +4,7 @@ import TableRow from './TableRow';
  
 const AwesomeTable = ({data}) => {
   return (
-    <table>
+    <table className='resultsTable'>
       <thead>
         <tr>
           <td>Race</td>
