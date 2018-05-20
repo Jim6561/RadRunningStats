@@ -1,13 +1,21 @@
 const pg = require('pg');
 const jsonfile = require('jsonfile');
 
-//const fileToLoad = 'data/scrapedRaces/EpiphanyEndurance10K5K_10K.json'
-//const fileToLoad = 'data/scrapedRaces/EpiphanyEndurance10K5K_5K.json'
+//const fileToLoad = 'data/scrapedRaces/11thAnnualDragginTailUltraTrailChallenge50K25K_25K.json';
+//const fileToLoad = 'data/scrapedRaces/11thAnnualDragginTailUltraTrailChallenge50K25K_50K.json';
+//const fileToLoad = 'data/scrapedRaces/44thAnnualPalaceSaloon5K_5K.json';
+//const fileToLoad = 'data/scrapedRaces/4thAnnualBeerMile_5K.json';
+//const fileToLoad = 'data/scrapedRaces/5thAnnualNeneFest5K_5K.json';
+//const fileToLoad = 'data/scrapedRaces/EpiphanyEndurance10K5K_10K.json';
+//const fileToLoad = 'data/scrapedRaces/EpiphanyEndurance10K5K_5K.json';
 //const fileToLoad = 'data/scrapedRaces/HOPS&HALFSHELLSTrailRunWalk_5K.json';
+//const fileToLoad = 'data/scrapedRaces/RoseCityRun10K&One-MileRun_10K.json';
+//const fileToLoad = 'data/scrapedRaces/RoseCityRun10K&One-MileRun_1M.json';
 //const fileToLoad = 'data/scrapedRaces/Springtime10K5K1Mile_10K.json';
 //const fileToLoad = 'data/scrapedRaces/Springtime10K5K1Mile_1M.json';
 //const fileToLoad = 'data/scrapedRaces/Springtime10K5K1Mile_5K.json';
-const fileToLoad = 'data/scrapedRaces/WormGruntinFestival5K_5K.json';
+const fileToLoad = 'data/scrapedRaces/TatesHell5KRunWalk_5K.json';
+//const fileToLoad = 'data/scrapedRaces/WormGruntinFestival5K_5K.json';
 
 var envParams = jsonfile.readFileSync('.env');
 var dataToSave = jsonfile.readFileSync(fileToLoad);
@@ -48,7 +56,7 @@ generateResultSql = function(raceId) {
 				result.place,
 				result.divtot,
 				result.div,
-				result.no,
+				result.bib,
 				result.net,
 				result.gun,
 				result.split,

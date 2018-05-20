@@ -29,8 +29,7 @@ extractEvent = (event) => {
 			metaDistance: distancePage.metaDistance,
 			columnStyle: event.columnStyle
 		}
-
-		var myTestThingy = scrapeResultsFromUrl(config, (raceResults) => {
+		scrapeResultsFromUrl(config, (raceResults) => {
 			var raceResults = {
 				'raceName': event.raceName,
 				'eventDate': new Date(event.date),

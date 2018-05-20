@@ -1,55 +1,90 @@
 const convertDataTypes = require('./convertDataTypes');
+const transformRow = require('./transformRow');
 module.exports.scrape = function($, config, callback) {
 
 	const privates = {
-		"expectedColumns": {
-			"C6": [
-				{
-					"name": "place",
-					"index": 0,
-					"length": 10
-				}, {
-					"name": "firstName",
-					"index": 10,
-					"length": 22
-				}, {
-					"name": "lastName",
-					"index": 32,
-					"length": 24
-				}, {
-					"name": "sex",
-					"index": 56,
-					"length": 12
-				}, {
-					"name": "age",
-					"index": 68, 
-					"length": 8
-				}, {
-					"name": "time",
-					"index": 76,
-					"length": 8
-				}],
-			"C4": [{
-					"name": "place",
-					"index": 0,
-					"length": 11
-				}, {
-					"name": "firstName",
-					"index": 11,
-					"length": 21
-				}, {
-					"name": "lastName",
-					"index": 32,
-					"length": 23
-				}, {
-					"name": "time",
-					"index": 55,
-					"length": 8
-				}]
+		possibleColumns: [
+			'Place',
+			'Bib',
+			'First Name',
+			'Frist Name', // OH yes
+			'Last Name',
+			'Sex',
+			'Age Group',
+			'Age',
+			'Time'
+		],
+
+		locateColumns: (headers) => {
+			var columnMetadata = [];
+			var addedAgeGroup = false;
+
+			privates.possibleColumns.map((column) => {
+				//Don't want both Age and Age Group, Age is contained in Age Group.
+				if (addedAgeGroup && column === 'Age') {
+					return;
+				}
+
+				var startIndex = headers.indexOf(column);
+				if (startIndex > -1) {
+					var name = privates.sanitizeColumnName(column);
+
+					//The time data always starts to the left of the header.
+					//Which is annoying.
+					if (name === 'time') {
+						startIndex -= 2;
+					}
+
+					columnMetadata.push({
+						'name': name,
+						'startIndex': startIndex
+					});
+
+					if (column === 'Age Group') {
+						addedAgeGroup = true;
+					}
+				}
+			});
+
+			//Might be a good idea to sort by startIndex at this point		
+			columnMetadata.map((column, i, array) => {
+				if (i < array.length - 1) {
+					column.endIndex = array[i+1].startIndex;
+				}
+			});
+			return columnMetadata;
+		},
+
+		sanitizeColumnName: (name) => {
+			switch(name) {
+				case 'Place':
+					return 'place';
+				case 'First Name':
+				case 'Frist Name':
+					return 'firstName';
+				case 'Last Name':
+					return 'lastName';
+				case 'Sex':
+					return 'sex';
+				case 'Age':
+					return 'age';
+				case 'Time':
+					return 'time';
+				case 'Age Group':
+					return 'div';
+				case 'Bib':
+					return 'bib';
+				default:
+					throw 'Unexpected column: ' + name;
+			}
 		},
 
 		getDataRows: ($, metaDistance) => {
+			//Remove things that can get between the meta and the data. We really want
+			//to move to the 'next' subling and it to be a pre
 			$('meta[columns]').remove();
+			$('p').remove();
+
 			var $preTag = $('meta[distance="' + metaDistance + '"]+pre');
 			var data = $preTag.text().split('\n');
 			return data;
@@ -59,35 +94,30 @@ module.exports.scrape = function($, config, callback) {
 			var rawData = {};
 
 			columnData.map((column, i) => {
-				var columnName = column.name,
-					data = rowString.substring(column.index, column.index + column.length).trim();
+				var columnName = column.name
+					data = column.endIndex === null
+						?
+					rowString.substring(column.startIndex)
+						:
+					rowString.substring(column.startIndex, column.endIndex);				
+				data = data.trim();
 				rawData[columnName] = convertDataTypes(columnName, data);
 			});
 			return rawData;
 		},
 
-		transformRow: (rawData) => {
-			var myReturn = Object.assign({}, rawData);
-			var name = ((rawData.firstName || '') + ' ' + (rawData.lastName || '')).trim();
-			if (!name) {
-				return null;
-			}
 
-			myReturn.name = name;
-			delete myReturn.firstName;
-			delete myReturn.lastName;
-			return myReturn;
-		}
 	}
 
+	var $columnMeta = $('meta[columns]');
 	var rows = privates.getDataRows($, config.metaDistance);
 	var headers = rows.shift();
+	var columnData = privates.locateColumns(headers);
 	var results = [];
-	var columnData = privates.expectedColumns[config.columnStyle];
 
 	rows.map((rowString, i) => {
 		var rawData = privates.extractRow(rowString, columnData);
-		var transformedData = privates.transformRow(rawData);
+		var transformedData = transformRow(rawData);
 		if (transformedData !== null) {
 			results.push(transformedData);
 		}

@@ -1,5 +1,5 @@
 const convertDataTypes = require('./convertDataTypes');
-
+const transformRow = require('./transformRow');
 module.exports.scrape = function($, config, callback) {
 
 	const privates = {
@@ -23,8 +23,12 @@ module.exports.scrape = function($, config, callback) {
 			rowIndex = 1; // cos we are skipping the header row.
 
 			while(rowIndex < $results.length) {
-				var rowResult = privates.extractRow($rowData.children(), columnHeaders);
-				resultsData.push(rowResult);
+				var rawData = privates.extractRow($rowData.children(), columnHeaders);
+				var transformedData = transformRow(rawData);
+
+				if (transformedData !== null) {
+					resultsData.push(transformedData);
+				}
 
 				$rowData = $rowData.next();
 				rowIndex++;
@@ -42,13 +46,11 @@ module.exports.scrape = function($, config, callback) {
 			while(columnIndex < $rowTableData.length) {
 				var columnHeader = columnHeaders[columnIndex],
 					rawData = $pointer.text().trim();
-
-				if (columnHeader === 'time') {
-					$rowResult['net'] = convertDataTypes('time', rawData);
-					$rowResult['gun'] = convertDataTypes('time', rawData);
-				} else {
-					$rowResult[columnHeader] = convertDataTypes(columnHeader, rawData);			
+				if (columnHeader === 'no') {
+					columnHeader = 'bib';
 				}
+
+				$rowResult[columnHeader] = convertDataTypes(columnHeader, rawData);
 
 				$pointer = $pointer.next();
 				columnIndex++;

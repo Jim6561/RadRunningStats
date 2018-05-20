@@ -16,8 +16,11 @@ module.exports = function(columnHeader, rawData) {
 	  	else if (timeParts.length === 3) {
 	  		return parseInt(timeParts[0]) * 60 * 60 + parseInt(timeParts[1]) * 60 + parseInt(timeParts[2]);
 	  	}
+	  	else if (rawData === 'NTA') {
+	  		return null; // Hopefully we can treat this like no data, so it doesn't mess up calculations
+	  	}
 	  	console.log('Unexpected time: ' + rawData);
-		return rawData + ' in seconds';
+		return null;
 	}
 
 	return rawData;

@@ -4,6 +4,8 @@ div_tot, div, bib_number, split_time, net_time, gun_time, pace
 FROM runner_result ORDER BY age;
 
 
-SELECT race_id, COUNT(*)
-FROM runner_result
-GROUP BY race_id;
+SELECT r.race_name, r.distance, COUNT(1)
+FROM race r
+JOIN runner_result rr
+ON (rr.race_id = r.race_id)
+GROUP BY r.race_name, r.distance;
