@@ -3,6 +3,7 @@ const cheerio = require('cheerio');
 const jsonfile = require('jsonfile');
 const htmlScraper = require('./htmlScraper');
 const aspScraper = require('./aspScraper');
+const path = require('path');
 
 
 var myArgs = process.argv.slice(2);
@@ -11,6 +12,9 @@ if (inputFile === undefined) {
 	console.log('Must supply sourceFile parameter');
 	return;
 }
+
+var outputFolder = myArgs[1];
+if (!outputFolder) outputFolder = '';
 
 jsonfile.readFile(inputFile, (err, eventsToScrape) => {
 	if (err) throw err;
@@ -22,7 +26,6 @@ jsonfile.readFile(inputFile, (err, eventsToScrape) => {
 
 extractEvent = (event) => {
 	event.distances.forEach((distancePage) => {
-
 		let config = {
 			url: distancePage.url,
 			pageType: event.pageType,
@@ -39,7 +42,7 @@ extractEvent = (event) => {
 			};
 
 			var sanitizedName = (event.raceName + '_' + distancePage.distance).replace(/[ ',/]/g, '');
-			var fileName = 'data/scrapedRaces/' +  sanitizedName + '.json';
+			var fileName = path.join('data/scrapedRaces/' + outputFolder, sanitizedName + '.json');
 			console.log('writing file: ' + fileName);
 			jsonfile.writeFile(fileName, raceResults, (err) => {
 				if (err) throw err;
