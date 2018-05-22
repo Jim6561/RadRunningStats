@@ -3,16 +3,18 @@ const path = require('path');
 const fs = require('fs-extra');
 const stats = require('statsjs');
 
-if (process.argv.length < 2) {
+var myArgs = process.argv.slice(2);
+var theFolder = myArgs[0];
+
+if (!theFolder) {
 	console.log('Must supply sourceDir');
 	process.exit(-1);
 }
 
-var myArgs = process.argv.slice(2);
-var theFolder = myArgs[0];
 
-var sourceDir = path.join(__dirname, '../data/scrapedRaces/' + theFolder);
-var outputDir = path.join(__dirname, '../data/transformedRaces/' + theFolder);
+const sourceDir = path.join(__dirname, '../data/scrapedRaces/' + theFolder);
+const outputDir = path.join(__dirname, '../data/transformedRaces/' + theFolder);
+const KILOMETERS_TO_MILES = 0.621371;
 
 console.log('sourceDir ' + sourceDir);
 console.log('outputDir ' + outputDir);
@@ -50,4 +52,40 @@ var transformRace = function(race) {
     race.median_time = timeStats.median();
     race.third_quartile_time = timeStats.q3();
     race.last_time = timeStats.max();
+
+    race.distanceMiles = getDistanceInMiles(race.distance);
+
+    race.results.map((result) => {
+        fillInPace(result, race.distanceMiles);
+    });
 };
+
+var getDistanceInMiles = function(distance) {
+    try
+    {
+        var indexOfM = distance.indexOf('M');
+        if (indexOfM > -1) {
+            var numberPart = distance.substring(0, indexOfM);
+            if (!isNaN(numberPart)) {
+                return numberPart;
+            }
+        }
+        var indexOfK = distance.indexOf('K');
+        if (indexOfK > -1) {
+            var numberPart = distance.substring(0, indexOfK);
+            if (isNaN(numberPart)) {
+                throw 'Unpexpected distance: ' + distance;
+            }
+            return KILOMETERS_TO_MILES * numberPart;
+        }
+    } catch (e) {
+        throw 'unexpected distance: ' + distance;
+    }
+}
+
+var fillInPace = function(result, distanceMiles) {
+    if (result.pace > 0) {
+        return;
+    }
+    result.pace = result.net / distanceMiles;
+}
