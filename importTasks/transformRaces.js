@@ -48,10 +48,10 @@ var transformRace = function(race) {
     var timeStats = stats(times);
     
     race.winningTime = timeStats.min();
-    race.first_quartile_time = timeStats.q1();
-    race.median_time = timeStats.median();
-    race.third_quartile_time = timeStats.q3();
-    race.last_time = timeStats.max();
+    race.firstQuartileTime = timeStats.q1();
+    race.medianTime = timeStats.median();
+    race.thirdQuartileTime = timeStats.q3();
+    race.lastTime = timeStats.max();
 
     race.distanceMiles = getDistanceInMiles(race.distance);
 

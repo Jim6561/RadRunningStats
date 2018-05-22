@@ -4,7 +4,7 @@ const jsonfile = require('jsonfile');
 //const fileToLoad = 'data/scrapedRaces/11thAnnualDragginTailUltraTrailChallenge50K25K_25K.json';
 //const fileToLoad = 'data/scrapedRaces/11thAnnualDragginTailUltraTrailChallenge50K25K_50K.json';
 //const fileToLoad = 'data/scrapedRaces/44thAnnualPalaceSaloon5K_5K.json';
-//const fileToLoad = 'data/scrapedRaces/4thAnnualBeerMile_5K.json';
+//const fileToLoad = 'data/scrapedRaces/4thAnnualBeerMile_1M.json';
 //const fileToLoad = 'data/scrapedRaces/5thAnnualNeneFest5K_5K.json';
 //const fileToLoad = 'data/scrapedRaces/EpiphanyEndurance10K5K_10K.json';
 //const fileToLoad = 'data/scrapedRaces/EpiphanyEndurance10K5K_5K.json';
@@ -16,6 +16,10 @@ const jsonfile = require('jsonfile');
 //const fileToLoad = 'data/scrapedRaces/Springtime10K5K1Mile_5K.json';
 //const fileToLoad = 'data/scrapedRaces/TatesHell5KRunWalk_5K.json';
 //const fileToLoad = 'data/scrapedRaces/WormGruntinFestival5K_5K.json';
+
+//const fileToLoad = 'data/transformedRaces/2018_04/11thAnnualDragginTailUltraTrailChallenge50K25K_25K.json';
+const fileToLoad = 'data/transformedRaces/2018_04/4thAnnualBeerMile_1M.json';
+
 
 var envParams = jsonfile.readFileSync('.env');
 var dataToSave = jsonfile.readFileSync(fileToLoad);
@@ -31,12 +35,19 @@ var pool = new pg.Pool({
 });
 
 var insertRaceSql = {
-	text: 'INSERT INTO race(race_name, event_date, distance, location) VALUES ($1, $2, $3, $4) RETURNING race_id',
+	text: 'INSERT INTO race(race_name, event_date, distance, distance_miles, location, winning_time, first_quartile_time, median_time, third_quartile_time, last_time, finishers) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING race_id',
 	values: [
 		dataToSave.raceName,
 		dataToSave.eventDate,
 		dataToSave.distance,
-		dataToSave.location
+		dataToSave.distanceMiles,
+		dataToSave.location,
+		dataToSave.winningTime,
+		dataToSave.firstQuartileTime,
+		dataToSave.medianTime,
+		dataToSave.thirdQuartileTime,
+		dataToSave.lastTime,
+		dataToSave.finishers
 	]
 };
 
