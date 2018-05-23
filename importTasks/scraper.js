@@ -1,3 +1,5 @@
+//npm run scrapeData data/2018_04.json 2018_04
+
 const request = require('request');
 const cheerio = require('cheerio');
 const jsonfile = require('jsonfile');
