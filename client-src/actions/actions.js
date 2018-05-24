@@ -5,6 +5,7 @@ export const SEARCH_FORM_CHANGED = 'SEARCH_FORM_CHANGED';
 export const RESULTS_REQUESTED = 'RESULTS_REQUESTED';
 export const RECEIVE_RESULTS_SUCCESS = 'RECEIVE_RESULTS_SUCCESS';
 export const RECEIVE_RESULTS_FAILED = 'RECEIVE_RESULTS_FAILED';
+export const PAGE_BUTTON_CLICKED = 'PAGE_BUTTON_CLICKED';
 
 
 /*
@@ -27,6 +28,13 @@ export function receiveResults_success(records) {
 	return {
 		type: RECEIVE_RESULTS_SUCCESS,
 		records
+	}
+};
+
+export function pageButtonClicked(page) {
+	return {
+		type: PAGE_BUTTON_CLICKED,
+		page
 	}
 };
 

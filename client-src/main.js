@@ -9,6 +9,7 @@ import createSagaMiddleware from 'redux-saga'
 
 import TableHolder from './containers/TableHolder';
 import RunnerSearchFormHolder from './containers/RunnerSearchFormHolder';
+import HeaderBarHolder from './containers/HeaderBarHolder';
 
 import myApp from './reducers';
 import rootSaga from './sagas/rootSaga'
@@ -30,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
   ReactDOM.render(
     <Provider store={store}>
       <div>
+        <HeaderBarHolder/>
         <RunnerSearchFormHolder/>
         <TableHolder/>
       </div>

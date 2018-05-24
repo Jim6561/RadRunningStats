@@ -2,9 +2,20 @@ import { connect } from 'react-redux';
 import AwesomeTable from '../components/AwesomeTable';
 
 const mapStateToProps = state => {
-  return {
-    data: state.records
-  }
+	let data;
+	if (state.selectedPage === 'RESULTS_PAGE') {
+		data = state.results
+	}
+	else if (state.selectedPage === 'RACES_PAGE') {
+		data = state.races	
+	}
+	else {
+		console.log('unexpected page in state: ' + state.selectedPage);
+	}
+
+	return {
+		data: data
+	}
 }
 
 //This table doesn't do anything.
@@ -13,8 +24,8 @@ const mapDispatchToProps = dispatch => {
 }
 
 const TableHolder = connect(
-  mapStateToProps,
-  mapDispatchToProps
+ 	mapStateToProps,
+	mapDispatchToProps
 )(AwesomeTable)
 
 export default TableHolder
