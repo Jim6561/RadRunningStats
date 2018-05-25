@@ -1,4 +1,4 @@
-import {RECEIVE_RESULTS_SUCCESS, RECEIVE_RACES_SUCCESS, SEARCH_FORM_CHANGED, PAGE_BUTTON_CLICKED} from '../actions/actions'
+import * as actions from '../actions/actions'
 
 
 //Make these sensible constants somehow.
@@ -8,7 +8,7 @@ const RESULTS_PAGE = 'RESULTS_PAGE';
 const RACES_PAGE = 'RACES_PAGE';
 
 const initialState = {
-	selectedPage: RESULTS_PAGE,
+	selectedPage: RACES_PAGE,
 	runnerName: '',
 	results: [],
 	races: []
@@ -17,19 +17,19 @@ const initialState = {
 function myApp(state = initialState, action) {
 
 	switch (action.type) {
-	    case RECEIVE_RESULTS_SUCCESS:
+	    case actions.RECEIVE_RESULTS_SUCCESS:
 	    	return Object.assign({}, state, {
 	     		results: action.records
 	     	});
-	    case RECEIVE_RACES_SUCCESS:
+	    case actions.RECEIVE_RACES_SUCCESS:
 	    	return Object.assign({}, state, {
 	     		races: action.records
 	     	});
-	    case SEARCH_FORM_CHANGED:
+	    case actions.SEARCH_FORM_CHANGED:
 	    	return Object.assign({}, state, {
 	    		runnerName: action.event.target.value
 	    	});
-	    case PAGE_BUTTON_CLICKED:
+	    case actions.PAGE_BUTTON_CLICKED:
 	    	return Object.assign({}, state, {
 	    		selectedPage: action.page
 	    	});

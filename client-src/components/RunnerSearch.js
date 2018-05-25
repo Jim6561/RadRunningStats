@@ -19,8 +19,11 @@ const RunnerSearch = ({runnerName, results, onclick, onchange, onkeyup}) => {
 }
 
 RunnerSearchForm.propTypes = {
+  runnerName: PropTypes.string.isRequired,
+  results: PropTypes.array,
   onclick: PropTypes.func.isRequired,
   onchange: PropTypes.func.isRequired,
+  onkeyup: PropTypes.func.isRequired
 }
 
 export default RunnerSearch;

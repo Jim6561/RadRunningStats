@@ -7,14 +7,10 @@ import {Provider} from 'react-redux';
 import createSagaMiddleware from 'redux-saga'
 
 
-import TableHolder from './containers/TableHolder';
-import RacesTableHolder from './containers/RacesTableHolder';
-import RunnerSearchFormHolder from './containers/RunnerSearchFormHolder';
 import PageHolder from './containers/PageHolder';
 
 import myApp from './reducers';
 import rootSaga from './sagas/rootSaga'
-import resultFetcher from './sagas/resultFetcher'
 import { racesRequested } from './actions/actions'
 
 
