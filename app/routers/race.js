@@ -9,6 +9,7 @@ router.get('/', function(req, response) {
 	var nameParam = req.query.name;
 
 	var query = { text: 'SELECT'
+				 + ' r.race_id,'
 				 + ' r.race_name,'
 				 + ' r.distance,'
 				 + ' r.event_date,'

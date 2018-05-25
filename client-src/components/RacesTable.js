@@ -10,11 +10,9 @@ const RacesTable = ({data}) => {
           <td>Race</td>
           <td>Distance</td>
           <td>Date</td>
-          <td>Name</td>
-          <td>Sex</td>
-          <td>Age</td>
-          <td>City</td>
-          <td>State</td>
+          <td>Finishers</td>
+          <td>Winning Time</td>
+          <td>Median Time</td>
         </tr>
       </thead>
       <tbody>

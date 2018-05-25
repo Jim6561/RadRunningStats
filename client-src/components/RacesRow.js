@@ -8,11 +8,9 @@ const RacesRow = ({rowdata}) => {
       <td>{rowdata.race_name}</td>
       <td>{rowdata.distance}</td>
       <td>{new Date(rowdata.event_date).toLocaleDateString()}</td>
-      <td>{rowdata.name}</td>
-      <td>{rowdata.sex}</td>
-      <td>{rowdata.age}</td>
-      <td>{rowdata.city}</td>
-      <td>{rowdata.state}</td>
+      <td>{rowdata.finishers}</td>
+      <td><TimeValue value={rowdata.winning_time}/></td>
+      <td><TimeValue value={rowdata.median_time}/></td>
     </tr>
   );
 }
