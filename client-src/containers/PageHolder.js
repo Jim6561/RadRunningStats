@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
-import HeaderBar from '../components/HeaderBar';
-import { searchFormChanged, resultsRequested, pageButtonClicked } from '../actions/actions';
+import MainPage from '../components/MainPage';
+import { pageButtonClicked } from '../actions/actions';
 
 const mapStateToProps = state => {
 	return {
-
+		selectedPage: state.selectedPage,
+		races: state.races
 	}
 }
 
@@ -23,9 +24,9 @@ const mapDispatchToProps = dispatch => {
 	}
 }
 
-const HeaderBarHolder = connect(
+const PageHolder = connect(
   mapStateToProps,
   mapDispatchToProps
-)(HeaderBar)
+)(MainPage)
 
-export default HeaderBarHolder
+export default PageHolder

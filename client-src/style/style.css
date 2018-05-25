@@ -26,3 +26,8 @@ tr.dataRow:nth-child(odd) {
 tr.dataRow:hover {
 	background-color: lightgreen;
 }
+
+.giantButton {
+	padding: 1em;
+	background-color: #E0FFF0;
+}

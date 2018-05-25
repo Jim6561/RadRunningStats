@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
-import RunnerSearchForm from '../components/RunnerSearchForm';
+import RunnerSearch from '../components/RunnerSearch';
 import { searchFormChanged, resultsRequested } from '../actions/actions';
 
 const mapStateToProps = state => {
   return {
-    data: state.runnerName
+    runnerName: state.runnerName,
+    results: state.results
   }
 }
 
@@ -28,6 +29,6 @@ const mapDispatchToProps = dispatch => {
 const RunnerSearchFormHolder = connect(
   mapStateToProps,
   mapDispatchToProps
-)(RunnerSearchForm)
+)(RunnerSearch)
 
 export default RunnerSearchFormHolder
