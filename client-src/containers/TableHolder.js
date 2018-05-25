@@ -7,7 +7,7 @@ const mapStateToProps = state => {
 		data = state.results
 	}
 	else if (state.selectedPage === 'RACES_PAGE') {
-		data = state.races	
+		data = []
 	}
 	else {
 		console.log('unexpected page in state: ' + state.selectedPage);

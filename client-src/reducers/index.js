@@ -1,4 +1,4 @@
-import {RECEIVE_RESULTS_SUCCESS, SEARCH_FORM_CHANGED, PAGE_BUTTON_CLICKED} from '../actions/actions'
+import {RECEIVE_RESULTS_SUCCESS, RECEIVE_RACES_SUCCESS, SEARCH_FORM_CHANGED, PAGE_BUTTON_CLICKED} from '../actions/actions'
 
 
 //Make these sensible constants somehow.
@@ -20,6 +20,10 @@ function myApp(state = initialState, action) {
 	    case RECEIVE_RESULTS_SUCCESS:
 	    	return Object.assign({}, state, {
 	     		results: action.records
+	     	});
+	    case RECEIVE_RACES_SUCCESS:
+	    	return Object.assign({}, state, {
+	     		races: action.records
 	     	});
 	    case SEARCH_FORM_CHANGED:
 	    	return Object.assign({}, state, {

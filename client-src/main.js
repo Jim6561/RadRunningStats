@@ -8,12 +8,14 @@ import createSagaMiddleware from 'redux-saga'
 
 
 import TableHolder from './containers/TableHolder';
+import RacesTableHolder from './containers/RacesTableHolder';
 import RunnerSearchFormHolder from './containers/RunnerSearchFormHolder';
 import HeaderBarHolder from './containers/HeaderBarHolder';
 
 import myApp from './reducers';
 import rootSaga from './sagas/rootSaga'
 import resultFetcher from './sagas/resultFetcher'
+import { racesRequested } from './actions/actions'
 
 
 const sagaMiddleware = createSagaMiddleware()
@@ -26,6 +28,8 @@ const store = createStore(myApp, applyMiddleware(sagaMiddleware));
 
 sagaMiddleware.run(rootSaga)
 
+store.dispatch(racesRequested());
+
 document.addEventListener('DOMContentLoaded', function() {
 
   ReactDOM.render(
@@ -34,6 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <HeaderBarHolder/>
         <RunnerSearchFormHolder/>
         <TableHolder/>
+        <RacesTableHolder/>
       </div>
     </Provider>
     ,document.getElementById('mount')
