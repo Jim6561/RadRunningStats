@@ -7,7 +7,7 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'Jimmy' });
 });
 
-//router.use('/', require('./test'));
 router.use('/runner', require('./runner'));
+router.use('/race', require('./race'));
 
 module.exports = router;
