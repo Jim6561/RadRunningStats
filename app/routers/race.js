@@ -9,28 +9,19 @@ router.get('/', function(req, response) {
 	var nameParam = req.query.name;
 
 	var query = { text: 'SELECT'
+				 + ' r.race_id,'
 				 + ' r.race_name,'
 				 + ' r.distance,'
 				 + ' r.event_date,'
-				 + ' runner.name,'
-				 + ' runner.sex,'
-				 + ' runner.age,'
-				 + ' runner.city,'
-				 + ' runner.state,'
-				 + ' runner.place,'
-				 + ' runner.div_tot,'
-				 + ' runner.div,'
-				 + ' runner.bib_number,'
-				 + ' runner.net_time,'
-				 + ' runner.gun_time,'
-				 + ' runner.split_time,'
-				 + ' runner.pace'
-				 + ' FROM runner_result runner'
-				 + ' JOIN race r'
-				 + ' ON (r.race_id = runner.race_id)'
-				 + ' WHERE runner.name ILIKE $1',
-				 values: [ '%' + nameParam + '%'
-				 ] };
+				 + ' r.location,'
+				 + ' r.finishers,'
+				 + ' r.winning_time,'
+				 + ' r.first_quartile_time,'
+				 + ' r.median_time,'
+				 + ' r.third_quartile_time,'
+				 + ' r.last_time'
+				 + ' FROM race r',
+				 values: [] };
 
 console.log(query);
 

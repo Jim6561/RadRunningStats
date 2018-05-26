@@ -1,23 +1,40 @@
-import {RECEIVE_RESULTS_SUCCESS, SEARCH_FORM_CHANGED} from '../actions/actions'
+import * as actions from '../actions/actions'
+
+
+//Make these sensible constants somehow.
+//And the ones on HeaderBar
+//Also, change to use that spreader thing
+const RESULTS_PAGE = 'RESULTS_PAGE';
+const RACES_PAGE = 'RACES_PAGE';
 
 const initialState = {
+	selectedPage: RACES_PAGE,
 	runnerName: '',
-	records: []
+	results: [],
+	races: []
 };
 
 function myApp(state = initialState, action) {
 
 	switch (action.type) {
-	    case RECEIVE_RESULTS_SUCCESS:
+	    case actions.RECEIVE_RESULTS_SUCCESS:
 	    	return Object.assign({}, state, {
-	     		records: action.records
-	     	})
-	    case SEARCH_FORM_CHANGED:
+	     		results: action.records
+	     	});
+	    case actions.RECEIVE_RACES_SUCCESS:
+	    	return Object.assign({}, state, {
+	     		races: action.records
+	     	});
+	    case actions.SEARCH_FORM_CHANGED:
 	    	return Object.assign({}, state, {
 	    		runnerName: action.event.target.value
-	    	})
+	    	});
+	    case actions.PAGE_BUTTON_CLICKED:
+	    	return Object.assign({}, state, {
+	    		selectedPage: action.page
+	    	});
 	    default:
-	     	return state
+	     	return state;
  	}
 }
 
