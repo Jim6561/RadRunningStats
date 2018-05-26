@@ -18,29 +18,35 @@ function myApp(state = initialState, action) {
 
 	switch (action.type) {
 	    case actions.RECEIVE_RESULTS_SUCCESS:
-	    	return Object.assign({}, state, {
-	     		results: action.records
-	     	});
+	    	return {
+	    		...state,
+	    		results: action.records
+	    	};
 	    case actions.RECEIVE_RESULTS_FAILED:
-	    	return Object.assign({}, state, {
-	     		results: []
-	     	});
+	    	return {
+	    		...state,
+	    		results: []
+	    	};
 	    case actions.RECEIVE_RACES_SUCCESS:
-	    	return Object.assign({}, state, {
+	    	return {
+	    		...state,
 	     		races: action.records
-	     	});
+	     	};
 		case actions.RECEIVE_RACES_FAILED:
-	    	return Object.assign({}, state, {
+	    	return {
+	    		...state,
 	     		races: []
-	     	});
+	     	};
 	    case actions.SEARCH_FORM_CHANGED:
-	    	return Object.assign({}, state, {
+	    	return {
+	    		...state,
 	    		runnerName: action.event.target.value
-	    	});
+	    	};
 	    case actions.PAGE_BUTTON_CLICKED:
-	    	return Object.assign({}, state, {
+	    	return {
+	    		...state,
 	    		selectedPage: action.page
-	    	});
+	    	};
 	    default:
 	     	return state;
  	}
