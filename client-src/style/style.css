@@ -32,13 +32,17 @@ tr.dataRow:hover {
 	background-color: #E0FFF0;
 }
 
+.selectedButton {
+	background: linear-gradient(to top, #E0EEE0 , lightgreen);
+}
+
 .giantButton:hover {
 	background-color: lightgreen;
 	cursor: pointer;
 }
 
 .headerBar {
-	border-bottom: thin solid black;
+	padding-top: 1em;
 	padding-bottom: 1em;
 	margin-bottom: 1em;
 }
