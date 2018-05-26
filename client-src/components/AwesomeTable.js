@@ -2,32 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TableRow from './TableRow';
  
-const AwesomeTable = ({data}) => {
+const AwesomeTable = ({data, columns}) => {
   return (
-    <table className='resultsTable'>
+    <table className='awesomeTable'>
       <thead>
         <tr>
-          <td>Race</td>
-          <td>Distance</td>
-          <td>Date</td>
-          <td>Name</td>
-          <td>Sex</td>
-          <td>Age</td>
-          <td>City</td>
-          <td>State</td>
-          <td>Place</td>
-          <td>Div/Tot</td>
-          <td>Div</td>
-          <td>Bib number</td>
-          <td>Net</td>
-          <td>Gun</td>
-          <td>Split</td>
-          <td>Pace</td>
+          {columns.map((column, i) => 
+            <td key={i}>{column.header}</td>
+          )}
         </tr>
       </thead>
       <tbody>
         {data.map((record, i) => 
-            <TableRow key={i} rowdata={record}/>
+            <TableRow key={i} rowdata={record} columns={columns}/>
         )}
       </tbody>
     </table>
@@ -35,7 +22,8 @@ const AwesomeTable = ({data}) => {
 }
 
 AwesomeTable.propTypes = {
-  data: PropTypes.array.isRequired
+  data: PropTypes.array.isRequired,
+  columns: PropTypes.array.isRequired
 }
 
 export default AwesomeTable;

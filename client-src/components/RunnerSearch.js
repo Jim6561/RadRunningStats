@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import RunnerSearchForm from '../components/RunnerSearchForm';
-import AwesomeTable from '../components/AwesomeTable';
+import ResultsTable from '../components/ResultsTable';
  
 const RunnerSearch = ({runnerName, results, onclick, onchange, onkeyup}) => {
   
@@ -13,7 +13,7 @@ const RunnerSearch = ({runnerName, results, onclick, onchange, onkeyup}) => {
     		onchange={onchange}
     		onkeyup={onkeyup}
     		/>
-    	<AwesomeTable data={results}/>
+    	<ResultsTable data={results}/>
     </div>
   );
 }
