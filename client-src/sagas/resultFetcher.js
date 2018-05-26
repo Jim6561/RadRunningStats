@@ -1,5 +1,5 @@
 import { call, put, select } from 'redux-saga/effects'
-import { receiveResults_success } from '../actions/actions'
+import { receiveResults_success, receiveResults_failed } from '../actions/actions'
 
 export default function* resultFetcher (action) {
   let runnerName = yield select(state => state.runnerName);
@@ -17,6 +17,6 @@ export default function* resultFetcher (action) {
 
   } catch(err) {
     console.error('Record fetch error: ' + JSON.stringify(err))
-    //Should yield something here
+    yield put(receiveResults_failed(err));
   }
 }

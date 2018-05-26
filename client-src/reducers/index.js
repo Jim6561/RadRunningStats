@@ -21,9 +21,17 @@ function myApp(state = initialState, action) {
 	    	return Object.assign({}, state, {
 	     		results: action.records
 	     	});
+	    case actions.RECEIVE_RESULTS_FAILED:
+	    	return Object.assign({}, state, {
+	     		results: []
+	     	});
 	    case actions.RECEIVE_RACES_SUCCESS:
 	    	return Object.assign({}, state, {
 	     		races: action.records
+	     	});
+		case actions.RECEIVE_RACES_FAILED:
+	    	return Object.assign({}, state, {
+	     		races: []
 	     	});
 	    case actions.SEARCH_FORM_CHANGED:
 	    	return Object.assign({}, state, {

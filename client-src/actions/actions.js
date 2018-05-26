@@ -34,10 +34,10 @@ export function receiveResults_success(records) {
 	}
 };
 
-export function receiveResults_failed(records) {
+export function receiveResults_failed(err) {
 	return {
 		type: RECEIVE_RESULTS_FAILED,
-		records
+		err
 	}
 };
 
@@ -48,17 +48,16 @@ export function racesRequested() {
 };
 
 export function receiveRaces_success(records) {
-console.log('action: receiveRaces_success');
 	return {
 		type: RECEIVE_RACES_SUCCESS,
 		records
 	}
 };
 
-export function receiveRaces_failed(records) {
+export function receiveRaces_failed(err) {
 	return {
 		type: RECEIVE_RACES_FAILED,
-		records
+		err
 	}
 };
 
