@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import RunnerSearch from '../components/RunnerSearch';
-import { searchFormChanged, resultsRequested } from '../actions/actions';
+import { searchFormChanged, resultsRequested } from '../actions/actionCreators';
 
 const mapStateToProps = state => {
   return {

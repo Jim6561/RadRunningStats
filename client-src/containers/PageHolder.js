@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import MainPage from '../components/MainPage';
-import { pageButtonClicked } from '../actions/actions';
+import { pageButtonClicked } from '../actions/actionCreators';
 
 const mapStateToProps = state => {
 	return {

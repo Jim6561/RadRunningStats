@@ -11,7 +11,7 @@ import PageHolder from './containers/PageHolder';
 
 import myApp from './reducers';
 import rootSaga from './sagas/rootSaga'
-import { racesRequested } from './actions/actions'
+import { racesRequested } from './actions/actionCreators'
 
 
 const sagaMiddleware = createSagaMiddleware()

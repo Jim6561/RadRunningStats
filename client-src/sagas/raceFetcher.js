@@ -1,5 +1,5 @@
 import { call, put, select } from 'redux-saga/effects'
-import { receiveRaces_success, receiveRaces_failed } from '../actions/actions'
+import { receiveRaces_success, receiveRaces_failed } from '../actions/actionCreators'
 
 export default function* resultFetcher (action) {
   let queryUrl = 'race';

@@ -1,5 +1,5 @@
 import { call, put, select } from 'redux-saga/effects'
-import { receiveResults_success, receiveResults_failed } from '../actions/actions'
+import { receiveResults_success, receiveResults_failed } from '../actions/actionCreators'
 
 export default function* resultFetcher (action) {
   let runnerName = yield select(state => state.runnerName);
