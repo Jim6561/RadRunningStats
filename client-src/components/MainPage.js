@@ -17,13 +17,15 @@ class MainPage extends React.Component {
 	render() {
   
 	  return (
-	    <div className='headerBar'>
-	    	<div>
+	    <div>
+	    	<div className='headerBar'>
 		    	<span id='racesSpan' className='giantButton' onClick={(e) => this.handleClick('races', e)}>Races</span>
 		    	<span id='runnersSpan' className='giantButton' onClick={(e) => this.handleClick('results', e)}>Runners</span>
 	    	</div>
-	    	{this.props.selectedPage === 'RACES_PAGE' && <RacesTable data={this.props.races}/>}
-	    	{this.props.selectedPage === 'RESULTS_PAGE' && <RunnerSearchFormHolder/>}
+	    	<div class='pageContent'>
+	    		{this.props.selectedPage === 'RACES_PAGE' && <RacesTable data={this.props.races}/>}
+	    		{this.props.selectedPage === 'RESULTS_PAGE' && <RunnerSearchFormHolder/>}
+	    	</div>
 	    </div>
 	  );
 	}

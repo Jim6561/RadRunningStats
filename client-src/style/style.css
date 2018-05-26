@@ -28,6 +28,17 @@ tr.dataRow:hover {
 }
 
 .giantButton {
-	padding: 1em;
+	padding: 1em 5em 1em 5em;
 	background-color: #E0FFF0;
+}
+
+.giantButton:hover {
+	background-color: lightgreen;
+	cursor: pointer;
+}
+
+.headerBar {
+	border-bottom: thin solid black;
+	padding-bottom: 1em;
+	margin-bottom: 1em;
 }
