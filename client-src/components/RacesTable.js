@@ -29,14 +29,15 @@ const columns = [
 ];
 
 
-const RacesTable = ({data}) => {
+const RacesTable = ({data, onSortTable}) => {
   return (
-    <AwesomeTable data={data} columns={columns}/>
+    <AwesomeTable data={data} columns={columns} onSortTable={onSortTable}/>
   );
 }
 
 RacesTable.propTypes = {
-  data: PropTypes.array.isRequired
+  data: PropTypes.array.isRequired,
+  onSortTable: PropTypes.func.isRequired
 }
 
 export default RacesTable;

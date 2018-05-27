@@ -53,3 +53,17 @@ export function pageButtonClicked(page) {
 		page
 	}
 };
+
+export function racesTableSortClicked(column) {
+	return {
+		type: actions.RACES_TABLE_SORT_CLICKED,
+		column
+	}
+};
+
+export function resultsTableSortClicked(column) {
+	return {
+		type: actions.RESULTS_TABLE_SORT_CLICKED,
+		column
+	}
+};

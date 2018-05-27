@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import RacesTable from '../components/RacesTable';
+import { racesTableSortClicked } from '../actions/actionCreators';
 
 const mapStateToProps = state => {
 	return {
@@ -7,9 +8,12 @@ const mapStateToProps = state => {
 	}
 }
 
-//This table doesn't do anything.
 const mapDispatchToProps = dispatch => {
-	return {}
+	return {
+		onSortTable: (column) => {
+			dispatch(racesTableSortClicked(column));
+		}
+	}
 }
 
 const RacesTableHolder = connect(

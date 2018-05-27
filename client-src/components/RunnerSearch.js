@@ -3,27 +3,27 @@ import PropTypes from 'prop-types';
 import RunnerSearchForm from '../components/RunnerSearchForm';
 import ResultsTable from '../components/ResultsTable';
  
-const RunnerSearch = ({runnerName, results, onclick, onchange, onkeyup}) => {
-  
+const RunnerSearch = ({runnerName, results, onClick, onChange, onKeyup, onSortTable}) => {
   return (
     <div>
     	<RunnerSearchForm
     		runnerName={runnerName}
-    		onclick={onclick}
-    		onchange={onchange}
-    		onkeyup={onkeyup}
+    		onClick={onClick}
+    		onChange={onChange}
+    		onKeyup={onKeyup}
     		/>
-    	<ResultsTable data={results}/>
+    	<ResultsTable data={results} onSortTable={onSortTable}/>
     </div>
   );
 }
 
-RunnerSearchForm.propTypes = {
+RunnerSearch.propTypes = {
   runnerName: PropTypes.string.isRequired,
   results: PropTypes.array,
-  onclick: PropTypes.func.isRequired,
-  onchange: PropTypes.func.isRequired,
-  onkeyup: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onKeyup: PropTypes.func.isRequired,
+  onSortTable: PropTypes.func.isRequired
 }
 
 export default RunnerSearch;

@@ -12,7 +12,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		showPage: (whichPage) => {
-
 			if (whichPage === 'results') {
 				dispatch(pageButtonClicked('RESULTS_PAGE'));
 			} else if (whichPage === 'races') {

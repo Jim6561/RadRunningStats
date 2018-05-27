@@ -1,4 +1,5 @@
 import * as actions from '../actions/actions'
+import arraySort from 'array-sort'
 
 
 //Make these sensible constants somehow.
@@ -14,8 +15,13 @@ const initialState = {
 	races: []
 };
 
-function myApp(state = initialState, action) {
+function sortTable(data, column) {
+	arraySort(data, column);
 
+	return data;
+}
+
+function myApp(state = initialState, action) {
 	switch (action.type) {
 	    case actions.RECEIVE_RESULTS_SUCCESS:
 	    	return {
@@ -47,6 +53,16 @@ function myApp(state = initialState, action) {
 	    		...state,
 	    		selectedPage: action.page
 	    	};
+	    case actions.RACES_TABLE_SORT_CLICKED:
+	    	return {
+	    		...state,
+	    		races: arraySort(state.races.slice(0), action.column)
+	    	}
+	    case actions.RESULTS_TABLE_SORT_CLICKED:
+	    	return {
+	    		...state,
+	    		results: arraySort(state.results.slice(0), action.column)
+	    	}
 	    default:
 	     	return state;
  	}

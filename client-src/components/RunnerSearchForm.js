@@ -1,20 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
  
-const RunnerSearchForm = ({runnerName, onclick, onchange, onkeyup}) => {
+const RunnerSearchForm = ({runnerName, onClick, onChange, onKeyup}) => {
   
   return (
     <div className='searchForm'>
     	Search for a name
-    	<input value={runnerName} onChange={onchange} onKeyUp={onkeyup}/>
-    	<button onClick={onclick}>Search</button>
+    	<input value={runnerName} onChange={onChange} onKeyUp={onKeyup}/>
+    	<button onClick={onClick}>Search</button>
     </div>
   );
 }
 
 RunnerSearchForm.propTypes = {
-  onclick: PropTypes.func.isRequired,
-  onchange: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired
 }
 
 export default RunnerSearchForm;

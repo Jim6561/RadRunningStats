@@ -60,14 +60,15 @@ const columns = [
   }
 ];
 
-const ResultsTable = ({data}) => {
+const ResultsTable = ({data, onSortTable}) => {
   return (
-    <AwesomeTable data={data} columns={columns}/>
+    <AwesomeTable data={data} columns={columns} onSortTable={onSortTable}/>
   );
 }
 
 ResultsTable.propTypes = {
-  data: PropTypes.array.isRequired
+  data: PropTypes.array.isRequired,
+  onSortTable: PropTypes.func.isRequired
 }
 
 export default ResultsTable;

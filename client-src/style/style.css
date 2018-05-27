@@ -2,6 +2,10 @@
 	width: 100%;
 }
 
+td.sortableHeader {
+	cursor: pointer;
+}
+
 .searchForm {
 	margin: 1em;
 }
@@ -30,6 +34,7 @@ tr.dataRow:hover {
 .giantButton {
 	padding: 1em 5em 1em 5em;
 	background-color: #E0FFF0;
+	cursor: pointer;
 }
 
 .selectedButton {
@@ -38,7 +43,6 @@ tr.dataRow:hover {
 
 .giantButton:hover {
 	background-color: lightgreen;
-	cursor: pointer;
 }
 
 .headerBar {
