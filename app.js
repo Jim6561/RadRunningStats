@@ -3,6 +3,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var path = require('path');
 var serveStatic = require('serve-static')
+var favicon = require('serve-favicon');
 
 var app = express();
 const PORT = process.env.PORT || 5000;
@@ -17,6 +18,7 @@ app.set('view engine', 'pug');
 app.use(require('./app/routers/'));
 app.use(serveStatic(rootdir + '/lib'));
 app.use(logger('dev'));
+app.use(favicon(path.join(rootdir + '/public', 'favicon.gif')));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
