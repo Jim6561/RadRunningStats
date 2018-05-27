@@ -1,5 +1,6 @@
 import { call, put, select } from 'redux-saga/effects'
-import { receiveResults_success } from '../actions/actions'
+import { receiveResults_success, receiveResults_failed } from '../actions/actionCreators'
+import { replaceDataTypes } from './serverTranslationUtil'
 
 export default function* resultFetcher (action) {
   let runnerName = yield select(state => state.runnerName);
@@ -10,13 +11,13 @@ export default function* resultFetcher (action) {
 
   try {
     const response = yield call(fetch, queryUrl, req),
-          responseJson = yield response.json(),
-          results = responseJson;
-
-    yield put(receiveResults_success(responseJson));
+          responseData = yield response.json();
+          
+    yield call(replaceDataTypes, responseData);
+    yield put(receiveResults_success(responseData));
 
   } catch(err) {
     console.error('Record fetch error: ' + JSON.stringify(err))
-    //Should yield something here
+    yield put(receiveResults_failed(err));
   }
 }

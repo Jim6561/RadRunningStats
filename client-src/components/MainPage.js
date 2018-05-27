@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import RacesTable from '../components/RacesTable';
+import classNames from 'classnames';
+import RacesTableHolder from '../containers/RacesTableHolder';
 import RunnerSearchFormHolder from '../containers/RunnerSearchFormHolder';
  
 class MainPage extends React.Component {
@@ -15,19 +16,36 @@ class MainPage extends React.Component {
   	}
 
 	render() {
+
+		let racesButtonClass = classNames({
+			'giantButton': true,
+			'selectedButton': this.props.selectedPage === 'RACES_PAGE'
+		});
+		let resultsButtonClass = classNames({
+			'giantButton': true,
+			'selectedButton': this.props.selectedPage === 'RESULTS_PAGE'
+		});
   
-	  return (
+	 	return (
 	    <div>
 	    	<div className='headerBar'>
-		    	<span id='racesSpan' className='giantButton' onClick={(e) => this.handleClick('races', e)}>Races</span>
-		    	<span id='runnersSpan' className='giantButton' onClick={(e) => this.handleClick('results', e)}>Runners</span>
+		    	<span
+		    		id='racesSpan'
+		    		className={racesButtonClass}
+		    		onClick={(e) => this.handleClick('races', e)
+		    	}>Races</span>
+		    	<span
+		    		id='runnersSpan'
+		    		className={resultsButtonClass}
+		    		onClick={(e) => this.handleClick('results', e)
+		    	}>Runners</span>
 	    	</div>
-	    	<div class='pageContent'>
-	    		{this.props.selectedPage === 'RACES_PAGE' && <RacesTable data={this.props.races}/>}
+	    	<div className='pageContent'>
+	    		{this.props.selectedPage === 'RACES_PAGE' && <RacesTableHolder/>}
 	    		{this.props.selectedPage === 'RESULTS_PAGE' && <RunnerSearchFormHolder/>}
 	    	</div>
-	    </div>
-	  );
+	   	</div>
+	 	);
 	}
 }
 

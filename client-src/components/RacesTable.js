@@ -1,31 +1,43 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import RacesRow from './RacesRow';
+import AwesomeTable from './AwesomeTable';
+import TimeValue from './TimeValue';
  
-const RacesTable = ({data}) => {
+const columns = [
+  {
+    header: 'Race',
+    dataProp: 'race_name'
+  }, {
+    header: 'Distance',
+    dataProp: 'distance'
+  }, {
+    header: 'Date',
+    dataProp: 'event_date',
+    render: (data) => {return new Date(data).toLocaleDateString()}
+  }, {
+    header: 'Finishers',
+    dataProp: 'finishers'
+  }, {
+    header: 'Winning Time',
+    dataProp: 'winning_time',
+    render: (data) => {return <TimeValue value={data}/>}
+  }, {
+    header: 'Median Time',
+    dataProp: 'median_time',
+    render: (data) => {return <TimeValue value={data}/>}
+  }
+];
+
+
+const RacesTable = ({data, onSortTable}) => {
   return (
-    <table className='resultsTable'>
-      <thead>
-        <tr>
-          <td>Race</td>
-          <td>Distance</td>
-          <td>Date</td>
-          <td>Finishers</td>
-          <td>Winning Time</td>
-          <td>Median Time</td>
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((record, i) => 
-            <RacesRow key={i} rowdata={record}/>
-        )}
-      </tbody>
-    </table>
+    <AwesomeTable data={data} columns={columns} onSortTable={onSortTable}/>
   );
 }
 
 RacesTable.propTypes = {
-  data: PropTypes.array.isRequired
+  data: PropTypes.array.isRequired,
+  onSortTable: PropTypes.func.isRequired
 }
 
 export default RacesTable;

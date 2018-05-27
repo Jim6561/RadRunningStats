@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import MainPage from '../components/MainPage';
-import { pageButtonClicked } from '../actions/actions';
+import { pageButtonClicked } from '../actions/actionCreators';
 
 const mapStateToProps = state => {
 	return {
@@ -12,7 +12,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		showPage: (whichPage) => {
-
 			if (whichPage === 'results') {
 				dispatch(pageButtonClicked('RESULTS_PAGE'));
 			} else if (whichPage === 'races') {

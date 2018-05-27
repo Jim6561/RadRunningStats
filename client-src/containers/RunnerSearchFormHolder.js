@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import RunnerSearch from '../components/RunnerSearch';
-import { searchFormChanged, resultsRequested } from '../actions/actions';
+import { searchFormChanged, resultsRequested, resultsTableSortClicked } from '../actions/actionCreators';
 
 const mapStateToProps = state => {
   return {
@@ -11,17 +11,20 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		onclick: () => {
+		onClick: () => {
 			dispatch(resultsRequested());
 		},
-		onchange: (e) => {
+		onChange: (e) => {
 			dispatch(searchFormChanged(e))
 		},
-		onkeyup: (e) => {
+		onKeyup: (e) => {
 			//13 = enter
 			if (e.keyCode === 13) {
 				dispatch(resultsRequested());
 			}
+		},
+		onSortTable: (column) => {
+			dispatch(resultsTableSortClicked(column));
 		}
 	}
 }

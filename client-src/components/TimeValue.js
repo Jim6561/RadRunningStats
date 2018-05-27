@@ -15,7 +15,7 @@ const TimeValue = ({value}) => {
 }
 
 TimeValue.propTypes = {
-  value: PropTypes.string
+  value: PropTypes.number
 }
 
 export default TimeValue;

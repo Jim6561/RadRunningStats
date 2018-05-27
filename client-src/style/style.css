@@ -1,5 +1,9 @@
-.resultsTable {
+.awesomeTable {
 	width: 100%;
+}
+
+td.sortableHeader {
+	cursor: pointer;
 }
 
 .searchForm {
@@ -30,15 +34,19 @@ tr.dataRow:hover {
 .giantButton {
 	padding: 1em 5em 1em 5em;
 	background-color: #E0FFF0;
+	cursor: pointer;
+}
+
+.selectedButton {
+	background: linear-gradient(to top, #E0EEE0 , lightgreen);
 }
 
 .giantButton:hover {
 	background-color: lightgreen;
-	cursor: pointer;
 }
 
 .headerBar {
-	border-bottom: thin solid black;
+	padding-top: 1em;
 	padding-bottom: 1em;
 	margin-bottom: 1em;
 }

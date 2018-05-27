@@ -1,41 +1,45 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TableRow from './TableRow';
- 
-const AwesomeTable = ({data}) => {
-  return (
-    <table className='resultsTable'>
-      <thead>
-        <tr>
-          <td>Race</td>
-          <td>Distance</td>
-          <td>Date</td>
-          <td>Name</td>
-          <td>Sex</td>
-          <td>Age</td>
-          <td>City</td>
-          <td>State</td>
-          <td>Place</td>
-          <td>Div/Tot</td>
-          <td>Div</td>
-          <td>Bib number</td>
-          <td>Net</td>
-          <td>Gun</td>
-          <td>Split</td>
-          <td>Pace</td>
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((record, i) => 
-            <TableRow key={i} rowdata={record}/>
-        )}
-      </tbody>
-    </table>
-  );
+
+class AwesomeTable extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleSortClick = this.handleSortClick.bind(this);
+  }
+
+  handleSortClick(whichColumn) {
+      this.props.onSortTable(whichColumn.dataProp);
+  }
+
+  render() {
+    return (
+      <table className='awesomeTable'>
+        <thead>
+          <tr>
+            {this.props.columns.map((column, i) => 
+              <td
+                className='sortableHeader'
+                key={i}
+                onClick={(e) => this.handleSortClick(column)}
+              >{column.header}</td>
+            )}
+          </tr>
+        </thead>
+        <tbody>
+          {this.props.data.map((record, i) => 
+              <TableRow key={i} rowdata={record} columns={this.props.columns}/>
+          )}
+        </tbody>
+      </table>
+    );
+  }
 }
 
 AwesomeTable.propTypes = {
-  data: PropTypes.array.isRequired
+  data: PropTypes.array.isRequired,
+  columns: PropTypes.array.isRequired,
+  onSortTable: PropTypes.func.isRequired
 }
 
 export default AwesomeTable;
