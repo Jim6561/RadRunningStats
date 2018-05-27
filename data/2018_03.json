@@ -1,0 +1,46 @@
+{
+	"events": [
+		{
+			"raceName": "Bobcat Family Trail 5K & 1 Mile Run",
+			"date": "2018-03-24",
+			"pageType": "html",
+			"distances": [{
+				"distance": "5K",
+				"url": "http://gulfwinds.org/raceresults/2018/Bobcat5K2018.html"
+			}, {
+				"distance": "1M",
+				"url": "http://gulfwinds.org/raceresults/2018/BobcatMile2018.html"
+			}]
+		},
+		{
+			"raceName": "2Lt Justin Sisson 5K",
+			"date": "2018-03-24",
+			"pageType": "html",
+			"distances": [{
+				"distance": "5K",
+				"url": "http://gulfwinds.org/raceresults/2018/Sisson2018.html"
+			}]
+		},
+		{
+			"raceName": "Habitat for Humanity 5K",
+			"date": "2018-03-10",
+			"pageType": "html",
+			"distances": [{
+				"distance": "5K",
+				"url": "http://gulfwinds.org/raceresults/2018/Habitat2018.html"
+			}]
+		},
+		{
+			"raceName": "Shamrock Scurry 5K & 1 Mile",
+			"date": "2018-03-03",
+			"pageType": "html",
+			"distances": [{
+				"distance": "5K",
+				"url": "http://gulfwinds.org/raceresults/2018/Shamrock5K2018.html"
+			}, {
+				"distance": "1M",
+				"url": "http://gulfwinds.org/raceresults/2018/ShamrockMile2018.html"
+			}]
+		}
+	]
+}

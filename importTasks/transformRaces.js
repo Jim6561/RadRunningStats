@@ -1,4 +1,4 @@
-//npm run transformRaces 2018_04
+//npm run transformData 2018_04
 const jsonfile = require('jsonfile');
 const path = require('path');
 const fs = require('fs-extra');

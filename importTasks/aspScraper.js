@@ -7,7 +7,6 @@ module.exports.scrape = function($, config, callback) {
 			'Place',
 			'Bib',
 			'First Name',
-			'Frist Name', // OH yes
 			'Last Name',
 			'Sex',
 			'Age Group',

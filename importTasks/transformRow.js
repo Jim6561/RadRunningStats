@@ -16,6 +16,11 @@ module.exports = function(rawData) {
 		delete myReturn.last;
 	}
 	if (!name) {
+		name = rawData.namelast;
+		delete myReturn.namelast;
+	}
+	if (!name) {
+		//console.log('No name ' + JSON.stringify(rawData));
 		return null;
 	}
 

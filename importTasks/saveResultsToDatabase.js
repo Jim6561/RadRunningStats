@@ -18,6 +18,15 @@ const jsonfile = require('jsonfile');
 //const fileToLoad = 'data/transformedRaces/2018_04/WormGruntinFestival5K_5K.json';
 
 
+//const fileToLoad = 'data/transformedRaces/2018_03/2LtJustinSisson5K_5K.json';
+//const fileToLoad = 'data/transformedRaces/2018_03/BobcatFamilyTrail5K&1MileRun_1M.json';
+//const fileToLoad = 'data/transformedRaces/2018_03/BobcatFamilyTrail5K&1MileRun_5K.json';
+//const fileToLoad = 'data/transformedRaces/2018_03/HabitatforHumanity5K_5K.json';
+//const fileToLoad = 'data/transformedRaces/2018_03/ShamrockScurry5K&1Mile_1M.json';
+//const fileToLoad = 'data/transformedRaces/2018_03/ShamrockScurry5K&1Mile_5K.json';
+
+
+
 var envParams = jsonfile.readFileSync('.env');
 var dataToSave = jsonfile.readFileSync(fileToLoad);
 
@@ -92,7 +101,7 @@ pool.connect()
 		runnerSql.forEach((sql, i, arr) => {
 
 			client.query(sql, (err, result) => {
-				console.log('inserting result: ' + i);
+				console.log('inserting result: ' + (i+1) + '/' + runnerSql.length);
 
 				if (err) {
 					console.log(sql);
