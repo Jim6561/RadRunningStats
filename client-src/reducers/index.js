@@ -16,6 +16,10 @@ const initialState = {
 };
 
 function sortTable(data, column) {
+	//Sort on the numeric value behind the text
+	if (column === 'distance') {
+		column = 'distance_miles';
+	}
 	arraySort(data, column);
 
 	return data;
@@ -56,12 +60,12 @@ function myApp(state = initialState, action) {
 	    case actions.RACES_TABLE_SORT_CLICKED:
 	    	return {
 	    		...state,
-	    		races: arraySort(state.races.slice(0), action.column)
+	    		races: sortTable(state.races.slice(0), action.column)
 	    	}
 	    case actions.RESULTS_TABLE_SORT_CLICKED:
 	    	return {
 	    		...state,
-	    		results: arraySort(state.results.slice(0), action.column)
+	    		results: sortTable(state.results.slice(0), action.column)
 	    	}
 	    default:
 	     	return state;
