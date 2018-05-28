@@ -1,5 +1,3 @@
-const convertDataTypes = require('./convertDataTypes');
-const transformRow = require('./transformRow');
 module.exports.scrape = function($, config, callback) {
 
 	const privates = {
@@ -7,7 +5,6 @@ module.exports.scrape = function($, config, callback) {
 			'Place',
 			'Bib',
 			'First Name',
-			'Frist Name', // OH yes
 			'Last Name',
 			'Sex',
 			'Age Group',
@@ -105,7 +102,7 @@ module.exports.scrape = function($, config, callback) {
 						:
 					rowString.substring(column.startIndex, column.endIndex);				
 				data = data.trim();
-				rawData[columnName] = convertDataTypes(columnName, data);
+				rawData[columnName] = data;
 			});
 			return rawData;
 		},
@@ -121,10 +118,7 @@ module.exports.scrape = function($, config, callback) {
 
 	rows.map((rowString, i) => {
 		var rawData = privates.extractRow(rowString, columnData);
-		var transformedData = transformRow(rawData);
-		if (transformedData !== null) {
-			results.push(transformedData);
-		}
+		results.push(rawData);
 	});
 	callback(results);
 };

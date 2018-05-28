@@ -1,5 +1,3 @@
-const convertDataTypes = require('./convertDataTypes');
-const transformRow = require('./transformRow');
 module.exports.scrape = function($, config, callback) {
 
 	const privates = {
@@ -24,11 +22,7 @@ module.exports.scrape = function($, config, callback) {
 
 			while(rowIndex < $results.length) {
 				var rawData = privates.extractRow($rowData.children(), columnHeaders);
-				var transformedData = transformRow(rawData);
-
-				if (transformedData !== null) {
-					resultsData.push(transformedData);
-				}
+				resultsData.push(rawData);
 
 				$rowData = $rowData.next();
 				rowIndex++;
@@ -50,7 +44,7 @@ module.exports.scrape = function($, config, callback) {
 					columnHeader = 'bib';
 				}
 
-				$rowResult[columnHeader] = convertDataTypes(columnHeader, rawData);
+				$rowResult[columnHeader] = rawData;
 
 				$pointer = $pointer.next();
 				columnIndex++;

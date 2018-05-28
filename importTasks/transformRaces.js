@@ -1,8 +1,9 @@
-//npm run transformRaces 2018_04
+//npm run transformData 2018_04
 const jsonfile = require('jsonfile');
 const path = require('path');
 const fs = require('fs-extra');
 const stats = require('statsjs');
+const transformRow = require('./transformRow');
 
 var myArgs = process.argv.slice(2);
 var theFolder = myArgs[0];
@@ -27,6 +28,10 @@ fs.emptyDir(outputDir);
 fs.readdir(sourceDir, function(err, items) {
 
     items.map((raceFileStr) => {
+        //Skip system files
+        if (raceFileStr.startsWith('.')) return;
+
+        console.log('transforming: ' + raceFileStr);        
     	var inputFileFullPath = path.join(sourceDir, raceFileStr);
     	var outputFileFullPath = path.join(outputDir, raceFileStr);
     	var race = jsonfile.readFileSync(inputFileFullPath);
@@ -41,9 +46,25 @@ fs.readdir(sourceDir, function(err, items) {
 var transformRace = function(race) {
 	race.finishers = race.results.length;
 
+    race.distanceMiles = getDistanceInMiles(race.distance);
+
+    var transformedResults = [];
+    race.results.map((rawRow) => {
+
+        var transformedData = transformRow(rawRow, race.distanceMiles);
+        if (transformedData !== null) {
+            transformedResults.push(transformedData);
+        }
+
+    });
+
+    race.results = transformedResults;
+
     var times = [];
     race.results.map((result) => {
-        times.push(result.net);
+        if (result.net) {
+            times.push(result.net);
+        }
     });
 
     var timeStats = stats(times);
@@ -54,11 +75,10 @@ var transformRace = function(race) {
     race.thirdQuartileTime = timeStats.q3();
     race.lastTime = timeStats.max();
 
-    race.distanceMiles = getDistanceInMiles(race.distance);
-
-    race.results.map((result) => {
-        fillInPace(result, race.distanceMiles);
-    });
+    if (race.winningTime <= 0) {
+        console.log('no winning time! ' + race.winningTime);        
+        console.log(times);
+    }
 };
 
 var getDistanceInMiles = function(distance) {
@@ -82,11 +102,4 @@ var getDistanceInMiles = function(distance) {
     } catch (e) {
         throw 'unexpected distance: ' + distance;
     }
-}
-
-var fillInPace = function(result, distanceMiles) {
-    if (result.pace > 0) {
-        return;
-    }
-    result.pace = result.net / distanceMiles;
 }
