@@ -1,7 +1,9 @@
 /**
- * This is common to both scrapers. It combines name parts for now
+ * This is common to both scrapers.
  */
-module.exports = function(rawData) {
+const convertDataTypes = require('./convertDataTypes');
+module.exports = function(rawData, distanceMiles) {
+
 	var myReturn = Object.assign({}, rawData);
 
 	var name = rawData.name;
@@ -24,10 +26,20 @@ module.exports = function(rawData) {
 		return null;
 	}
 
-	if (rawData.time) {
+	if (myReturn.time) {
 		myReturn.net = rawData.time;
 		myReturn.gun = rawData.time;
 		delete myReturn.time;
+	}
+
+	if (myReturn['net time'] && !myReturn.net) {
+		myReturn.net = myReturn['net time'];
+		delete myReturn['net time'];
+	}
+
+	if (myReturn['gun time'] && !myReturn.gun) {
+		myReturn.gun = myReturn['gun time'];
+		delete myReturn['gun time'];
 	}
 
 	if (myReturn.age && isNaN(myReturn.age)) {
@@ -42,6 +54,23 @@ module.exports = function(rawData) {
 		console.log('unexpected sex: ' + myReturn.sex);
 	}
 
+	for (var columnName in myReturn) {
+	    if (myReturn.hasOwnProperty(columnName)) {
+	        myReturn[columnName] = convertDataTypes(columnName, myReturn[columnName]);
+	    } else {
+	    	console.log('skipping');
+	    }
+	}
+
+	fillInPace(myReturn, distanceMiles);
+
 	myReturn.name = name;
 	return myReturn;
+}
+
+var fillInPace = function(result, distanceMiles) {
+    if (result.pace > 0) {
+        return;
+    }
+    result.pace = result.net / distanceMiles;
 }
