@@ -1,0 +1,98 @@
+{
+	"events": [
+		{
+			"raceName": "Bulldog Dash 5K",
+			"date": "2018-02-24",
+			"pageType": "asp",
+			"distances": [{
+				"distance": "5K",
+				"metaDistance": "5K",
+				"url": "http://gulfwinds.org/raceresults/2018/Bulldog%20Dash%202018.asp"
+			}]
+		},
+		{
+			"raceName": "Trailblazer Run for Literacy 5K & 1 Mile",
+			"date": "2018-02-24",
+			"pageType": "html",
+			"distances": [{
+				"distance": "5K",
+				"url": "http://www.gulfwinds.org/raceresults/2018/Trailblazer5K2018.html"
+			}, {
+				"distance": "1M",
+				"url": "http://www.gulfwinds.org/raceresults/2018/TrailblazerMile2018.html"
+			}]
+		},
+		{
+			"raceName": "Flash 12K & 6K",
+			"date": "2018-02-17",
+			"pageType": "html",
+			"distances": [{
+				"distance": "12K",
+				"url": "http://gulfwinds.org/raceresults/2018/Flash12K2018.html"
+			}, {
+				"distance": "6K",
+				"url": "http://gulfwinds.org/raceresults/2018/Flash6K2018.html"
+			}]
+		},
+		{
+			"raceName": "Heart and Sole One Mile Run",
+			"location": "Thomasville, GA",
+			"date": "2018-02-17",
+			"pageType": "html",
+			"distances": [{
+				"distance": "1M",
+				"url": "http://gulfwinds.org/raceresults/2018/HeartandSole2018.html"
+			}]
+		},
+		{
+			"raceName": "First Option Care 5K Run For Life",
+			"location": "Thomasville, GA",
+			"date": "2018-02-10",
+			"pageType": "asp",
+			"distances": [{
+				"distance": "5K",
+				"metaDistance": "5K",
+				"url": "http://gulfwinds.org/raceresults/2018/First%20Option%202018.asp"
+			}]
+		},
+		{
+			"raceName": "18th Annual Mardi Gras 5K",
+			"location": "Panama City Beach",
+			"date": "2018-02-10",
+			"pageType": "asp",
+			"distances": [{
+				"distance": "5K",
+				"metaDistance": "5K",
+				"url": "http://gulfwinds.org/raceresults/2018/Mardi_Gras_2018.asp"
+			}, {
+				"distance": "1M",
+				"metaDistance": "1M",
+				"url": "http://gulfwinds.org/raceresults/2018/Mardi_Gras_2018.asp"
+			}]
+		},
+		{
+			"raceName": "Run for the Cookies 5K & 1 Mile",
+			"date": "2018-02-10",
+			"pageType": "html",
+			"distances": [{
+				"distance": "5K",
+				"url": "http://gulfwinds.org/raceresults/2018/Cookie5K2018.html"
+			}, {
+				"distance": "1M",
+				"url": "http://gulfwinds.org/raceresults/2018/CookieMile2018.html"
+			}]
+		},
+		{
+			"raceName": "Tallahassee Marathon, Tallahassee Half Marathon and Marathon Relay",
+			"date": "2018-02-04",
+			"pageType": "html",
+			"distances": [{
+				"distance": "Marathon",
+				"url": "http://gulfwinds.org/raceresults/2018/Marathon2018.html"
+			}, {
+				"distance": "Half Marathon",
+				"url": "http://gulfwinds.org/raceresults/2018/HalfMarathon2018.html"
+			}]
+		}
+	]
+}

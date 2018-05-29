@@ -42,6 +42,11 @@ module.exports = function(rawData, distanceMiles) {
 		delete myReturn['gun time'];
 	}
 
+	if (myReturn['131m']) {
+		myReturn.split = myReturn['131m'];
+		delete myReturn['131m'];
+	}
+
 	if (myReturn.age && isNaN(myReturn.age)) {
 		console.log('unexpected age: ' + myReturn.age);
 	}

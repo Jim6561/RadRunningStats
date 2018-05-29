@@ -84,6 +84,12 @@ var transformRace = function(race) {
 var getDistanceInMiles = function(distance) {
     try
     {
+        if (distance === 'Marathon') {
+            return 26.2188;
+        }
+        if (distance === 'Half Marathon') {
+            return 13.1094;
+        }
         var indexOfM = distance.indexOf('M');
         if (indexOfM > -1) {
             var numberPart = distance.substring(0, indexOfM);
@@ -94,11 +100,11 @@ var getDistanceInMiles = function(distance) {
         var indexOfK = distance.indexOf('K');
         if (indexOfK > -1) {
             var numberPart = distance.substring(0, indexOfK);
-            if (isNaN(numberPart)) {
-                throw 'Unpexpected distance: ' + distance;
-            }
-            return KILOMETERS_TO_MILES * numberPart;
+            if (!isNaN(numberPart)) {
+                return KILOMETERS_TO_MILES * numberPart;   
+            }    
         }
+        throw 'Unpexpected distance: ' + distance;
     } catch (e) {
         throw 'unexpected distance: ' + distance;
     }
