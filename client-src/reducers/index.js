@@ -25,51 +25,58 @@ function sortTable(data, column) {
 	return data;
 }
 
-function myApp(state = initialState, action) {
+
+function resultsReducer(state, action) {
 	switch (action.type) {
-	    case actions.RECEIVE_RESULTS_SUCCESS:
-	    	return {
-	    		...state,
-	    		results: action.records
-	    	};
+		case actions.RECEIVE_RESULTS_SUCCESS:
+			return action.records;
 	    case actions.RECEIVE_RESULTS_FAILED:
-	    	return {
-	    		...state,
-	    		results: []
-	    	};
-	    case actions.RECEIVE_RACES_SUCCESS:
-	    	return {
-	    		...state,
-	     		races: action.records
-	     	};
-		case actions.RECEIVE_RACES_FAILED:
-	    	return {
-	    		...state,
-	     		races: []
-	     	};
-	    case actions.SEARCH_FORM_CHANGED:
-	    	return {
-	    		...state,
-	    		runnerName: action.event.target.value
-	    	};
-	    case actions.PAGE_BUTTON_CLICKED:
-	    	return {
-	    		...state,
-	    		selectedPage: action.page
-	    	};
-	    case actions.RACES_TABLE_SORT_CLICKED:
-	    	return {
-	    		...state,
-	    		races: sortTable(state.races.slice(0), action.column)
-	    	}
+	    	return [];
 	    case actions.RESULTS_TABLE_SORT_CLICKED:
-	    	return {
-	    		...state,
-	    		results: sortTable(state.results.slice(0), action.column)
-	    	}
+	    	return sortTable(state.slice(0), action.column);
+	    default:
+	     	return state;
+	}
+}
+
+function racesReducer(state, action) {
+	switch (action.type) {
+		case actions.RECEIVE_RACES_SUCCESS:
+	    	return action.records;
+		case actions.RECEIVE_RACES_FAILED:
+	    	return [];
+	     case actions.RACES_TABLE_SORT_CLICKED:
+	    	return sortTable(state.slice(0), action.column);
+	    default:
+	     	return state;
+	}
+}
+
+function runnerNameReducer(state, action) {
+	switch (action.type) {
+	    case actions.SEARCH_FORM_CHANGED:
+	    	return action.event.target.value;
 	    default:
 	     	return state;
  	}
+}
+
+function selectedPageReducer(state, action) {
+	switch (action.type) {
+	    case actions.PAGE_BUTTON_CLICKED:
+	    	return action.page;
+	    default:
+	     	return state;
+ 	}
+}
+
+function myApp(state = initialState, action) {
+	return {
+		results: resultsReducer(state.results, action),
+		races: racesReducer(state.races, action),
+		runnerName: runnerNameReducer(state.runnerName, action),
+		selectedPage: selectedPageReducer(state.selectedPage, action),
+	}
 }
 
 export default myApp;
