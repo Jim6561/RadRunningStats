@@ -1,5 +1,6 @@
 import * as actions from '../actions/actions'
 import arraySort from 'array-sort'
+import { combineReducers } from 'redux'
 
 
 //Make these sensible constants somehow.
@@ -26,7 +27,7 @@ function sortTable(data, column) {
 }
 
 
-function resultsReducer(state, action) {
+function resultsReducer(state = [], action) {
 	switch (action.type) {
 		case actions.RECEIVE_RESULTS_SUCCESS:
 			return action.records;
@@ -39,7 +40,7 @@ function resultsReducer(state, action) {
 	}
 }
 
-function racesReducer(state, action) {
+function racesReducer(state = [], action) {
 	switch (action.type) {
 		case actions.RECEIVE_RACES_SUCCESS:
 	    	return action.records;
@@ -52,7 +53,7 @@ function racesReducer(state, action) {
 	}
 }
 
-function runnerNameReducer(state, action) {
+function runnerNameReducer(state = '', action) {
 	switch (action.type) {
 	    case actions.SEARCH_FORM_CHANGED:
 	    	return action.event.target.value;
@@ -61,7 +62,7 @@ function runnerNameReducer(state, action) {
  	}
 }
 
-function selectedPageReducer(state, action) {
+function selectedPageReducer(state = RACES_PAGE, action) {
 	switch (action.type) {
 	    case actions.PAGE_BUTTON_CLICKED:
 	    	return action.page;
@@ -70,13 +71,11 @@ function selectedPageReducer(state, action) {
  	}
 }
 
-function myApp(state = initialState, action) {
-	return {
-		results: resultsReducer(state.results, action),
-		races: racesReducer(state.races, action),
-		runnerName: runnerNameReducer(state.runnerName, action),
-		selectedPage: selectedPageReducer(state.selectedPage, action),
-	}
-}
+const myApp = combineReducers({
+		results: resultsReducer,
+		races: racesReducer,
+		runnerName: runnerNameReducer,
+		selectedPage: selectedPageReducer,
+	})
 
 export default myApp;
