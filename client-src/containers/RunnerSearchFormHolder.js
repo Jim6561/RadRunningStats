@@ -5,7 +5,7 @@ import { searchFormChanged, resultsRequested, resultsTableSortClicked } from '..
 const mapStateToProps = state => {
   return {
     runnerName: state.runnerName,
-    results: state.results
+    results: state.results.rows
   }
 }
 

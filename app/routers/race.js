@@ -12,6 +12,7 @@ router.get('/', function(req, response) {
 				 + ' r.race_id,'
 				 + ' r.race_name,'
 				 + ' r.distance,'
+				 + ' r.distance_miles,'
 				 + ' r.event_date,'
 				 + ' r.location,'
 				 + ' r.finishers,'

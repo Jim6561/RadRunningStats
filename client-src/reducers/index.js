@@ -1,5 +1,6 @@
 import * as actions from '../actions/actions'
 import arraySort from 'array-sort'
+import { combineReducers } from 'redux'
 
 
 //Make these sensible constants somehow.
@@ -8,64 +9,86 @@ import arraySort from 'array-sort'
 const RESULTS_PAGE = 'RESULTS_PAGE';
 const RACES_PAGE = 'RACES_PAGE';
 
-const initialState = {
-	selectedPage: RACES_PAGE,
-	runnerName: '',
-	results: [],
-	races: []
-};
+function sortTable(state, newColumn) {
 
-function sortTable(data, column) {
-	arraySort(data, column);
+	var data = state.rows.slice(0),
+		oldSortColumn = state.sortColumn,
+		sortColumn = newColumn;
+	
+	//Sort on the numeric value behind the text
+	if (newColumn === 'distance') {
+		sortColumn = 'distance_miles';
+	}
 
-	return data;
+	var reverse = (sortColumn === oldSortColumn) ? !state.reverse : false;
+
+	//The sorting is the least important...
+	arraySort(data, sortColumn, {reverse: reverse});
+
+	return {rows: data, sortColumn: sortColumn, reverse: reverse};
 }
 
-function myApp(state = initialState, action) {
+function resultsReducer(state = {rows: [], sortColumn: null, acsending: true}, action) {
 	switch (action.type) {
-	    case actions.RECEIVE_RESULTS_SUCCESS:
-	    	return {
-	    		...state,
-	    		results: action.records
-	    	};
+		case actions.RECEIVE_RESULTS_SUCCESS:
+			return {
+				...state,
+				rows: action.records
+			};
 	    case actions.RECEIVE_RESULTS_FAILED:
 	    	return {
 	    		...state,
-	    		results: []
+	    		rows: []
 	    	};
-	    case actions.RECEIVE_RACES_SUCCESS:
+	    case actions.RESULTS_TABLE_SORT_CLICKED:
+	    	return sortTable(state, action.column);
+	    default:
+	     	return state;
+	}
+}
+
+function racesReducer(state = {rows: [], sortColumn: null, acsending: true}, action) {
+	switch (action.type) {
+		case actions.RECEIVE_RACES_SUCCESS:
 	    	return {
-	    		...state,
-	     		races: action.records
-	     	};
+				...state,
+				rows: action.records
+			};
 		case actions.RECEIVE_RACES_FAILED:
 	    	return {
 	    		...state,
-	     		races: []
-	     	};
+	    		rows: []
+	    	};
+	     case actions.RACES_TABLE_SORT_CLICKED:
+	    	return sortTable(state, action.column);
+	    default:
+	     	return state;
+	}
+}
+
+function runnerNameReducer(state = '', action) {
+	switch (action.type) {
 	    case actions.SEARCH_FORM_CHANGED:
-	    	return {
-	    		...state,
-	    		runnerName: action.event.target.value
-	    	};
-	    case actions.PAGE_BUTTON_CLICKED:
-	    	return {
-	    		...state,
-	    		selectedPage: action.page
-	    	};
-	    case actions.RACES_TABLE_SORT_CLICKED:
-	    	return {
-	    		...state,
-	    		races: arraySort(state.races.slice(0), action.column)
-	    	}
-	    case actions.RESULTS_TABLE_SORT_CLICKED:
-	    	return {
-	    		...state,
-	    		results: arraySort(state.results.slice(0), action.column)
-	    	}
+	    	return action.event.target.value;
 	    default:
 	     	return state;
  	}
 }
+
+function selectedPageReducer(state = RACES_PAGE, action) {
+	switch (action.type) {
+	    case actions.PAGE_BUTTON_CLICKED:
+	    	return action.page;
+	    default:
+	     	return state;
+ 	}
+}
+
+const myApp = combineReducers({
+		results: resultsReducer,
+		races: racesReducer,
+		runnerName: runnerNameReducer,
+		selectedPage: selectedPageReducer,
+	})
 
 export default myApp;
