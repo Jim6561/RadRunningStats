@@ -9,45 +9,58 @@ import { combineReducers } from 'redux'
 const RESULTS_PAGE = 'RESULTS_PAGE';
 const RACES_PAGE = 'RACES_PAGE';
 
-const initialState = {
-	selectedPage: RACES_PAGE,
-	runnerName: '',
-	results: [],
-	races: []
-};
+function sortTable(state, newColumn) {
 
-function sortTable(data, column) {
+	var data = state.rows.slice(0),
+		oldSortColumn = state.sortColumn,
+		sortColumn = newColumn;
+	
 	//Sort on the numeric value behind the text
-	if (column === 'distance') {
-		column = 'distance_miles';
+	if (newColumn === 'distance') {
+		sortColumn = 'distance_miles';
 	}
-	arraySort(data, column);
 
-	return data;
+	var reverse = (sortColumn === oldSortColumn) ? !state.reverse : false;
+
+	//The sorting is the least important...
+	arraySort(data, sortColumn, {reverse: reverse});
+
+	return {rows: data, sortColumn: sortColumn, reverse: reverse};
 }
 
-
-function resultsReducer(state = [], action) {
+function resultsReducer(state = {rows: [], sortColumn: null, acsending: true}, action) {
 	switch (action.type) {
 		case actions.RECEIVE_RESULTS_SUCCESS:
-			return action.records;
+			return {
+				...state,
+				rows: action.records
+			};
 	    case actions.RECEIVE_RESULTS_FAILED:
-	    	return [];
+	    	return {
+	    		...state,
+	    		rows: []
+	    	};
 	    case actions.RESULTS_TABLE_SORT_CLICKED:
-	    	return sortTable(state.slice(0), action.column);
+	    	return sortTable(state, action.column);
 	    default:
 	     	return state;
 	}
 }
 
-function racesReducer(state = [], action) {
+function racesReducer(state = {rows: [], sortColumn: null, acsending: true}, action) {
 	switch (action.type) {
 		case actions.RECEIVE_RACES_SUCCESS:
-	    	return action.records;
+	    	return {
+				...state,
+				rows: action.records
+			};
 		case actions.RECEIVE_RACES_FAILED:
-	    	return [];
+	    	return {
+	    		...state,
+	    		rows: []
+	    	};
 	     case actions.RACES_TABLE_SORT_CLICKED:
-	    	return sortTable(state.slice(0), action.column);
+	    	return sortTable(state, action.column);
 	    default:
 	     	return state;
 	}
