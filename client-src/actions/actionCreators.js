@@ -67,3 +67,9 @@ export function resultsTableSortClicked(column) {
 		column
 	}
 };
+
+export function showResultLocationsClicked() {
+	return {
+		type: actions.SHOW_RESULT_LOCATIONS_CLICKED
+	}
+};

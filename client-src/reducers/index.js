@@ -28,7 +28,7 @@ function sortTable(state, newColumn) {
 	return {rows: data, sortColumn: sortColumn, reverse: reverse};
 }
 
-function resultsReducer(state = {rows: [], sortColumn: null, acsending: true}, action) {
+function resultsReducer(state = {rows: [], sortColumn: null, acsending: true, showLocations: true}, action) {	
 	switch (action.type) {
 		case actions.RECEIVE_RESULTS_SUCCESS:
 			return {
@@ -42,6 +42,11 @@ function resultsReducer(state = {rows: [], sortColumn: null, acsending: true}, a
 	    	};
 	    case actions.RESULTS_TABLE_SORT_CLICKED:
 	    	return sortTable(state, action.column);
+	    case actions.SHOW_RESULT_LOCATIONS_CLICKED:
+	    	return {
+	    		...state,
+	    		showLocations: !state.showLocations
+	    	}
 	    default:
 	     	return state;
 	}
