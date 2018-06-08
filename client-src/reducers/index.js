@@ -1,6 +1,6 @@
 import * as actions from '../actions/actions'
-import arraySort from 'array-sort'
 import { combineReducers } from 'redux'
+import sortTable from './sortTable'
 
 
 //Make these sensible constants somehow.
@@ -9,24 +9,7 @@ import { combineReducers } from 'redux'
 const RESULTS_PAGE = 'RESULTS_PAGE';
 const RACES_PAGE = 'RACES_PAGE';
 
-function sortTable(state, newColumn) {
 
-	var data = state.rows.slice(0),
-		oldSortColumn = state.sortColumn,
-		sortColumn = newColumn;
-	
-	//Sort on the numeric value behind the text
-	if (newColumn === 'distance') {
-		sortColumn = 'distance_miles';
-	}
-
-	var reverse = (sortColumn === oldSortColumn) ? !state.reverse : false;
-
-	//The sorting is the least important...
-	arraySort(data, sortColumn, {reverse: reverse});
-
-	return {rows: data, sortColumn: sortColumn, reverse: reverse};
-}
 
 function resultsReducer(state = {rows: [], sortColumn: null, acsending: true, showLocations: true}, action) {	
 	switch (action.type) {

@@ -1,0 +1,27 @@
+import arraySort from 'array-sort'
+
+const sortTable = function(state, newColumn) {
+
+	var data = state.rows.slice(0),
+		oldSortColumn = state.sortColumn,
+		sortColumn = newColumn;
+	
+	//Sort on the numeric value behind the text
+	if (newColumn === 'distance') {
+		sortColumn = 'distance_miles';
+	}
+
+	var reverse = (sortColumn === oldSortColumn) ? !state.reverse : false;
+
+	//The sorting is the least important...
+	arraySort(data, sortColumn, {reverse: reverse});
+
+	return {
+		...state,
+		rows: data,
+		sortColumn: sortColumn,
+		reverse: reverse
+	};
+}
+
+export default sortTable;
