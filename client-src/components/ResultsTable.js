@@ -25,10 +25,12 @@ const columns = [
     dataProp: 'age'
   }, {
     header: 'City',
-    dataProp: 'city'
+    dataProp: 'city',
+    group: 'location'
   }, {
     header: 'State',
-    dataProp: 'state'
+    dataProp: 'state',
+    group: 'location'
   }, {
     header: 'Place',
     dataProp: 'place'
@@ -60,15 +62,32 @@ const columns = [
   }
 ];
 
-const ResultsTable = ({data, onSortTable}) => {
+
+
+const doUpdateColumnGroup = (columns, group, show) => {
+  if (show) {
+    return columns;
+  }
+  let newColumns = [];
+  columns.map((col) => {
+    if (col.group !== group) {
+      newColumns.push(col);
+    }
+  });
+  return newColumns;
+}
+
+const ResultsTable = ({data, onSortTable, showLocations}) => {
+  let actualColumns = doUpdateColumnGroup(columns, 'location', showLocations);
   return (
-    <AwesomeTable data={data} columns={columns} onSortTable={onSortTable}/>
+    <AwesomeTable data={data} columns={actualColumns} onSortTable={onSortTable}/>
   );
 }
 
 ResultsTable.propTypes = {
   data: PropTypes.array.isRequired,
-  onSortTable: PropTypes.func.isRequired
+  onSortTable: PropTypes.func.isRequired,
+  showLocations: PropTypes.bool.isRequired
 }
 
 export default ResultsTable;
