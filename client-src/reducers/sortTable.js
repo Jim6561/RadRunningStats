@@ -1,6 +1,6 @@
 import arraySort from 'array-sort'
 
-const sortTable = function(state, newColumn) {
+export const sortTable = (state, newColumn) => {
 
 	var data = state.rows.slice(0),
 		oldSortColumn = state.sortColumn,
@@ -24,4 +24,10 @@ const sortTable = function(state, newColumn) {
 	};
 }
 
-export default sortTable;
+export const makeTable = (rows = [], sortColumn = null, acsending = true) => {
+	return {
+		rows: rows,
+		sortColumn: sortColumn,
+		acsending: acsending
+	}
+}
