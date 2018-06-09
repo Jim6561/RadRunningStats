@@ -27,11 +27,11 @@ const columns = [
   }, {
     header: 'City',
     dataProp: 'city',
-    group: 'location'
+    groups: ['location']
   }, {
     header: 'State',
     dataProp: 'state',
-    group: 'location'
+    groups: ['location']
   }, {
     header: 'Place',
     dataProp: 'place'

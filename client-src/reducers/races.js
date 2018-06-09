@@ -51,12 +51,22 @@ function showAllTimes(state = false, action) {
 	}
 }
 
+function showPaces(state = false, action) {
+	switch (action.type) {
+		case actions.SHOW_RACE_PACES_CLICKED:
+	    	return !state;
+	    default:
+	     	return state;
+	}
+}
+
 const races = combineReducers({
 	table: tableReducer,
 	showLocations: showLocations,
 	showWinningTime: showWinningTime,
 	showMedianTime: showMedianTime,
-	showAllTimes: showAllTimes
+	showAllTimes: showAllTimes,
+	showPaces: showPaces
 });
 
 export default races;

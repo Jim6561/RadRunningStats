@@ -97,3 +97,9 @@ export function showAllRaceTimesClicked() {
 		type: actions.SHOW_ALL_RACE_TIMES_CLICKED
 	}
 };
+
+export function showRacePacesClicked() {
+	return {
+		type: actions.SHOW_RACE_PACES_CLICKED
+	}
+};

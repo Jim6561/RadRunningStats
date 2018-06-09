@@ -9,11 +9,13 @@ const RacesPage = ({
   showWinningTime, 
   showMedianTime, 
   showAllTimes,
+  showPaces,
   onSortTable, 
   onShowLocationChange, 
   onShowWinningTimeChange, 
   onShowMedianTimeChange,
-  onShowAllTimesChange
+  onShowAllTimesChange,
+  onShowPacesChange
 }) => {
   return (
     <div>
@@ -22,6 +24,7 @@ const RacesPage = ({
         <CheckBox label='Winning Time' checked={showWinningTime} onChange={onShowWinningTimeChange}/>
         <CheckBox label='Median Time' checked={showMedianTime} onChange={onShowMedianTimeChange}/>
         <CheckBox label='All Times' checked={showAllTimes} onChange={onShowAllTimesChange}/>
+        <CheckBox label='Pace' checked={showPaces} onChange={onShowPacesChange}/>
       </span>  
       <RacesTable
         data={data}
@@ -29,6 +32,7 @@ const RacesPage = ({
         showWinningTime={showWinningTime}
         showMedianTime={showMedianTime}
         showAllTimes={showAllTimes}
+        showPaces={showPaces}
         onSortTable={onSortTable}
       />
     </div>
