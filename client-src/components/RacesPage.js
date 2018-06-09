@@ -15,7 +15,8 @@ const RacesPage = ({
   onShowWinningTimeChange, 
   onShowMedianTimeChange,
   onShowAllTimesChange,
-  onShowPacesChange
+  onShowPacesChange,
+  onSingleRaceClicked
 }) => {
   return (
     <div>
@@ -34,6 +35,7 @@ const RacesPage = ({
         showAllTimes={showAllTimes}
         showPaces={showPaces}
         onSortTable={onSortTable}
+        onSingleRaceClicked={onSingleRaceClicked}
       />
     </div>
   );
@@ -41,7 +43,8 @@ const RacesPage = ({
 
 RacesPage.propTypes = {
   data: PropTypes.array.isRequired,
-  onSortTable: PropTypes.func.isRequired
+  onSortTable: PropTypes.func.isRequired,
+  onSingleRaceClicked: PropTypes.func.isRequired
 }
 
 export default RacesPage;

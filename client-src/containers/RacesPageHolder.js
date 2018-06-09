@@ -6,7 +6,8 @@ import {
 	showWinningTimeClicked, 
 	showMedianTimeClicked,
 	showAllRaceTimesClicked,
-	showRacePacesClicked
+	showRacePacesClicked,
+	singleRaceClicked
 } from '../actions/actionCreators';
 
 const mapStateToProps = state => {
@@ -39,6 +40,9 @@ const mapDispatchToProps = dispatch => {
 		},
 		onShowPacesChange: () => {
 			dispatch(showRacePacesClicked());
+		},
+		onSingleRaceClicked: (raceId) => {
+			dispatch(singleRaceClicked(raceId));
 		}
 	}
 }

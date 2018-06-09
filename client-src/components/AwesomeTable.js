@@ -28,7 +28,7 @@ class AwesomeTable extends React.Component {
         </thead>
         <tbody>
           {this.props.data.map((record, i) => 
-              <TableRow key={i} rowdata={record} columns={this.props.columns}/>
+              <TableRow key={i} rowdata={record} columns={this.props.columns} onRowClicked={this.props.onRowClicked} />
           )}
         </tbody>
       </table>
@@ -39,7 +39,8 @@ class AwesomeTable extends React.Component {
 AwesomeTable.propTypes = {
   data: PropTypes.array.isRequired,
   columns: PropTypes.array.isRequired,
-  onSortTable: PropTypes.func.isRequired
+  onSortTable: PropTypes.func.isRequired,
+  onRowClicked: PropTypes.func
 }
 
 export default AwesomeTable;

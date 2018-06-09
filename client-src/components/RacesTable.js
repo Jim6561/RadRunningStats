@@ -75,7 +75,7 @@ const columns = [
   }
 ];
 
-const RacesTable = ({data, showLocations, showWinningTime, showMedianTime, showAllTimes, showPaces, onSortTable}) => {
+const RacesTable = ({data, showLocations, showWinningTime, showMedianTime, showAllTimes, showPaces, onSortTable, onSingleRaceClicked}) => {
   let actualColumns = columns;
   actualColumns = doUpdateColumnGroup(actualColumns, 'location', showLocations);
   actualColumns = doUpdateColumnGroup(actualColumns, 'winning_time', showWinningTime || showAllTimes);
@@ -84,13 +84,14 @@ const RacesTable = ({data, showLocations, showWinningTime, showMedianTime, showA
   actualColumns = doUpdateColumnGroup(actualColumns, 'pace', showPaces);
   actualColumns = doUpdateColumnGroup(actualColumns, 'time', !showPaces);
   return (
-    <AwesomeTable data={data} columns={actualColumns} onSortTable={onSortTable}/>
+    <AwesomeTable data={data} columns={actualColumns} onSortTable={onSortTable} onRowClicked={onSingleRaceClicked}/>
   );
 }
 
 RacesTable.propTypes = {
   data: PropTypes.array.isRequired,
-  onSortTable: PropTypes.func.isRequired
+  onSortTable: PropTypes.func.isRequired,
+  onSingleRaceClicked: PropTypes.func.isRequired
 }
 
 export default RacesTable;

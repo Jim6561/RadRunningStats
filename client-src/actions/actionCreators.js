@@ -103,3 +103,10 @@ export function showRacePacesClicked() {
 		type: actions.SHOW_RACE_PACES_CLICKED
 	}
 };
+
+export function singleRaceClicked(row) {
+	return {
+		type: actions.SINGLE_RACE_CLICKED,
+		raceId: row.race_id
+	}
+};

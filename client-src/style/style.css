@@ -50,3 +50,7 @@ tr.dataRow:hover {
 	padding-bottom: 1em;
 	margin-bottom: 1em;
 }
+
+.clickable {
+	cursor: pointer;
+}
