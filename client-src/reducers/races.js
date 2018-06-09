@@ -15,9 +15,18 @@ function tableReducer(state = makeTable(), action) {
 	}
 }
 
+function showLocations(state = true, action) {
+	switch (action.type) {
+		case actions.SHOW_RACE_LOCATIONS_CLICKED:
+	    	return !state;
+	    default:
+	     	return state;
+	}
+}
+
 const races = combineReducers({
-	table: tableReducer
-	//showLocations: showLocations
+	table: tableReducer,
+	showLocations: showLocations
 });
 
 export default races;

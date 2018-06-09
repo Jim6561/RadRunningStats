@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AwesomeTable from './AwesomeTable';
 import TimeValue from './TimeValue';
+import { doUpdateColumnGroup } from '../helpers/TableHelper'
  
 const columns = [
   {
@@ -14,6 +15,10 @@ const columns = [
     header: 'Date',
     dataProp: 'event_date',
     render: (data) => {return new Date(data).toLocaleDateString()}
+  }, {
+    header: 'Location',
+    dataProp: 'location',
+    group: 'location'
   }, {
     header: 'Finishers',
     dataProp: 'finishers'
@@ -28,10 +33,10 @@ const columns = [
   }
 ];
 
-
-const RacesTable = ({data, onSortTable}) => {
+const RacesTable = ({data, showLocations, onSortTable}) => {
+  let actualColumns = doUpdateColumnGroup(columns, 'location', showLocations);
   return (
-    <AwesomeTable data={data} columns={columns} onSortTable={onSortTable}/>
+    <AwesomeTable data={data} columns={actualColumns} onSortTable={onSortTable}/>
   );
 }
 

@@ -73,3 +73,9 @@ export function showResultLocationsClicked() {
 		type: actions.SHOW_RESULT_LOCATIONS_CLICKED
 	}
 };
+
+export function showRaceLocationsClicked() {
+	return {
+		type: actions.SHOW_RACE_LOCATIONS_CLICKED
+	}
+};

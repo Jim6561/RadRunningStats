@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AwesomeTable from './AwesomeTable';
 import TimeValue from './TimeValue';
+import { doUpdateColumnGroup } from '../helpers/TableHelper'
 
 const columns = [
   {
@@ -61,21 +62,6 @@ const columns = [
     render: (data) => {return <TimeValue value={data}/>}
   }
 ];
-
-
-
-const doUpdateColumnGroup = (columns, group, show) => {
-  if (show) {
-    return columns;
-  }
-  let newColumns = [];
-  columns.map((col) => {
-    if (col.group !== group) {
-      newColumns.push(col);
-    }
-  });
-  return newColumns;
-}
 
 const ResultsTable = ({data, onSortTable, showLocations}) => {
   let actualColumns = doUpdateColumnGroup(columns, 'location', showLocations);

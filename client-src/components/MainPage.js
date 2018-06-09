@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import RacesTableHolder from '../containers/RacesTableHolder';
+import RacesPageHolder from '../containers/RacesPageHolder';
 import RunnerSearchFormHolder from '../containers/RunnerSearchFormHolder';
  
 class MainPage extends React.Component {
@@ -41,7 +41,7 @@ class MainPage extends React.Component {
 		    	}>Runners</span>
 	    	</div>
 	    	<div className='pageContent'>
-	    		{this.props.selectedPage === 'RACES_PAGE' && <RacesTableHolder/>}
+	    		{this.props.selectedPage === 'RACES_PAGE' && <RacesPageHolder/>}
 	    		{this.props.selectedPage === 'RESULTS_PAGE' && <RunnerSearchFormHolder/>}
 	    	</div>
 	   	</div>
