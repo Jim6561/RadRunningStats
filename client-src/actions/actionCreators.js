@@ -79,3 +79,15 @@ export function showRaceLocationsClicked() {
 		type: actions.SHOW_RACE_LOCATIONS_CLICKED
 	}
 };
+
+export function showWinningTimeClicked() {
+	return {
+		type: actions.SHOW_WINNING_TIME_CLICKED
+	}
+};
+
+export function showMedianTimeClicked() {
+	return {
+		type: actions.SHOW_MEDIAN_TIME_CLICKED
+	}
+};

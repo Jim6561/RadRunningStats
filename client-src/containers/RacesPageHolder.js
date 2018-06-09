@@ -1,11 +1,18 @@
 import { connect } from 'react-redux';
 import RacesPage from '../components/RacesPage';
-import { racesTableSortClicked, showRaceLocationsClicked } from '../actions/actionCreators';
+import { 
+	racesTableSortClicked, 
+	showRaceLocationsClicked, 
+	showWinningTimeClicked, 
+	showMedianTimeClicked
+} from '../actions/actionCreators';
 
 const mapStateToProps = state => {
 	return {
 		data: state.races.table.rows,
-		showLocations: state.races.showLocations
+		showLocations: state.races.showLocations,
+		showWinningTime: state.races.showWinningTime,
+		showMedianTime: state.races.showMedianTime
 	}
 }
 
@@ -16,6 +23,12 @@ const mapDispatchToProps = dispatch => {
 		},
 		onShowLocationChange: () => {
 			dispatch(showRaceLocationsClicked());
+		},		
+		onShowWinningTimeChange: () => {
+			dispatch(showWinningTimeClicked());
+		},
+		onShowMedianTimeChange: () => {
+			dispatch(showMedianTimeClicked());
 		}
 	}
 }

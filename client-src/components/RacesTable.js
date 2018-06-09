@@ -25,16 +25,20 @@ const columns = [
   }, {
     header: 'Winning Time',
     dataProp: 'winning_time',
-    render: (data) => {return <TimeValue value={data}/>}
+    render: (data) => {return <TimeValue value={data}/>},
+    group: 'winning_time'
   }, {
     header: 'Median Time',
     dataProp: 'median_time',
-    render: (data) => {return <TimeValue value={data}/>}
+    render: (data) => {return <TimeValue value={data}/>},
+    group: 'median_time'
   }
 ];
 
-const RacesTable = ({data, showLocations, onSortTable}) => {
+const RacesTable = ({data, showLocations, showWinningTime, showMedianTime, onSortTable}) => {
   let actualColumns = doUpdateColumnGroup(columns, 'location', showLocations);
+  actualColumns = doUpdateColumnGroup(actualColumns, 'winning_time', showWinningTime);
+  actualColumns = doUpdateColumnGroup(actualColumns, 'median_time', showMedianTime);
   return (
     <AwesomeTable data={data} columns={actualColumns} onSortTable={onSortTable}/>
   );

@@ -15,7 +15,7 @@ function tableReducer(state = makeTable(), action) {
 	}
 }
 
-function showLocations(state = true, action) {
+function showLocations(state = false, action) {
 	switch (action.type) {
 		case actions.SHOW_RACE_LOCATIONS_CLICKED:
 	    	return !state;
@@ -24,9 +24,29 @@ function showLocations(state = true, action) {
 	}
 }
 
+function showWinningTime(state = true, action) {
+	switch (action.type) {
+		case actions.SHOW_WINNING_TIME_CLICKED:
+	    	return !state;
+	    default:
+	     	return state;
+	}
+}
+
+function showMedianTime(state = true, action) {
+	switch (action.type) {
+		case actions.SHOW_MEDIAN_TIME_CLICKED:
+	    	return !state;
+	    default:
+	     	return state;
+	}
+}
+
 const races = combineReducers({
 	table: tableReducer,
-	showLocations: showLocations
+	showLocations: showLocations,
+	showWinningTime: showWinningTime,
+	showMedianTime: showMedianTime
 });
 
 export default races;
