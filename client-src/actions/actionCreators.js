@@ -67,3 +67,39 @@ export function resultsTableSortClicked(column) {
 		column
 	}
 };
+
+export function showResultLocationsClicked() {
+	return {
+		type: actions.SHOW_RESULT_LOCATIONS_CLICKED
+	}
+};
+
+export function showRaceLocationsClicked() {
+	return {
+		type: actions.SHOW_RACE_LOCATIONS_CLICKED
+	}
+};
+
+export function showWinningTimeClicked() {
+	return {
+		type: actions.SHOW_WINNING_TIME_CLICKED
+	}
+};
+
+export function showMedianTimeClicked() {
+	return {
+		type: actions.SHOW_MEDIAN_TIME_CLICKED
+	}
+};
+
+export function showAllRaceTimesClicked() {
+	return {
+		type: actions.SHOW_ALL_RACE_TIMES_CLICKED
+	}
+};
+
+export function showRacePacesClicked() {
+	return {
+		type: actions.SHOW_RACE_PACES_CLICKED
+	}
+};

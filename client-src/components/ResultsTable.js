@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AwesomeTable from './AwesomeTable';
 import TimeValue from './TimeValue';
+import { doUpdateColumnGroup } from '../helpers/TableHelper'
 
 const columns = [
   {
@@ -25,10 +26,12 @@ const columns = [
     dataProp: 'age'
   }, {
     header: 'City',
-    dataProp: 'city'
+    dataProp: 'city',
+    groups: ['location']
   }, {
     header: 'State',
-    dataProp: 'state'
+    dataProp: 'state',
+    groups: ['location']
   }, {
     header: 'Place',
     dataProp: 'place'
@@ -60,15 +63,17 @@ const columns = [
   }
 ];
 
-const ResultsTable = ({data, onSortTable}) => {
+const ResultsTable = ({data, onSortTable, showLocations}) => {
+  let actualColumns = doUpdateColumnGroup(columns, 'location', showLocations);
   return (
-    <AwesomeTable data={data} columns={columns} onSortTable={onSortTable}/>
+    <AwesomeTable data={data} columns={actualColumns} onSortTable={onSortTable}/>
   );
 }
 
 ResultsTable.propTypes = {
   data: PropTypes.array.isRequired,
-  onSortTable: PropTypes.func.isRequired
+  onSortTable: PropTypes.func.isRequired,
+  showLocations: PropTypes.bool.isRequired
 }
 
 export default ResultsTable;

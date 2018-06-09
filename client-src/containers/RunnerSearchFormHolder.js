@@ -1,11 +1,12 @@
 import { connect } from 'react-redux';
 import RunnerSearch from '../components/RunnerSearch';
-import { searchFormChanged, resultsRequested, resultsTableSortClicked } from '../actions/actionCreators';
+import { searchFormChanged, resultsRequested, resultsTableSortClicked, showResultLocationsClicked } from '../actions/actionCreators';
 
 const mapStateToProps = state => {
   return {
     runnerName: state.runnerName,
-    results: state.results.rows
+    results: state.results.table.rows,
+    showLocations: state.results.showLocations
   }
 }
 
@@ -14,7 +15,7 @@ const mapDispatchToProps = dispatch => {
 		onClick: () => {
 			dispatch(resultsRequested());
 		},
-		onChange: (e) => {
+		onNameChange: (e) => {
 			dispatch(searchFormChanged(e))
 		},
 		onKeyup: (e) => {
@@ -25,6 +26,9 @@ const mapDispatchToProps = dispatch => {
 		},
 		onSortTable: (column) => {
 			dispatch(resultsTableSortClicked(column));
+		},
+		onShowLocationChange: () => {
+			dispatch(showResultLocationsClicked());
 		}
 	}
 }

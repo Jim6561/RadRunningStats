@@ -17,7 +17,7 @@ export default function* resultFetcher (action) {
     yield put(receiveResults_success(responseData));
 
   } catch(err) {
-    console.error('Record fetch error: ' + JSON.stringify(err))
+    console.error('Record fetch error: ' + JSON.stringify(err));
     yield put(receiveResults_failed(err));
   }
 }
