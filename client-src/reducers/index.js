@@ -1,32 +1,13 @@
 import * as actions from '../actions/actions'
 import { combineReducers } from 'redux'
-import { sortTable } from './sortTable'
 import results from './results'
+import races from './races'
 
 //Make these sensible constants somehow.
 //And the ones on HeaderBar
 //Also, change to use that spreader thing
 const RESULTS_PAGE = 'RESULTS_PAGE';
 const RACES_PAGE = 'RACES_PAGE';
-
-function racesReducer(state = {rows: [], sortColumn: null, acsending: true}, action) {
-	switch (action.type) {
-		case actions.RECEIVE_RACES_SUCCESS:
-	    	return {
-				...state,
-				rows: action.records
-			};
-		case actions.RECEIVE_RACES_FAILED:
-	    	return {
-	    		...state,
-	    		rows: []
-	    	};
-	     case actions.RACES_TABLE_SORT_CLICKED:
-	    	return sortTable(state, action.column);
-	    default:
-	     	return state;
-	}
-}
 
 function runnerNameReducer(state = '', action) {
 	switch (action.type) {
@@ -48,7 +29,7 @@ function selectedPageReducer(state = RACES_PAGE, action) {
 
 const myApp = combineReducers({
 		results: results,
-		races: racesReducer,
+		races: races,
 		runnerName: runnerNameReducer,
 		selectedPage: selectedPageReducer,
 	})

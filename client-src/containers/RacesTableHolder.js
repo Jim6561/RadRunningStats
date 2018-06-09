@@ -4,7 +4,7 @@ import { racesTableSortClicked } from '../actions/actionCreators';
 
 const mapStateToProps = state => {
 	return {
-		data: state.races.rows
+		data: state.races.table.rows
 	}
 }
 
