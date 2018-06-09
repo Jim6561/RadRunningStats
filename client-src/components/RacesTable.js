@@ -28,17 +28,34 @@ const columns = [
     render: (data) => {return <TimeValue value={data}/>},
     group: 'winning_time'
   }, {
+    header: 'First Quartile Time',
+    dataProp: 'first_quartile_time',
+    render: (data) => {return <TimeValue value={data}/>},
+    group: 'all_times'
+  }, {
     header: 'Median Time',
     dataProp: 'median_time',
     render: (data) => {return <TimeValue value={data}/>},
     group: 'median_time'
+  }, {
+    header: 'Third Quartile Time',
+    dataProp: 'third_quartile_time',
+    render: (data) => {return <TimeValue value={data}/>},
+    group: 'all_times'
+  }, {
+    header: 'Slowest Time',
+    dataProp: 'last_time',
+    render: (data) => {return <TimeValue value={data}/>},
+    group: 'all_times'
   }
 ];
 
-const RacesTable = ({data, showLocations, showWinningTime, showMedianTime, onSortTable}) => {
-  let actualColumns = doUpdateColumnGroup(columns, 'location', showLocations);
-  actualColumns = doUpdateColumnGroup(actualColumns, 'winning_time', showWinningTime);
-  actualColumns = doUpdateColumnGroup(actualColumns, 'median_time', showMedianTime);
+const RacesTable = ({data, showLocations, showWinningTime, showMedianTime, showAllTimes, onSortTable}) => {
+  let actualColumns = columns;
+  actualColumns = doUpdateColumnGroup(actualColumns, 'location', showLocations);
+  actualColumns = doUpdateColumnGroup(actualColumns, 'winning_time', showWinningTime || showAllTimes);
+  actualColumns = doUpdateColumnGroup(actualColumns, 'median_time', showMedianTime || showAllTimes);
+  actualColumns = doUpdateColumnGroup(actualColumns, 'all_times', showAllTimes);
   return (
     <AwesomeTable data={data} columns={actualColumns} onSortTable={onSortTable}/>
   );

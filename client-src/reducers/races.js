@@ -42,11 +42,21 @@ function showMedianTime(state = true, action) {
 	}
 }
 
+function showAllTimes(state = false, action) {
+	switch (action.type) {
+		case actions.SHOW_ALL_RACE_TIMES_CLICKED:
+	    	return !state;
+	    default:
+	     	return state;
+	}
+}
+
 const races = combineReducers({
 	table: tableReducer,
 	showLocations: showLocations,
 	showWinningTime: showWinningTime,
-	showMedianTime: showMedianTime
+	showMedianTime: showMedianTime,
+	showAllTimes: showAllTimes
 });
 
 export default races;

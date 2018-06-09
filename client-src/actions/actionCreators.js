@@ -91,3 +91,9 @@ export function showMedianTimeClicked() {
 		type: actions.SHOW_MEDIAN_TIME_CLICKED
 	}
 };
+
+export function showAllRaceTimesClicked() {
+	return {
+		type: actions.SHOW_ALL_RACE_TIMES_CLICKED
+	}
+};

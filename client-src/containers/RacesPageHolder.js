@@ -4,7 +4,8 @@ import {
 	racesTableSortClicked, 
 	showRaceLocationsClicked, 
 	showWinningTimeClicked, 
-	showMedianTimeClicked
+	showMedianTimeClicked,
+	showAllRaceTimesClicked
 } from '../actions/actionCreators';
 
 const mapStateToProps = state => {
@@ -12,7 +13,8 @@ const mapStateToProps = state => {
 		data: state.races.table.rows,
 		showLocations: state.races.showLocations,
 		showWinningTime: state.races.showWinningTime,
-		showMedianTime: state.races.showMedianTime
+		showMedianTime: state.races.showMedianTime,
+		showAllTimes: state.races.showAllTimes
 	}
 }
 
@@ -29,6 +31,9 @@ const mapDispatchToProps = dispatch => {
 		},
 		onShowMedianTimeChange: () => {
 			dispatch(showMedianTimeClicked());
+		},
+		onShowAllTimesChange: () => {
+			dispatch(showAllRaceTimesClicked());
 		}
 	}
 }
