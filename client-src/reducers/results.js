@@ -15,7 +15,7 @@ function tableReducer(state = makeTable(), action) {
 	}
 }
 
-function showLocations(state = true, action) {
+function showLocations(state = false, action) {
 	switch (action.type) {
 		case actions.SHOW_RESULT_LOCATIONS_CLICKED:
 	    	return !state;
