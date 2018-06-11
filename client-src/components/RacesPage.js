@@ -43,7 +43,17 @@ const RacesPage = ({
 
 RacesPage.propTypes = {
   data: PropTypes.array.isRequired,
+  showLocations: PropTypes.bool.isRequired,
+  showWinningTime: PropTypes.bool.isRequired,
+  showMedianTime: PropTypes.bool.isRequired,
+  showAllTimes: PropTypes.bool.isRequired,
+  showPaces: PropTypes.bool.isRequired,
   onSortTable: PropTypes.func.isRequired,
+  onShowLocationChange: PropTypes.func.isRequired,
+  onShowWinningTimeChange: PropTypes.func.isRequired,
+  onShowMedianTimeChange: PropTypes.func.isRequired,
+  onShowAllTimesChange: PropTypes.func.isRequired,
+  onShowPacesChange: PropTypes.func.isRequired,
   onSingleRaceClicked: PropTypes.func.isRequired
 }
 

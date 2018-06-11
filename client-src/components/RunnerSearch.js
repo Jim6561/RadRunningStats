@@ -4,7 +4,7 @@ import RunnerSearchForm from '../components/RunnerSearchForm';
 import ResultsTable from '../components/ResultsTable';
 import CheckBox from '../components/CheckBox';
  
-const RunnerSearch = ({runnerName, results, onClick, onNameChange, onKeyup, onSortTable, showLocations, onShowLocationChange}) => {
+const RunnerSearch = ({runnerName, results, showLocations, onClick, onNameChange, onKeyup, onSortTable, onShowLocationChange}) => {
   return (
     <div>
     	<RunnerSearchForm
@@ -25,10 +25,12 @@ const RunnerSearch = ({runnerName, results, onClick, onNameChange, onKeyup, onSo
 RunnerSearch.propTypes = {
   runnerName: PropTypes.string.isRequired,
   results: PropTypes.array,
+  showLocations: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
   onNameChange: PropTypes.func.isRequired,
   onKeyup: PropTypes.func.isRequired,
-  onSortTable: PropTypes.func.isRequired
+  onSortTable: PropTypes.func.isRequired,
+  onShowLocationChange: PropTypes.func.isRequired
 }
 
 export default RunnerSearch;
