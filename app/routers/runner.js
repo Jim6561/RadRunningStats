@@ -1,14 +1,31 @@
 'use strict';
 
 var express = require('express'),
+	escape = require('pg-escape'),
 	pgpool = require('../../database/pgpool'),
     router = express.Router();
 
 router.get('/', function(req, response) {
 
 	var nameParam = req.query.name;
+	var raceParam = req.query.raceId;
 
-	var query = { text: 'SELECT'
+	var clauses = [];
+
+	if (nameParam !== undefined) {
+		var searchParam = '%' + nameParam + '%';
+		clauses.push(escape('runner.name ILIKE %L', searchParam));
+	}
+	if (raceParam !== undefined) {
+		clauses.push(escape('runner.race_id = %L', raceParam));
+	}
+	if (clauses.length === 0)
+	{
+		console.log('no parameters, sending empty result');
+		response.send([]);
+	}
+	
+	var query = 'SELECT'
 				 + ' r.race_name,'
 				 + ' r.distance,'
 				 + ' r.event_date,'
@@ -28,11 +45,9 @@ router.get('/', function(req, response) {
 				 + ' FROM runner_result runner'
 				 + ' JOIN race r'
 				 + ' ON (r.race_id = runner.race_id)'
-				 + ' WHERE runner.name ILIKE $1',
-				 values: [ '%' + nameParam + '%'
-				 ] };
+				 + ' WHERE ' + clauses.join(' AND ');
 
-console.log(query);
+	console.log(query);
 
 	pgpool.connect(function(err, client, release) {
 		if (err) {
