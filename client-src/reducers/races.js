@@ -60,24 +60,13 @@ function showPaces(state = false, action) {
 	}
 }
 
-function singleRace(state = null, action) {
-	switch (action.type) {
-		case actions.SINGLE_RACE_CLICKED:
-			console.log('Race clicked: ' + action.raceId);
-	    	return action.raceId;
-	    default:
-	     	return state;
-	}
-}
-
 const races = combineReducers({
 	table: tableReducer,
 	showLocations: showLocations,
 	showWinningTime: showWinningTime,
 	showMedianTime: showMedianTime,
 	showAllTimes: showAllTimes,
-	showPaces: showPaces,
-	singleRace: singleRace
+	showPaces: showPaces
 });
 
 export default races;

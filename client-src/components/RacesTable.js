@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AwesomeTable from './AwesomeTable';
 import TimeValue from './TimeValue';
+import CheckBox from './CheckBox';
 import { doUpdateColumnGroup } from '../helpers/TableHelper'
  
 const columns = [
@@ -75,7 +76,10 @@ const columns = [
   }
 ];
 
-const RacesTable = ({data, showLocations, showWinningTime, showMedianTime, showAllTimes, showPaces, onSortTable, onSingleRaceClicked}) => {
+const RacesTable = ({
+  data, 
+  showLocations, showWinningTime, showMedianTime, showAllTimes, showPaces, 
+  onSortTable, onSingleRaceClicked, onShowLocationChange, onShowWinningTimeChange, onShowMedianTimeChange, onShowAllTimesChange, onShowPacesChange}) => {
   let actualColumns = columns;
   actualColumns = doUpdateColumnGroup(actualColumns, 'location', showLocations);
   actualColumns = doUpdateColumnGroup(actualColumns, 'winning_time', showWinningTime || showAllTimes);
@@ -84,16 +88,33 @@ const RacesTable = ({data, showLocations, showWinningTime, showMedianTime, showA
   actualColumns = doUpdateColumnGroup(actualColumns, 'pace', showPaces);
   actualColumns = doUpdateColumnGroup(actualColumns, 'time', !showPaces);
   return (
-    <AwesomeTable data={data} columns={actualColumns} onSortTable={onSortTable} onRowClicked={onSingleRaceClicked}/>
+    <div>
+      <span>
+        <CheckBox label='Locations' checked={showLocations} onChange={onShowLocationChange}/>
+        <CheckBox label='Winning Time' checked={showWinningTime} onChange={onShowWinningTimeChange}/>
+        <CheckBox label='Median Time' checked={showMedianTime} onChange={onShowMedianTimeChange}/>
+        <CheckBox label='All Times' checked={showAllTimes} onChange={onShowAllTimesChange}/>
+        <CheckBox label='Pace' checked={showPaces} onChange={onShowPacesChange}/>
+      </span>  
+      <AwesomeTable data={data} columns={actualColumns} onSortTable={onSortTable} onRowClicked={onSingleRaceClicked}/>
+    </div>
   );
 }
 
 RacesTable.propTypes = {
   data: PropTypes.array.isRequired,
   onSortTable: PropTypes.func.isRequired,
-  onSingleRaceClicked: PropTypes.func.isRequired
+  showLocations: PropTypes.bool.isRequired,
+  showWinningTime: PropTypes.bool.isRequired,
+  showMedianTime: PropTypes.bool.isRequired,
+  showAllTimes: PropTypes.bool.isRequired,
+  showPaces: PropTypes.bool.isRequired,
+  onSingleRaceClicked: PropTypes.func.isRequired,
+  onShowLocationChange: PropTypes.func.isRequired,
+  onShowWinningTimeChange: PropTypes.func.isRequired,
+  onShowMedianTimeChange: PropTypes.func.isRequired,
+  onShowAllTimesChange: PropTypes.func.isRequired,
+  onShowPacesChange: PropTypes.func.isRequired
 }
 
 export default RacesTable;
-
-
