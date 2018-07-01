@@ -131,3 +131,9 @@ export function singleRaceTableSortClicked(column) {
 		column
 	}
 };
+
+export function showSingleRaceLocationsClicked() {
+	return {
+		type: actions.SINGLE_RACE_TABLE_LOCATIONS_CLICKED
+	}
+};

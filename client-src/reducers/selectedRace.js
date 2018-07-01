@@ -31,8 +31,8 @@ function tableReducer(state = makeTable(), action) {
 
 function showLocations(state = false, action) {
 	switch (action.type) {
-		//case actions.SHOW_RESULT_LOCATIONS_CLICKED:
-	    //	return !state;
+		case actions.SINGLE_RACE_TABLE_LOCATIONS_CLICKED:
+	    	return !state;
 	    default:
 	     	return state;
 	}
