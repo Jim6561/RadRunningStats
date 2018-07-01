@@ -110,3 +110,17 @@ export function singleRaceClicked(row) {
 		raceId: row.race_id
 	}
 };
+
+export function receiveSelectedRaceResults_success(records) {
+	return {
+		type: actions.RECEIVE_SELECTED_RACE_SUCCESS,
+		records
+	}
+};
+
+export function receiveSelectedRaceResults_failed(err) {
+	return {
+		type: actions.RECEIVE_SELECTED_RACE_FAILED,
+		err
+	}
+};
