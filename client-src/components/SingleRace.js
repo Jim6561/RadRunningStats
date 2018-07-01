@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ResultsTable from './ResultsTable';
 
-const RacesPage = ({raceId, showLocations, results, onSortTable, onShowLocationChange
+const SingleRace = ({raceId, showLocations, results, onSortTable, onShowLocationChange
 
 }) => {
   console.log(raceId);
@@ -14,8 +14,11 @@ const RacesPage = ({raceId, showLocations, results, onSortTable, onShowLocationC
   );
 }
 
-RacesPage.propTypes = {
-	
+SingleRace.propTypes = {
+	raceId: PropTypes.number, //maybe not required at all 
+	results: PropTypes.array.isRequired, 
+	onSortTable: PropTypes.func.isRequired, 
+	showLocations: PropTypes.bool.isRequired
 }
 
-export default RacesPage;
+export default SingleRace;

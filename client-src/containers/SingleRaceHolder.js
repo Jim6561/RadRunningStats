@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import SingleRace from '../components/SingleRace';
-//import {  } from '../actions/actionCreators';
+import { singleRaceTableSortClicked } from '../actions/actionCreators';
 
 const mapStateToProps = state => {
 	return {
@@ -14,7 +14,7 @@ const mapDispatchToProps = dispatch => {
 	return {
 		onSortTable: (column) => {
 			console.log('sorting table');
-			//dispatch(singleRaceTableSortClicked(column));
+			dispatch(singleRaceTableSortClicked(column));
 		},
 		onShowLocationChange: () => {
 			console.log('show location clicked')

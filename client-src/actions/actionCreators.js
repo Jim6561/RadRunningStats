@@ -124,3 +124,10 @@ export function receiveSelectedRaceResults_failed(err) {
 		err
 	}
 };
+
+export function singleRaceTableSortClicked(column) {
+	return {
+		type: actions.SINGLE_RACE_TABLE_SORT_CLICKED,
+		column
+	}
+};

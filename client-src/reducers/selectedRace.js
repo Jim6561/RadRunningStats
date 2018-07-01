@@ -21,8 +21,8 @@ function tableReducer(state = makeTable(), action) {
 	    case actions.RECEIVE_SELECTED_RESULTS_FAILED:
 	    	console.log('Receiving results failed');
 	    	return makeTable([]);
-	    //case actions.RESULTS_TABLE_SORT_CLICKED:
-	    //	return sortTable(state, action.column);
+	    case actions.SINGLE_RACE_TABLE_SORT_CLICKED:
+	    	return sortTable(state, action.column);
 	   	default:
 	     	return state;
 	}

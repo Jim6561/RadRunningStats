@@ -15,7 +15,7 @@ const RacesPage = ({selectedRaceId
 }
 
 RacesPage.propTypes = {
-
+	selectedRaceId: PropTypes.number
 }
 
 export default RacesPage;
