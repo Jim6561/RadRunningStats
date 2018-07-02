@@ -6,6 +6,9 @@ const mapStateToProps = state => {
 	return {
 		results: state.selectedRace.table.rows,
 		raceId: state.selectedRace.raceId,
+		raceName: state.selectedRace.raceDetails.raceName,
+		distance: state.selectedRace.raceDetails.distance,
+		eventDate: state.selectedRace.raceDetails.eventDate,
 		showLocations: state.selectedRace.showLocations
 	}
 }

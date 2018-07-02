@@ -17,7 +17,7 @@ const RunnerSearch = ({runnerName, results, showLocations, onClick, onNameChange
         label='Show Locations'
         checked={showLocations}
         onChange={onShowLocationChange}/>
-    	<ResultsTable data={results} onSortTable={onSortTable} showLocations={showLocations}/>
+    	<ResultsTable data={results} onSortTable={onSortTable} showLocations={showLocations} showRace={true}/>
     </div>
   );
 }

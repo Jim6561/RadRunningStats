@@ -3,24 +3,26 @@ import PropTypes from 'prop-types';
 import CheckBox from './CheckBox';
 import ResultsTable from './ResultsTable';
 
-const SingleRace = ({raceId, showLocations, results, onSortTable, onShowLocationChange
-
+const SingleRace = ({raceId, raceName, distance, eventDate, showLocations, results, onSortTable, onShowLocationChange
 }) => {
-  console.log(raceId);
   return (
     <div>
-      Selected a race!
+      <h2>{raceName}</h2>
+      <span>{(new Date(eventDate).toLocaleDateString())}</span>
+      <span>Distance {distance}</span>
       <CheckBox
         label='Show Locations'
         checked={showLocations}
         onChange={onShowLocationChange}/>
-      <ResultsTable data={results} onSortTable={onSortTable} showLocations={showLocations}/>
+      <ResultsTable data={results} onSortTable={onSortTable} showLocations={showLocations} showRace={false}/>
     </div>
   );
 }
 
 SingleRace.propTypes = {
-	raceId: PropTypes.number, //maybe not required at all 
+	raceName: PropTypes.string.isRequired,
+  eventDate: PropTypes.string.isRequired,
+  distance: PropTypes.string.isRequired,
 	results: PropTypes.array.isRequired, 
 	onSortTable: PropTypes.func.isRequired, 
   onShowLocationChange: PropTypes.func.isRequired,

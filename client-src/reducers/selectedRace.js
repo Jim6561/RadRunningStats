@@ -12,14 +12,25 @@ function raceId(state = null, action) {
 	}
 }
 
+function raceDetails(state = null, action) {
+	switch (action.type) {
+		case actions.SINGLE_RACE_CLICKED:
+			return {
+				...state,
+				distance: action.distance,
+				raceName: action.raceName,
+				eventDate: action.eventDate,
+			};
+	   	default:
+	     	return state;
+	}
+}
 
 function tableReducer(state = makeTable(), action) {
 	switch (action.type) {
 		case actions.RECEIVE_SELECTED_RACE_SUCCESS:
-			console.log('Receiving results');
 			return makeTable(action.records);
 	    case actions.RECEIVE_SELECTED_RESULTS_FAILED:
-	    	console.log('Receiving results failed');
 	    	return makeTable([]);
 	    case actions.SINGLE_RACE_TABLE_SORT_CLICKED:
 	    	return sortTable(state, action.column);
@@ -27,7 +38,6 @@ function tableReducer(state = makeTable(), action) {
 	     	return state;
 	}
 }
-
 
 function showLocations(state = false, action) {
 	switch (action.type) {
@@ -40,6 +50,7 @@ function showLocations(state = false, action) {
 
 const selectedRace = combineReducers({
 	raceId: raceId,
+	raceDetails: raceDetails,
 	table: tableReducer,
 	showLocations: showLocations
 });

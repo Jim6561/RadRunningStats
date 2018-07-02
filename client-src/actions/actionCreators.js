@@ -105,9 +105,13 @@ export function showRacePacesClicked() {
 };
 
 export function singleRaceClicked(row) {
+	console.log(row);
 	return {
 		type: actions.SINGLE_RACE_CLICKED,
-		raceId: row.race_id
+		raceId: row.race_id,
+		distance: row.distance,
+		raceName: row.race_name,
+		eventDate: row.event_date
 	}
 };
 
