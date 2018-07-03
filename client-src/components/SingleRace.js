@@ -3,20 +3,39 @@ import PropTypes from 'prop-types';
 import CheckBox from './CheckBox';
 import ResultsTable from './ResultsTable';
 
-const SingleRace = ({raceId, raceName, distance, eventDate, showLocations, results, onSortTable, onShowLocationChange
-}) => {
-  return (
-    <div>
-      <h2>{raceName}</h2>
-      <span>{(new Date(eventDate).toLocaleDateString())}</span>
-      <span>Distance {distance}</span>
-      <CheckBox
-        label='Show Locations'
-        checked={showLocations}
-        onChange={onShowLocationChange}/>
-      <ResultsTable data={results} onSortTable={onSortTable} showLocations={showLocations} showRace={false}/>
-    </div>
-  );
+class SingleRace extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.props.onReturnToRacesClicked();
+  }
+
+  render() {
+    return (
+      <div>
+        <span
+              id='backToRaces'
+              //className={racesButtonClass}
+              onClick={this.handleClick}
+          >Back</span>
+        <h2>{this.props.raceName}</h2>
+        <span>{(new Date(this.props.eventDate).toLocaleDateString())}</span>
+        <span>Distance {this.props.distance}</span>
+        <CheckBox
+          label='Show Locations'
+          checked={this.props.showLocations}
+          onChange={this.props.onShowLocationChange}/>
+        <ResultsTable
+          data={this.props.results}
+          onSortTable={this.props.onSortTable}
+          showLocations={this.props.showLocations}
+          showRace={false}/>
+      </div>
+    )
+  }
 }
 
 SingleRace.propTypes = {
@@ -24,9 +43,10 @@ SingleRace.propTypes = {
   eventDate: PropTypes.string.isRequired,
   distance: PropTypes.string.isRequired,
 	results: PropTypes.array.isRequired, 
-	onSortTable: PropTypes.func.isRequired, 
+	showLocations: PropTypes.bool.isRequired,
+  onSortTable: PropTypes.func.isRequired, 
   onShowLocationChange: PropTypes.func.isRequired,
-  showLocations: PropTypes.bool.isRequired
+  onReturnToRacesClicked: PropTypes.func.isRequired
 }
 
 export default SingleRace;

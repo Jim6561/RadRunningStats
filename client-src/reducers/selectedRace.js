@@ -5,8 +5,9 @@ import { combineReducers } from 'redux'
 function raceId(state = null, action) {
 	switch (action.type) {
 		case actions.SINGLE_RACE_CLICKED:
-			console.log('setting selected race: ' + action.raceId);
 			return action.raceId;
+		case actions.RETURN_TO_RACES_CLICKED:
+			return null;
 	   	default:
 	     	return state;
 	}

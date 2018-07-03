@@ -3,7 +3,6 @@ import { receiveSelectedRaceResults_success, receiveSelectedRaceResults_failed }
 import { replaceDataTypes } from './serverTranslationUtil'
 
 export default function* resultFetcher (action) {
-  console.log('fetching one race');
   //I think this yield is important. If gives the reducer chance to set the state.
   //Cos we have two things listening to sincleRaceClicked
   let raceId = yield select(state => state.selectedRace.raceId);

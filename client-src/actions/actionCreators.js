@@ -105,7 +105,6 @@ export function showRacePacesClicked() {
 };
 
 export function singleRaceClicked(row) {
-	console.log(row);
 	return {
 		type: actions.SINGLE_RACE_CLICKED,
 		raceId: row.race_id,
@@ -139,5 +138,11 @@ export function singleRaceTableSortClicked(column) {
 export function showSingleRaceLocationsClicked() {
 	return {
 		type: actions.SINGLE_RACE_TABLE_LOCATIONS_CLICKED
+	}
+};
+
+export function returnToRacesClicked() {
+	return {
+		type: actions.RETURN_TO_RACES_CLICKED
 	}
 };
