@@ -1,8 +1,5 @@
 import { connect } from 'react-redux';
 import RacesPage from '../components/RacesPage';
-//import { 
-//	
-//} from '../actions/actionCreators';
 
 const mapStateToProps = state => {
 	return {
@@ -12,7 +9,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-
 	}
 }
 

@@ -45,11 +45,11 @@ class SingleRace extends React.Component {
 }
 
 SingleRace.propTypes = {
-	raceName: PropTypes.string.isRequired,
+  raceName: PropTypes.string.isRequired,
   eventDate: PropTypes.string.isRequired,
   distance: PropTypes.string.isRequired,
-	results: PropTypes.array.isRequired, 
-	showLocations: PropTypes.bool.isRequired,
+  results: PropTypes.array.isRequired, 
+  showLocations: PropTypes.bool.isRequired,
   onSortTable: PropTypes.func.isRequired, 
   onShowLocationChange: PropTypes.func.isRequired,
   onReturnToRacesClicked: PropTypes.func.isRequired

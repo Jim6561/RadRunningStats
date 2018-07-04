@@ -47,8 +47,6 @@ router.get('/', function(req, response) {
 				 + ' ON (r.race_id = runner.race_id)'
 				 + ' WHERE ' + clauses.join(' AND ');
 
-	console.log(query);
-
 	pgpool.connect(function(err, client, release) {
 		if (err) {
 			console.log('Error!');

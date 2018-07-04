@@ -24,8 +24,6 @@ router.get('/', function(req, response) {
 				 + ' FROM race r',
 				 values: [] };
 
-console.log(query);
-
 	pgpool.connect(function(err, client, release) {
 		if (err) {
 			console.log('Error!');
