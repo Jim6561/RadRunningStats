@@ -16,18 +16,24 @@ class SingleRace extends React.Component {
   render() {
     return (
       <div>
-        <span
+        <div>
+          <span className='raceTitle'>{this.props.raceName}</span>
+          <span
               id='backToRaces'
-              //className={racesButtonClass}
+              className='mediumButton'
               onClick={this.handleClick}
-          >Back</span>
-        <h2>{this.props.raceName}</h2>
-        <span>{(new Date(this.props.eventDate).toLocaleDateString())}</span>
-        <span>Distance {this.props.distance}</span>
-        <CheckBox
-          label='Show Locations'
-          checked={this.props.showLocations}
-          onChange={this.props.onShowLocationChange}/>
+           >Back</span>
+        </div>
+        <div className='propertiesSection'>
+          <span className='raceProperty'>{(new Date(this.props.eventDate).toLocaleDateString())}</span>
+          <span className='raceProperty'>Distance: {this.props.distance}</span>
+        </div>
+        <div>
+          <CheckBox
+            label='Show Locations'
+            checked={this.props.showLocations}
+            onChange={this.props.onShowLocationChange}/>
+        </div>
         <ResultsTable
           data={this.props.results}
           onSortTable={this.props.onSortTable}
