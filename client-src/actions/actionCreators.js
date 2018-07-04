@@ -103,3 +103,46 @@ export function showRacePacesClicked() {
 		type: actions.SHOW_RACE_PACES_CLICKED
 	}
 };
+
+export function singleRaceClicked(row) {
+	return {
+		type: actions.SINGLE_RACE_CLICKED,
+		raceId: row.race_id,
+		distance: row.distance,
+		raceName: row.race_name,
+		eventDate: row.event_date
+	}
+};
+
+export function receiveSelectedRaceResults_success(records) {
+	return {
+		type: actions.RECEIVE_SELECTED_RACE_SUCCESS,
+		records
+	}
+};
+
+export function receiveSelectedRaceResults_failed(err) {
+	return {
+		type: actions.RECEIVE_SELECTED_RACE_FAILED,
+		err
+	}
+};
+
+export function singleRaceTableSortClicked(column) {
+	return {
+		type: actions.SINGLE_RACE_TABLE_SORT_CLICKED,
+		column
+	}
+};
+
+export function showSingleRaceLocationsClicked() {
+	return {
+		type: actions.SINGLE_RACE_TABLE_LOCATIONS_CLICKED
+	}
+};
+
+export function returnToRacesClicked() {
+	return {
+		type: actions.RETURN_TO_RACES_CLICKED
+	}
+};

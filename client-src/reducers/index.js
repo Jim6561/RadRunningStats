@@ -2,10 +2,10 @@ import * as actions from '../actions/actions'
 import { combineReducers } from 'redux'
 import results from './results'
 import races from './races'
+import selectedRace from './selectedRace'
 
 //Make these sensible constants somehow.
 //And the ones on HeaderBar
-//Also, change to use that spreader thing
 const RESULTS_PAGE = 'RESULTS_PAGE';
 const RACES_PAGE = 'RACES_PAGE';
 
@@ -32,6 +32,7 @@ const myApp = combineReducers({
 		races: races,
 		runnerName: runnerNameReducer,
 		selectedPage: selectedPageReducer,
+		selectedRace: selectedRace
 	})
 
 export default myApp;
