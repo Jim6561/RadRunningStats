@@ -16,14 +16,14 @@ export function resultsRequested() {
 export function receiveResults_success(records) {
 	return {
 		type: actions.RECEIVE_RESULTS_SUCCESS,
-		records
+		records: records
 	}
 };
 
 export function receiveResults_failed(err) {
 	return {
 		type: actions.RECEIVE_RESULTS_FAILED,
-		err
+		err: err
 	}
 };
 
@@ -36,35 +36,35 @@ export function racesRequested() {
 export function receiveRaces_success(records) {
 	return {
 		type: actions.RECEIVE_RACES_SUCCESS,
-		records
+		records: records
 	}
 };
 
 export function receiveRaces_failed(err) {
 	return {
 		type: actions.RECEIVE_RACES_FAILED,
-		err
+		err: err
 	}
 };
 
 export function pageButtonClicked(page) {
 	return {
 		type: actions.PAGE_BUTTON_CLICKED,
-		page
+		page: page
 	}
 };
 
 export function racesTableSortClicked(column) {
 	return {
 		type: actions.RACES_TABLE_SORT_CLICKED,
-		column
+		column: column
 	}
 };
 
 export function resultsTableSortClicked(column) {
 	return {
 		type: actions.RESULTS_TABLE_SORT_CLICKED,
-		column
+		column: column
 	}
 };
 
