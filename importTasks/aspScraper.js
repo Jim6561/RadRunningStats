@@ -105,20 +105,24 @@ module.exports.scrape = function($, config, callback) {
 				rawData[columnName] = data;
 			});
 			return rawData;
-		},
-
-
+		}
 	}
 
 	var $columnMeta = $('meta[columns]');
 	var rows = privates.getDataRows($, config.metaDistance);
+
 	var headers = rows.shift();
 	var columnData = privates.locateColumns(headers);
 	var results = [];
+	var currentPlace = 0;
 
 	rows.map((rowString, i) => {
 		var rawData = privates.extractRow(rowString, columnData);
-		results.push(rawData);
+		var thisPlace = Number(rawData.place);
+		if (thisPlace > currentPlace) {
+			currentPlace = thisPlace;
+			results.push(rawData);
+		}
 	});
 	callback(results);
 };

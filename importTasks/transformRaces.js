@@ -44,9 +44,7 @@ fs.readdir(sourceDir, function(err, items) {
 });
 
 var transformRace = function(race) {
-	race.finishers = race.results.length;
-
-    race.distanceMiles = getDistanceInMiles(race.distance);
+	race.distanceMiles = getDistanceInMiles(race.distance);
 
     var transformedResults = [];
     race.results.map((rawRow) => {
@@ -55,11 +53,11 @@ var transformRace = function(race) {
         if (transformedData !== null) {
             transformedResults.push(transformedData);
         }
-
     });
 
     race.results = transformedResults;
-
+    race.finishers = race.results.length;
+    
     var times = [];
     race.results.map((result) => {
         if (result.net) {
@@ -84,6 +82,12 @@ var transformRace = function(race) {
 var getDistanceInMiles = function(distance) {
     try
     {
+        if (distance === 'Marathon') {
+            return 26.2188;
+        }
+        if (distance === 'Half Marathon') {
+            return 13.1094;
+        }
         var indexOfM = distance.indexOf('M');
         if (indexOfM > -1) {
             var numberPart = distance.substring(0, indexOfM);
@@ -94,11 +98,11 @@ var getDistanceInMiles = function(distance) {
         var indexOfK = distance.indexOf('K');
         if (indexOfK > -1) {
             var numberPart = distance.substring(0, indexOfK);
-            if (isNaN(numberPart)) {
-                throw 'Unpexpected distance: ' + distance;
-            }
-            return KILOMETERS_TO_MILES * numberPart;
+            if (!isNaN(numberPart)) {
+                return KILOMETERS_TO_MILES * numberPart;   
+            }    
         }
+        throw 'Unpexpected distance: ' + distance;
     } catch (e) {
         throw 'unexpected distance: ' + distance;
     }

@@ -1,5 +1,5 @@
 /**
- * This is common to both scrapers.
+ * This is common to all the scrapers.
  */
 const convertDataTypes = require('./convertDataTypes');
 module.exports = function(rawData, distanceMiles) {
@@ -11,6 +11,11 @@ module.exports = function(rawData, distanceMiles) {
 		name = ((rawData.firstName || '') + ' ' + (rawData.lastName || '')).trim();
 		delete myReturn.firstName;
 		delete myReturn.lastName;
+	}
+	if (!name) {
+		name = ((rawData.firstname || '') + ' ' + (rawData.lastname || '')).trim();
+		delete myReturn.firstname;
+		delete myReturn.lastname;
 	}
 	if (!name) {
 		name = ((rawData.first || '') + ' ' + (rawData.last || '')).trim();
@@ -42,8 +47,17 @@ module.exports = function(rawData, distanceMiles) {
 		delete myReturn['gun time'];
 	}
 
+	if (myReturn['131m']) {
+		myReturn.split = myReturn['131m'];
+		delete myReturn['131m'];
+	}
+
 	if (myReturn.age && isNaN(myReturn.age)) {
 		console.log('unexpected age: ' + myReturn.age);
+	}
+
+	if (myReturn.sex === 'F`') {
+		myReturn.sex = 'F';
 	}
 
 	if (myReturn.sex
