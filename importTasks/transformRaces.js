@@ -44,9 +44,7 @@ fs.readdir(sourceDir, function(err, items) {
 });
 
 var transformRace = function(race) {
-	race.finishers = race.results.length;
-
-    race.distanceMiles = getDistanceInMiles(race.distance);
+	race.distanceMiles = getDistanceInMiles(race.distance);
 
     var transformedResults = [];
     race.results.map((rawRow) => {
@@ -55,11 +53,11 @@ var transformRace = function(race) {
         if (transformedData !== null) {
             transformedResults.push(transformedData);
         }
-
     });
 
     race.results = transformedResults;
-
+    race.finishers = race.results.length;
+    
     var times = [];
     race.results.map((result) => {
         if (result.net) {

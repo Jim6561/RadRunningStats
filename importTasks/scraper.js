@@ -5,6 +5,7 @@ const cheerio = require('cheerio');
 const jsonfile = require('jsonfile');
 const htmlScraper = require('./htmlScraper');
 const aspScraper = require('./aspScraper');
+const aspTableScraper = require('./aspTableScraper');
 const path = require('path');
 
 
@@ -66,6 +67,8 @@ scrapeResultsFromUrl = (config, callback) => {
 			scraper = htmlScraper;
 		} else if (config.pageType === 'asp') {
 			scraper = aspScraper;
+		} else if (config.pageType === 'aspTable') {
+			scraper = aspTableScraper;
 		} else {
 			throw 'unexpected pageType: ' + config.pageType;
 		}

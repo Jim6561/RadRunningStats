@@ -1,4 +1,3 @@
-const convertDataTypes = require('./convertDataTypes');
 module.exports.scrape = function($, config, callback) {
 
 	const privates = {

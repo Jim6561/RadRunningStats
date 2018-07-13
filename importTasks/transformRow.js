@@ -13,6 +13,11 @@ module.exports = function(rawData, distanceMiles) {
 		delete myReturn.lastName;
 	}
 	if (!name) {
+		name = ((rawData.firstname || '') + ' ' + (rawData.lastname || '')).trim();
+		delete myReturn.firstname;
+		delete myReturn.lastname;
+	}
+	if (!name) {
 		name = ((rawData.first || '') + ' ' + (rawData.last || '')).trim();
 		delete myReturn.first;
 		delete myReturn.last;
