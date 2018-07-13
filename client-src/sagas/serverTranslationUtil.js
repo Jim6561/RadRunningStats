@@ -15,5 +15,6 @@ export function replaceDataTypes(data) {
     convertToNumber(row, 'gun_time');
     convertToNumber(row, 'split_time');
     convertToNumber(row, 'pace');
+    convertToNumber(row, 'distance_miles');
   });
 };

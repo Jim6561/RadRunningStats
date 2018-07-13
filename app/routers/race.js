@@ -12,6 +12,7 @@ router.get('/', function(req, response) {
 				 + ' r.race_id,'
 				 + ' r.race_name,'
 				 + ' r.distance,'
+				 + ' r.distance_miles,'
 				 + ' r.event_date,'
 				 + ' r.location,'
 				 + ' r.finishers,'
@@ -22,8 +23,6 @@ router.get('/', function(req, response) {
 				 + ' r.last_time'
 				 + ' FROM race r',
 				 values: [] };
-
-console.log(query);
 
 	pgpool.connect(function(err, client, release) {
 		if (err) {

@@ -37,11 +37,17 @@ tr.dataRow:hover {
 	cursor: pointer;
 }
 
+.mediumButton {
+	padding: 1ex;
+	background-color: #E0FFF0;
+	cursor: pointer;
+}
+
 .selectedButton {
 	background: linear-gradient(to top, #E0EEE0 , lightgreen);
 }
 
-.giantButton:hover {
+.giantButton:hover, .mediumButton:hover{
 	background-color: lightgreen;
 }
 
@@ -49,4 +55,23 @@ tr.dataRow:hover {
 	padding-top: 1em;
 	padding-bottom: 1em;
 	margin-bottom: 1em;
+}
+
+.clickable {
+	cursor: pointer;
+}
+
+.raceTitle {
+	font-size: larger;
+	font-weight: bold;
+	padding: 1em;
+}
+
+.propertiesSection {
+	margin-bottom: 1em;
+	margin-top: 1em;
+}
+
+.raceProperty {
+	padding-right: 2em;
 }
