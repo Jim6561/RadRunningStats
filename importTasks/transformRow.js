@@ -1,5 +1,5 @@
 /**
- * This is common to both scrapers.
+ * This is common to all the scrapers.
  */
 const convertDataTypes = require('./convertDataTypes');
 module.exports = function(rawData, distanceMiles) {
@@ -54,6 +54,10 @@ module.exports = function(rawData, distanceMiles) {
 
 	if (myReturn.age && isNaN(myReturn.age)) {
 		console.log('unexpected age: ' + myReturn.age);
+	}
+
+	if (myReturn.sex === 'F`') {
+		myReturn.sex = 'F';
 	}
 
 	if (myReturn.sex
