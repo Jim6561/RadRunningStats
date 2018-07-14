@@ -116,6 +116,50 @@ describe('selectedRace reducer', () => {
 			expect(selectedRace({showLocations: true}, action).showLocations).toBe(false);
 		});
 	});
+
+	describe('divisions', () => {
+		it('should start with emptyArray', () => {
+			expect(selectedRace(undefined, {}).divisions).toEqual([]);
+		});
+
+		it('should handle RECEIVE_SELECTED_RACE_SUCCESS', () => {
+			var input = [
+				{name: 'dave', div: 'M40-50'},
+				{name: 'linda', div: 'F10-15'},
+				{name: 'louise', div: ''},
+				{name: 'gene', div: 'M10-15'}
+			];
+			var action = {
+				type: actions.RECEIVE_SELECTED_RACE_SUCCESS,
+				records: input
+			};
+
+			var actual = selectedRace({}, action).divisions;
+
+			expect(actual).toContain('Everyone');
+			expect(actual).not.toContain('');
+
+			//How else can we test the sorting?
+			var expected = ['Everyone', 'F10-15', 'M10-15', 'M40-50'];
+			expect(actual).toEqual(expected);
+		});
+	});
+
+	describe('selectedDivision', () => {
+		it('should start with nothing', () => {
+			expect(selectedRace(undefined, {}).selectedDivision).toBeNull();
+		});
+
+		it('should handle DIVISION_SELECTED', () => {
+			var myDivision = 'oldies';
+			var action = {
+				type: actions.DIVISION_SELECTED,
+				division: myDivision
+			};
+
+			expect(selectedRace({}, action).selectedDivision).toBe(myDivision);
+		});
+	});
 });
 
 describe('sortTable', () => {

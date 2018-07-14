@@ -49,11 +49,41 @@ function showLocations(state = false, action) {
 	}
 }
 
+function divisions(state = [], action) {
+	switch (action.type) {
+		case actions.RECEIVE_SELECTED_RACE_SUCCESS:
+			let rawDivisions = new Set();
+			action.records.map((row) =>{
+				if (row.div && row.div.length > 0) {
+					rawDivisions.add(row.div);
+				}
+			});
+			rawDivisions = Array.from(rawDivisions).sort();
+			rawDivisions.unshift('Everyone')
+			return rawDivisions;
+		default:
+	     	return state;
+	}
+}
+
+function selectedDivision(state = null, action) {
+	switch (action.type) {
+		case actions.DIVISION_SELECTED:
+			console.log('selected: ' + action.division);
+			return action.division;
+		default:
+			return state;
+	}
+}
+
+
 const selectedRace = combineReducers({
 	raceId: raceId,
 	raceDetails: raceDetails,
 	table: tableReducer,
-	showLocations: showLocations
+	showLocations: showLocations,
+	divisions: divisions,
+	selectedDivision: selectedDivision
 });
 
 export default selectedRace;

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CheckBox from './CheckBox';
+import Select from './Select';
 import ResultsTable from './ResultsTable';
 
 class SingleRace extends React.Component {
@@ -33,6 +34,7 @@ class SingleRace extends React.Component {
             label='Show Locations'
             checked={this.props.showLocations}
             onChange={this.props.onShowLocationChange}/>
+          <Select onChange={this.props.onDivisionSelected} options={this.props.divisions}/>
         </div>
         <ResultsTable
           data={this.props.results}
@@ -48,7 +50,8 @@ SingleRace.propTypes = {
   raceName: PropTypes.string.isRequired,
   eventDate: PropTypes.string.isRequired,
   distance: PropTypes.string.isRequired,
-  results: PropTypes.array.isRequired, 
+  results: PropTypes.array.isRequired,
+  divisions: PropTypes.array,
   showLocations: PropTypes.bool.isRequired,
   onSortTable: PropTypes.func.isRequired, 
   onShowLocationChange: PropTypes.func.isRequired,
