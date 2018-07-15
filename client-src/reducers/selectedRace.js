@@ -1,6 +1,10 @@
 import * as actions from '../actions/actions'
-import { sortTable, makeTable } from './sortTable'
+import { sortTable, makeTable, filter } from './sortTable'
 import { combineReducers } from 'redux'
+
+const DIV_EVERYONE = 'Everyone';
+const DIV_OTHER = 'Other';
+
 
 function raceId(state = null, action) {
 	switch (action.type) {
@@ -35,6 +39,8 @@ function tableReducer(state = makeTable(), action) {
 	    	return makeTable([]);
 	    case actions.SINGLE_RACE_TABLE_SORT_CLICKED:
 	    	return sortTable(state, action.column);
+	    case actions.DIVISION_SELECTED:
+	    	return filter(state, 'div', action.division);
 	   	default:
 	     	return state;
 	}
@@ -55,11 +61,14 @@ function divisions(state = [], action) {
 			let rawDivisions = new Set();
 			action.records.map((row) =>{
 				if (row.div && row.div.length > 0) {
-					rawDivisions.add(row.div);
+					rawDivisions.add(row.div);	
+				} else {
+					rawDivisions.add(DIV_OTHER);
 				}
 			});
+
 			rawDivisions = Array.from(rawDivisions).sort();
-			rawDivisions.unshift('Everyone')
+			rawDivisions.unshift(DIV_EVERYONE)
 			return rawDivisions;
 		default:
 	     	return state;
@@ -69,7 +78,6 @@ function divisions(state = [], action) {
 function selectedDivision(state = null, action) {
 	switch (action.type) {
 		case actions.DIVISION_SELECTED:
-			console.log('selected: ' + action.division);
 			return action.division;
 		default:
 			return state;
