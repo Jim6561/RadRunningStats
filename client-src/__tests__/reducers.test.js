@@ -74,6 +74,17 @@ describe('selectedRace reducer', () => {
 			expect(selectedRace(state, action).table).toEqual(expected);
 		});
 
+		it('should handle SINGLE_RACE_CLICKED', () => {
+			var state = {raceId: null},
+			action = {
+				type: actions.SINGLE_RACE_CLICKED,
+				raceId: 12
+        	},
+        	expected = makeTable([]);
+
+			expect(selectedRace(state, action).table).toEqual(expected);
+		});
+
 		it('should handle RECEIVE_SELECTED_RESULTS_FAILED', () => {
 			var state = {
 				raceId: null,

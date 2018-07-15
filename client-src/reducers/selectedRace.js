@@ -33,6 +33,8 @@ function raceDetails(state = null, action) {
 
 function tableReducer(state = makeTable(), action) {
 	switch (action.type) {
+		case actions.SINGLE_RACE_CLICKED:
+			return makeTable([]);
 		case actions.RECEIVE_SELECTED_RACE_SUCCESS:
 			return makeTable(action.records);
 	    case actions.RECEIVE_SELECTED_RESULTS_FAILED:
