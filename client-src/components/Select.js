@@ -12,13 +12,13 @@ class Select extends React.Component {
   	}
 
   	render() {
-  		var divData = ['England', 'Brazil', 'Panama'];
-    
-		return (
-			<select onChange={(e) => this.handleChange(e)}>
+      if (!this.props.visible) {
+        return "";
+      }
+		  return (
+			   <select onChange={(e) => this.handleChange(e)}>
             {this.props.options.map((value, i) => 
               <option key={i} value={value}>{value}</option>
-
             )}
           </select>
 		)
@@ -27,7 +27,12 @@ class Select extends React.Component {
 
 Select.propTypes = {
   options: PropTypes.array.isRequired,
+  visible: PropTypes.bool,
   onChange: PropTypes.func.isRequired
+}
+
+Select.defaultProps = {
+  visible: true
 }
 
 export default Select;

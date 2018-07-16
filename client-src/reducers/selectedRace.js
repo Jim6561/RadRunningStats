@@ -86,7 +86,6 @@ function selectedDivision(state = null, action) {
 	}
 }
 
-
 const selectedRace = combineReducers({
 	raceId: raceId,
 	raceDetails: raceDetails,

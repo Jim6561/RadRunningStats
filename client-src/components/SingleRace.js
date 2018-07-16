@@ -15,6 +15,8 @@ class SingleRace extends React.Component {
   }
 
   render() {
+    var showDivisionSelector = this.props.divisions.length > 2;
+
     return (
       <div>
         <div>
@@ -34,7 +36,7 @@ class SingleRace extends React.Component {
             label='Show Locations'
             checked={this.props.showLocations}
             onChange={this.props.onShowLocationChange}/>
-          <Select onChange={this.props.onDivisionSelected} options={this.props.divisions}/>
+          <Select visible={showDivisionSelector} onChange={this.props.onDivisionSelected} options={this.props.divisions}/>
         </div>
         <ResultsTable
           data={this.props.results}
