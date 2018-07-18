@@ -1,6 +1,10 @@
 import * as actions from '../actions/actions'
-import { sortTable, makeTable } from './sortTable'
+import { sortTable, makeTable, filter } from './sortTable'
 import { combineReducers } from 'redux'
+
+const DIV_EVERYONE = 'Everyone';
+const DIV_OTHER = 'Other';
+
 
 function raceId(state = null, action) {
 	switch (action.type) {
@@ -29,12 +33,16 @@ function raceDetails(state = null, action) {
 
 function tableReducer(state = makeTable(), action) {
 	switch (action.type) {
+		case actions.SINGLE_RACE_CLICKED:
+			return makeTable([]);
 		case actions.RECEIVE_SELECTED_RACE_SUCCESS:
 			return makeTable(action.records);
 	    case actions.RECEIVE_SELECTED_RESULTS_FAILED:
 	    	return makeTable([]);
 	    case actions.SINGLE_RACE_TABLE_SORT_CLICKED:
 	    	return sortTable(state, action.column);
+	    case actions.DIVISION_SELECTED:
+	    	return filter(state, 'div', action.division);
 	   	default:
 	     	return state;
 	}
@@ -49,11 +57,42 @@ function showLocations(state = false, action) {
 	}
 }
 
+function divisions(state = [], action) {
+	switch (action.type) {
+		case actions.RECEIVE_SELECTED_RACE_SUCCESS:
+			let rawDivisions = new Set();
+			action.records.map((row) =>{
+				if (row.div && row.div.length > 0) {
+					rawDivisions.add(row.div);	
+				} else {
+					rawDivisions.add(DIV_OTHER);
+				}
+			});
+
+			rawDivisions = Array.from(rawDivisions).sort();
+			rawDivisions.unshift(DIV_EVERYONE)
+			return rawDivisions;
+		default:
+	     	return state;
+	}
+}
+
+function selectedDivision(state = null, action) {
+	switch (action.type) {
+		case actions.DIVISION_SELECTED:
+			return action.division;
+		default:
+			return state;
+	}
+}
+
 const selectedRace = combineReducers({
 	raceId: raceId,
 	raceDetails: raceDetails,
 	table: tableReducer,
-	showLocations: showLocations
+	showLocations: showLocations,
+	divisions: divisions,
+	selectedDivision: selectedDivision
 });
 
 export default selectedRace;

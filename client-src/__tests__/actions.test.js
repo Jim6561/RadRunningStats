@@ -190,5 +190,14 @@ describe('actions', () => {
 				type: actions.RETURN_TO_RACES_CLICKED
 			};
 		expect(creators.returnToRacesClicked()).toEqual(expectedAction);
-	});		
+	});	
+
+	it('should create DIVISION_SELECTED action', () => {
+		var division = 'young',
+			expectedAction = {
+				type: actions.DIVISION_SELECTED,
+				division: division
+			};
+		expect(creators.divisionSelected(division)).toEqual(expectedAction);
+	});	
 });

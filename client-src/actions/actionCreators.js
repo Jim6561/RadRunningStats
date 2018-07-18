@@ -146,3 +146,10 @@ export function returnToRacesClicked() {
 		type: actions.RETURN_TO_RACES_CLICKED
 	}
 };
+
+export function divisionSelected(division) {
+	return {
+		type: actions.DIVISION_SELECTED,
+		division: division
+	}
+};
