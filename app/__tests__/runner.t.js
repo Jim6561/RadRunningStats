@@ -1,11 +1,10 @@
 const request = require('supertest');
 const express = require('express');
 
+import index from '../routers/index';
 import pool from '../../database/pgpool';
 
 jest.mock('../../database/pgpool');
-//import runner from '../routers/runner'
-import index from '../routers/index';
 
 var app = express();
 app.use(index);

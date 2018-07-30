@@ -37,11 +37,9 @@ router.get('/', function(req, response) {
 				}
 				response.send(result.rows);
 				
-			})
+			});
 		}
 	});
-
-	//response.send('Getting data');
 });
 
 module.exports = router;

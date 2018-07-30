@@ -25,7 +25,7 @@ router.get('/', function(req, response) {
 	}
 	if (clauses.length === 0)
 	{
-		console.log('no parameters, sending empty result');
+		//console.log('no parameters, sending empty result');
 		response.send([]);
 	}
 	
