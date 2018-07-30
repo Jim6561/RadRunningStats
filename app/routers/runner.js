@@ -59,12 +59,9 @@ router.get('/', function(req, response) {
 					return console.error('Error executing query', err.stack)
 				}
 				response.send(result.rows);
-				
-			})
+			});
 		}
 	});
-
-	//response.send('Getting data');
 });
 
 module.exports = router;
