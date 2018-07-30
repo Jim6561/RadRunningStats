@@ -9,6 +9,7 @@ router.get('/', function(req, response) {
 
 	var nameParam = req.query.name;
 	var raceParam = req.query.raceId;
+	var bibParam = req.query.bib;
 
 	var clauses = [];
 
@@ -18,6 +19,9 @@ router.get('/', function(req, response) {
 	}
 	if (raceParam !== undefined) {
 		clauses.push(escape('runner.race_id = %L', raceParam));
+	}
+	if (bibParam !== undefined) {
+		clauses.push(escape('runner.bib_number = %L', bibParam));
 	}
 	if (clauses.length === 0)
 	{
