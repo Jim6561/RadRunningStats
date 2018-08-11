@@ -13,14 +13,14 @@ router.get('/', function(req, response) {
 
 	var clauses = [];
 
-	if (nameParam !== undefined) {
+	if (nameParam) {
 		var searchParam = '%' + nameParam + '%';
 		clauses.push(escape('runner.name ILIKE %L', searchParam));
 	}
-	if (raceParam !== undefined) {
+	if (raceParam) {
 		clauses.push(escape('runner.race_id = %L', raceParam));
 	}
-	if (bibParam !== undefined) {
+	if (bibParam) {
 		clauses.push(escape('runner.bib_number = %L', bibParam));
 	}
 	if (clauses.length === 0)
@@ -50,7 +50,7 @@ router.get('/', function(req, response) {
 				 + ' JOIN race r'
 				 + ' ON (r.race_id = runner.race_id)'
 				 + ' WHERE ' + clauses.join(' AND ');
-
+//console.log(query);
 	pgpool.connect(function(err, client, release) {
 		if (err) {
 			console.log('Error!');
