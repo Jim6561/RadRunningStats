@@ -11,7 +11,7 @@ const RACES_PAGE = 'RACES_PAGE';
 
 function runnerNameReducer(state = '', action) {
 	switch (action.type) {
-	    case actions.SEARCH_FORM_CHANGED:
+	    case actions.SEARCH_FORM_NAME_CHANGED:
 	    	return action.event.target.value;
 	    default:
 	     	return state;

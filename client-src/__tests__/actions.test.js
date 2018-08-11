@@ -2,13 +2,13 @@ import * as actions from '../actions/actions'
 import * as creators from '../actions/actionCreators'
 
 describe('actions', () => {
-	it('should create SEARCH_FORM_CHANGED action', () => {
+	it('should create SEARCH_FORM_NAME_CHANGED action', () => {
 		var event = {thing: 'test'},
 			expectedAction = {
-				type: actions.SEARCH_FORM_CHANGED,
+				type: actions.SEARCH_FORM_NAME_CHANGED,
 				event: event
 			};
-		expect(creators.searchFormChanged(event)).toEqual(expectedAction);
+		expect(creators.searchFormNameChanged(event)).toEqual(expectedAction);
 	});
 
 	it('should create RESULTS_REQUESTED action', () => {

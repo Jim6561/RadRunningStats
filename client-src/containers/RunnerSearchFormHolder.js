@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import RunnerSearch from '../components/RunnerSearch';
-import { searchFormChanged, resultsRequested, resultsTableSortClicked, showResultLocationsClicked } from '../actions/actionCreators';
+import { searchFormNameChanged, resultsRequested, resultsTableSortClicked, showResultLocationsClicked } from '../actions/actionCreators';
 
 const mapStateToProps = state => {
   return {
@@ -12,11 +12,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		onClick: () => {
+		onSearchClick: () => {
 			dispatch(resultsRequested());
 		},
 		onNameChange: (e) => {
-			dispatch(searchFormChanged(e))
+			dispatch(searchFormNameChanged(e))
 		},
 		onKeyup: (e) => {
 			//13 = enter
