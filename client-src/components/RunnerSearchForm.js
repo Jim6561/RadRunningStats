@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
  
-const RunnerSearchForm = ({runnerName, onSearchClick, onChange, onKeyup}) => {
+const RunnerSearchForm = ({runnerName, runnerBib, onSearchClick, onNameChange, onBibChange, onKeyup}) => {
   
   return (
     <div className='searchForm'>
-    	Search for a name
-    	<input value={runnerName} onChange={onChange} onKeyUp={onKeyup}/>
+    	<span className='formLabel'>Name</span>
+    	<input id='runnerName' value={runnerName} onChange={onNameChange} onKeyUp={onKeyup}/>
+    	<span className='formLabel'>Bib Number</span>
+    	<input id='runnerBib' value={runnerBib} onChange={onBibChange} onKeyUp={onKeyup}/>
     	<button onClick={onSearchClick}>Search</button>
     </div>
   );
@@ -14,7 +16,8 @@ const RunnerSearchForm = ({runnerName, onSearchClick, onChange, onKeyup}) => {
 
 RunnerSearchForm.propTypes = {
   onSearchClick: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired
+  onNameChange: PropTypes.func.isRequired,
+  onBibChange: PropTypes.func.isRequired
 }
 
 export default RunnerSearchForm;

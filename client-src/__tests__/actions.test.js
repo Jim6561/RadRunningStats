@@ -11,6 +11,15 @@ describe('actions', () => {
 		expect(creators.searchFormNameChanged(event)).toEqual(expectedAction);
 	});
 
+	it('should create SEARCH_FORM_BIB_CHANGED action', () => {
+		var event = {thing: 'test'},
+			expectedAction = {
+				type: actions.SEARCH_FORM_BIB_CHANGED,
+				event: event
+			};
+		expect(creators.searchFormBibChanged(event)).toEqual(expectedAction);
+	});
+
 	it('should create RESULTS_REQUESTED action', () => {
 		var expectedAction = {
 				type: actions.RESULTS_REQUESTED

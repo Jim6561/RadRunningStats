@@ -7,6 +7,13 @@ export function searchFormNameChanged(event) {
 	}
 };
 
+export function searchFormBibChanged(event) {
+	return {
+		type: actions.SEARCH_FORM_BIB_CHANGED,
+		event: event
+	}
+};
+
 export function resultsRequested() {
 	return {
 		type: actions.RESULTS_REQUESTED
