@@ -15,9 +15,12 @@ const RunnerSearchForm = ({runnerName, runnerBib, onSearchClick, onNameChange, o
 }
 
 RunnerSearchForm.propTypes = {
+  runnerName: PropTypes.string.isRequired,
+  runnerBib: PropTypes.string.isRequired,
   onSearchClick: PropTypes.func.isRequired,
   onNameChange: PropTypes.func.isRequired,
-  onBibChange: PropTypes.func.isRequired
+  onBibChange: PropTypes.func.isRequired,
+  onKeyup: PropTypes.fund.isRequired
 }
 
 export default RunnerSearchForm;
