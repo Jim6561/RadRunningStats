@@ -4,8 +4,8 @@ import { searchFormNameChanged, searchFormBibChanged, resultsRequested, resultsT
 
 const mapStateToProps = state => {
   return {
-    runnerName: state.runnerName,
-    runnerBib: state.runnerBib,
+    runnerName: state.results.runnerName,
+    runnerBib: state.results.runnerBib,
     results: state.results.table.rows,
     showLocations: state.results.showLocations
   }

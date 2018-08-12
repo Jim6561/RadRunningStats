@@ -9,24 +9,6 @@ import selectedRace from './selectedRace'
 const RESULTS_PAGE = 'RESULTS_PAGE';
 const RACES_PAGE = 'RACES_PAGE';
 
-function runnerNameReducer(state = '', action) {
-	switch (action.type) {
-	    case actions.SEARCH_FORM_NAME_CHANGED:
-	    	return action.event.target.value;
-	    default:
-	     	return state;
- 	}
-}
-
-function runnerBibReducer(state = '', action) {
-	switch (action.type) {
-	    case actions.SEARCH_FORM_BIB_CHANGED:
-	    	return action.event.target.value;
-	    default:
-	     	return state;
- 	}
-}
-
 function selectedPageReducer(state = RACES_PAGE, action) {
 	switch (action.type) {
 	    case actions.PAGE_BUTTON_CLICKED:
@@ -39,8 +21,6 @@ function selectedPageReducer(state = RACES_PAGE, action) {
 const myApp = combineReducers({
 		results: results,
 		races: races,
-		runnerName: runnerNameReducer,
-		runnerBib: runnerBibReducer,
 		selectedPage: selectedPageReducer,
 		selectedRace: selectedRace
 	})
