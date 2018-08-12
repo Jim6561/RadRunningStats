@@ -20,7 +20,7 @@ RunnerSearchForm.propTypes = {
   onSearchClick: PropTypes.func.isRequired,
   onNameChange: PropTypes.func.isRequired,
   onBibChange: PropTypes.func.isRequired,
-  onKeyup: PropTypes.fund.isRequired
+  onKeyup: PropTypes.func.isRequired
 }
 
 export default RunnerSearchForm;
