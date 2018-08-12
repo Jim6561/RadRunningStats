@@ -1,3 +1,5 @@
+import stats from 'statsjs';
+
 import * as actions from '../actions/actions'
 import { sortTable, makeTable, filter } from './sortTable'
 import { combineReducers } from 'redux'
@@ -86,13 +88,33 @@ function selectedDivision(state = null, action) {
 	}
 }
 
+function quartiles(state = {}, action) {
+	switch (action.type) {
+		case actions.CALCULATE_SELECTED_RACE_STATS:
+			let times = [];
+			action.records.map(e => {times.push(e.gun_time)});
+			var timeStats = stats(times);
+	    
+			return {
+				min: timeStats.min(),
+				q1: timeStats.q1(),
+				median: timeStats.median(),
+				q3: timeStats.q3(),
+				max: timeStats.max(),
+			};
+		default:
+			return state;
+	}
+}
+
 const selectedRace = combineReducers({
 	raceId: raceId,
 	raceDetails: raceDetails,
 	table: tableReducer,
 	showLocations: showLocations,
 	divisions: divisions,
-	selectedDivision: selectedDivision
+	selectedDivision: selectedDivision,
+	quartiles: quartiles
 });
 
 export default selectedRace;

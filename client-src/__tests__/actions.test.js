@@ -209,4 +209,13 @@ describe('actions', () => {
 			};
 		expect(creators.divisionSelected(division)).toEqual(expectedAction);
 	});	
+
+	it('should create CALCULATE_SELECTED_RACE_STATS action', () => {
+		var records = {data: 'testData'},
+			expectedAction = {
+				type: actions.CALCULATE_SELECTED_RACE_STATS,
+				records: records
+			};
+		expect(creators.calculateSelectedRaceStats(records)).toEqual(expectedAction);
+	});	
 });

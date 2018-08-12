@@ -14,6 +14,10 @@ class SingleRace extends React.Component {
     this.props.onReturnToRacesClicked();
   }
 
+  componentDidUpdate(prevProps) {
+    this.props.onRecordsChanged(this.props.results);
+  }
+
   render() {
     var showDivisionSelector = this.props.divisions.length > 2;
     var divisionSelectorClass = 'divisionSelector';
@@ -60,7 +64,8 @@ SingleRace.propTypes = {
   showLocations: PropTypes.bool.isRequired,
   onSortTable: PropTypes.func.isRequired, 
   onShowLocationChange: PropTypes.func.isRequired,
-  onReturnToRacesClicked: PropTypes.func.isRequired
+  onReturnToRacesClicked: PropTypes.func.isRequired,
+  onRecordsChanged: PropTypes.func.isRequired
 }
 
 export default SingleRace;

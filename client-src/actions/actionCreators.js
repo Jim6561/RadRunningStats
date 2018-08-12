@@ -160,3 +160,10 @@ export function divisionSelected(division) {
 		division: division
 	}
 };
+
+export function calculateSelectedRaceStats(visibleRecords) {
+	return {
+		type: actions.CALCULATE_SELECTED_RACE_STATS,
+		records: visibleRecords
+	}
+};

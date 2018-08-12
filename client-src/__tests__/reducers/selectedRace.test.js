@@ -218,4 +218,29 @@ describe('selectedRace reducer', () => {
 			expect(selectedRace({}, action).selectedDivision).toBe(myDivision);
 		});
 	});
+
+	describe('quartiles', () => {
+		it('should start with nothing', () => {
+			expect(selectedRace(undefined, {}).quartiles).toEqual({});
+		});
+
+		it('should handle CALCULATE_SELECTED_RACE_STATS', () => {
+			var numbers = [1, 5, 3, 7, 5, 5, 100, 5];
+			var records = [];
+			numbers.map(e => {records.push({gun_time: e})});
+
+			var action = {
+				type: actions.CALCULATE_SELECTED_RACE_STATS,
+				records: records
+			},
+			expectedData = {
+				min: 1,
+				max: 100,
+				median: 5,
+				q1: 4,
+				q3: 6
+			};
+			expect(selectedRace(undefined, action).quartiles).toEqual(expectedData);
+		});
+	});
 });

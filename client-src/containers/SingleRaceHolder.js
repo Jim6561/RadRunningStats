@@ -4,7 +4,9 @@ import {
 	singleRaceTableSortClicked, 
 	showSingleRaceLocationsClicked, 
 	returnToRacesClicked, 
-	divisionSelected } 
+	divisionSelected,
+	calculateSelectedRaceStats
+ } 
 from '../actions/actionCreators';
 
 const mapStateToProps = state => {
@@ -32,6 +34,9 @@ const mapDispatchToProps = dispatch => {
 		},
 		onDivisionSelected: (division) => {
 			dispatch(divisionSelected(division));
+		},
+		onRecordsChanged: (records) => {
+			dispatch(calculateSelectedRaceStats(records));
 		}
 	}
 }
