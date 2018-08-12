@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
 import RunnerSearch from '../components/RunnerSearch';
-import { searchFormChanged, resultsRequested, resultsTableSortClicked, showResultLocationsClicked } from '../actions/actionCreators';
+import { searchFormNameChanged, searchFormBibChanged, resultsRequested, resultsTableSortClicked, showResultLocationsClicked } from '../actions/actionCreators';
 
 const mapStateToProps = state => {
   return {
-    runnerName: state.runnerName,
+    runnerName: state.results.runnerName,
+    runnerBib: state.results.runnerBib,
     results: state.results.table.rows,
     showLocations: state.results.showLocations
   }
@@ -12,11 +13,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		onClick: () => {
+		onSearchClick: () => {
 			dispatch(resultsRequested());
 		},
 		onNameChange: (e) => {
-			dispatch(searchFormChanged(e))
+			dispatch(searchFormNameChanged(e))
+		},
+		onBibChange: (e) => {
+			dispatch(searchFormBibChanged(e))
 		},
 		onKeyup: (e) => {
 			//13 = enter

@@ -9,19 +9,23 @@ router.get('/', function(req, response) {
 
 	var nameParam = req.query.name;
 	var raceParam = req.query.raceId;
+	var bibParam = req.query.bib;
 
 	var clauses = [];
 
-	if (nameParam !== undefined) {
+	if (nameParam) {
 		var searchParam = '%' + nameParam + '%';
 		clauses.push(escape('runner.name ILIKE %L', searchParam));
 	}
-	if (raceParam !== undefined) {
+	if (raceParam) {
 		clauses.push(escape('runner.race_id = %L', raceParam));
+	}
+	if (bibParam) {
+		clauses.push(escape('runner.bib_number = %L', bibParam));
 	}
 	if (clauses.length === 0)
 	{
-		console.log('no parameters, sending empty result');
+		//console.log('no parameters, sending empty result');
 		response.send([]);
 	}
 	
@@ -46,7 +50,7 @@ router.get('/', function(req, response) {
 				 + ' JOIN race r'
 				 + ' ON (r.race_id = runner.race_id)'
 				 + ' WHERE ' + clauses.join(' AND ');
-
+//console.log(query);
 	pgpool.connect(function(err, client, release) {
 		if (err) {
 			console.log('Error!');
@@ -59,12 +63,9 @@ router.get('/', function(req, response) {
 					return console.error('Error executing query', err.stack)
 				}
 				response.send(result.rows);
-				
-			})
+			});
 		}
 	});
-
-	//response.send('Getting data');
 });
 
 module.exports = router;

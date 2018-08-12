@@ -2,6 +2,24 @@ import * as actions from '../actions/actions'
 import { sortTable, makeTable } from './sortTable'
 import { combineReducers } from 'redux'
 
+function runnerName(state = '', action) {
+	switch (action.type) {
+	    case actions.SEARCH_FORM_NAME_CHANGED:
+	    	return action.event.target.value;
+	    default:
+	     	return state;
+ 	}
+}
+
+function runnerBib(state = '', action) {
+	switch (action.type) {
+	    case actions.SEARCH_FORM_BIB_CHANGED:
+	    	return action.event.target.value;
+	    default:
+	     	return state;
+ 	}
+}
+
 function tableReducer(state = makeTable(), action) {
 	switch (action.type) {
 		case actions.RECEIVE_RESULTS_SUCCESS:
@@ -25,6 +43,8 @@ function showLocations(state = false, action) {
 }
 
 const results = combineReducers({
+	runnerName: runnerName,
+	runnerBib: runnerBib,
 	table: tableReducer,
 	showLocations: showLocations
 });

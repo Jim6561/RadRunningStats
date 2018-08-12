@@ -1,8 +1,15 @@
 import * as actions from '../actions/actions'
 
-export function searchFormChanged(event) {
+export function searchFormNameChanged(event) {
 	return {
-		type: actions.SEARCH_FORM_CHANGED,
+		type: actions.SEARCH_FORM_NAME_CHANGED,
+		event: event
+	}
+};
+
+export function searchFormBibChanged(event) {
+	return {
+		type: actions.SEARCH_FORM_BIB_CHANGED,
 		event: event
 	}
 };
