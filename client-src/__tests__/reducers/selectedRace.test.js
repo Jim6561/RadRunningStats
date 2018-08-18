@@ -225,20 +225,32 @@ describe('selectedRace reducer', () => {
 		});
 
 		it('should handle CALCULATE_SELECTED_RACE_STATS', () => {
+			var allNumbers = [1, 5, 3, 7, 5, 5, 100, 5, 8, 7];
 			var numbers = [1, 5, 3, 7, 5, 5, 100, 5];
-			var records = [];
-			numbers.map(e => {records.push({gun_time: e})});
+			var allResults = [], visibleResults = [];
+			allNumbers.map(e => {allResults.push({gun_time: e})});
+			numbers.map(e => {visibleResults.push({gun_time: e})});
 
 			var action = {
 				type: actions.CALCULATE_SELECTED_RACE_STATS,
-				records: records
+				allResults: allResults,
+				visibleResults: visibleResults
 			},
 			expectedData = {
-				min: 1,
-				max: 100,
-				median: 5,
-				q1: 4,
-				q3: 6
+				selected: {
+					min: 1,
+					max: 100,
+					median: 5,
+					q1: 4,
+					q3: 6
+				},
+				complete: {
+					min: 1,
+					max: 100,
+					median: 5,
+					q1: 5,
+					q3: 7
+				}
 			};
 			expect(selectedRace(undefined, action).quartiles).toEqual(expectedData);
 		});

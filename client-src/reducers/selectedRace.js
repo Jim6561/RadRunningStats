@@ -91,16 +91,27 @@ function selectedDivision(state = null, action) {
 function quartiles(state = {}, action) {
 	switch (action.type) {
 		case actions.CALCULATE_SELECTED_RACE_STATS:
-			let times = [];
-			action.records.map(e => {times.push(e.gun_time)});
+			let times = [], selectedTimes = [];
+			action.allResults.map(e => {times.push(e.gun_time)});
+			action.visibleResults.map(e => {selectedTimes.push(e.gun_time)});
 			var timeStats = stats(times);
+			var selectedTimeStats = stats(selectedTimes);
 	    
 			return {
-				min: timeStats.min(),
-				q1: timeStats.q1(),
-				median: timeStats.median(),
-				q3: timeStats.q3(),
-				max: timeStats.max(),
+				selected: {
+					min: selectedTimeStats.min(),
+					q1: selectedTimeStats.q1(),
+					median: selectedTimeStats.median(),
+					q3: selectedTimeStats.q3(),
+					max: selectedTimeStats.max()
+				},
+				complete: {
+					min: timeStats.min(),
+					q1: timeStats.q1(),
+					median: timeStats.median(),
+					q3: timeStats.q3(),
+					max: timeStats.max()
+				}
 			};
 		default:
 			return state;

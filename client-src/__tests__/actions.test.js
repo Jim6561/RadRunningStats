@@ -211,11 +211,13 @@ describe('actions', () => {
 	});	
 
 	it('should create CALCULATE_SELECTED_RACE_STATS action', () => {
-		var records = {data: 'testData'},
+		var records1 = {data: 'testData'},
+			records2 = {data: 'otherTestData'},
 			expectedAction = {
 				type: actions.CALCULATE_SELECTED_RACE_STATS,
-				records: records
+				allResults: records1,
+				visibleResults: records2
 			};
-		expect(creators.calculateSelectedRaceStats(records)).toEqual(expectedAction);
+		expect(creators.calculateSelectedRaceStats(records1, records2)).toEqual(expectedAction);
 	});	
 });

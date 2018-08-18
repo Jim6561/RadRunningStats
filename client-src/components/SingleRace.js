@@ -16,7 +16,7 @@ class SingleRace extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    this.props.onRecordsChanged(this.props.results);
+    this.props.onRecordsChanged(this.props.allResults, this.props.results);
   }
 
   render() {

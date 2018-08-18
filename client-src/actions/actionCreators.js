@@ -161,9 +161,10 @@ export function divisionSelected(division) {
 	}
 };
 
-export function calculateSelectedRaceStats(visibleRecords) {
+export function calculateSelectedRaceStats(allResults, visibleResults) {
 	return {
 		type: actions.CALCULATE_SELECTED_RACE_STATS,
-		records: visibleRecords
+		allResults: allResults,
+		visibleResults: visibleResults
 	}
 };
