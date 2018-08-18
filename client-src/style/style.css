@@ -79,3 +79,7 @@ tr.dataRow:hover {
 .divisionSelector {
 	padding-left: 1em;
 }
+
+.statsBox {
+	float: right;
+}

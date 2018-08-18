@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import CheckBox from './CheckBox';
 import Select from './Select';
 import ResultsTable from './ResultsTable';
+import RaceStatsHolder from '../containers/RaceStatsHolder';
 
 class SingleRace extends React.Component {
   constructor(props) {
@@ -43,8 +44,10 @@ class SingleRace extends React.Component {
             onChange={this.props.onShowLocationChange}/>
           <span className={divisionSelectorClass}>
             <Select visible={showDivisionSelector} onChange={this.props.onDivisionSelected} options={this.props.divisions}/>
-            </span>
+          </span>
+          <RaceStatsHolder/>
         </div>
+        
         <ResultsTable
           data={this.props.results}
           onSortTable={this.props.onSortTable}
