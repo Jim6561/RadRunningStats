@@ -221,7 +221,7 @@ describe('selectedRace reducer', () => {
 
 	describe('quartiles', () => {
 		it('should start with nothing', () => {
-			expect(selectedRace(undefined, {}).quartiles).toEqual({});
+			expect(selectedRace(undefined, {}).quartiles).toEqual({filtered: false});
 		});
 
 		it('should handle CALCULATE_SELECTED_RACE_STATS', () => {
@@ -236,23 +236,49 @@ describe('selectedRace reducer', () => {
 				allResults: allResults,
 				visibleResults: visibleResults
 			},
-			expectedData = {
-				selected: {
-					min: 1,
-					max: 100,
-					median: 5,
-					q1: 4,
-					q3: 6
-				},
-				complete: {
-					min: 1,
-					max: 100,
-					median: 5,
-					q1: 5,
-					q3: 7
-				}
+			expectedSelected = {
+				min: 1,
+				max: 100,
+				median: 5,
+				q1: 4,
+				q3: 6
+			},
+			expectedComplete = {
+				min: 1,
+				max: 100,
+				median: 5,
+				q1: 5,
+				q3: 7
 			};
-			expect(selectedRace(undefined, action).quartiles).toEqual(expectedData);
+			let actualState = selectedRace(undefined, action).quartiles;
+			expect(actualState.selected).toEqual(expectedSelected);
+			expect(actualState.complete).toEqual(expectedComplete);
+		});
+
+		describe('it handling DIVISION_SELECTED', () => {
+			it('should not filter when divions is Everyone', () => {
+				var action = {
+					type: actions.DIVISION_SELECTED,
+					division: 'Everyone'
+				}
+				expect(selectedRace(undefined, action).quartiles).toEqual({filtered: false});
+			});
+
+			it('should filter when divions is not Everyone', () => {
+				var action = {
+					type: actions.DIVISION_SELECTED,
+					division: 'M50-55'
+				}
+				expect(selectedRace(undefined, action).quartiles).toEqual({filtered: true});
+			});	
+		});
+		
+		it('should handle SINGLE_RACE_CLICKED and set filtered to false', () => {
+			var action = {
+				type: actions.SINGLE_RACE_CLICKED,
+				raceId: 8
+			};
+			expect(selectedRace(undefined, action).quartiles.filtered).toBe(false);
 		});
 	});
 });

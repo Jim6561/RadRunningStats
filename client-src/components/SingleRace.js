@@ -68,6 +68,7 @@ SingleRace.propTypes = {
   onSortTable: PropTypes.func.isRequired, 
   onShowLocationChange: PropTypes.func.isRequired,
   onReturnToRacesClicked: PropTypes.func.isRequired,
+  onDivisionSelected: PropTypes.func.isRequired,
   onRecordsChanged: PropTypes.func.isRequired
 }
 

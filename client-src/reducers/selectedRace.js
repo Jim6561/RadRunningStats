@@ -88,7 +88,7 @@ function selectedDivision(state = null, action) {
 	}
 }
 
-function quartiles(state = {}, action) {
+function quartiles(state = {filtered: false}, action) {
 	switch (action.type) {
 		case actions.CALCULATE_SELECTED_RACE_STATS:
 			let times = [], selectedTimes = [];
@@ -96,8 +96,8 @@ function quartiles(state = {}, action) {
 			action.visibleResults.map(e => {selectedTimes.push(e.gun_time)});
 			var timeStats = stats(times);
 			var selectedTimeStats = stats(selectedTimes);
-	    
 			return {
+				...state,
 				selected: {
 					min: selectedTimeStats.min(),
 					q1: selectedTimeStats.q1(),
@@ -113,6 +113,15 @@ function quartiles(state = {}, action) {
 					max: timeStats.max()
 				}
 			};
+		case actions.DIVISION_SELECTED:
+			return {
+				...state, 
+				filtered: action.division !== DIV_EVERYONE
+			};
+		case actions.SINGLE_RACE_CLICKED:
+			return {
+				filtered: false
+			}
 		default:
 			return state;
 	}

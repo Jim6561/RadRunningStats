@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TimeValue from './TimeValue';
+import BoxPlot from './BoxPlot';
  
 const RaceStats = ({quartiles}) => {
 	return (
@@ -16,7 +17,7 @@ const RaceStats = ({quartiles}) => {
 				</tr>
 			</thead>
 			<tbody>
-				{quartiles.selected && 
+				{quartiles.complete && 
 					<tr>
 						<td>Overall</td>
 						<td><TimeValue value={quartiles.complete.min}/></td>
@@ -24,9 +25,15 @@ const RaceStats = ({quartiles}) => {
 						<td><TimeValue value={quartiles.complete.median}/></td>
 						<td><TimeValue value={quartiles.complete.q3}/></td>
 						<td><TimeValue value={quartiles.complete.max}/></td>
+						<td><BoxPlot 
+							chartMin = {quartiles.complete.min}
+							chartMax = {quartiles.complete.max}
+							data = {quartiles.complete}
+							size = {[400, 50]}
+						/></td>
 					</tr>
 				}
-				{quartiles.selected && 
+				{quartiles.filtered && quartiles.selected && quartiles.selected &&
 					<tr>
 						<td>Selected data</td>
 						<td><TimeValue value={quartiles.selected.min}/></td>
@@ -34,10 +41,17 @@ const RaceStats = ({quartiles}) => {
 						<td><TimeValue value={quartiles.selected.median}/></td>
 						<td><TimeValue value={quartiles.selected.q3}/></td>
 						<td><TimeValue value={quartiles.selected.max}/></td>
+						<td><BoxPlot
+							chartMin = {quartiles.complete.min}
+							chartMax = {quartiles.complete.max}
+							data = {quartiles.selected}
+							size = {[400, 50]}
+						/></td>
 					</tr>
 				}
 			</tbody>
 		</table>
+
 	);
 }
 
