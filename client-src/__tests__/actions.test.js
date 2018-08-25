@@ -220,4 +220,22 @@ describe('actions', () => {
 			};
 		expect(creators.calculateSelectedRaceStats(records1, records2)).toEqual(expectedAction);
 	});	
+
+	it('should create RUNNER_RESULT_SELECTED action', () => {
+		var rowIndex = 47,
+			expectedAction = {
+				type: actions.RUNNER_RESULT_SELECTED,
+				rowIndex: rowIndex
+			};
+		expect(creators.runnerResultSelected(rowIndex)).toEqual(expectedAction);
+	});
+
+	it('should create RUNNER_RESULT_HIGHLIGHTED action', () => {
+		var rowIndex = 44,
+			expectedAction = {
+				type: actions.RUNNER_RESULT_HIGHLIGHTED,
+				rowIndex: rowIndex
+			};
+		expect(creators.runnerResultHighlighted(rowIndex)).toEqual(expectedAction);
+	});
 });
