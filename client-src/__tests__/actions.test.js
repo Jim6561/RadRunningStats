@@ -223,19 +223,23 @@ describe('actions', () => {
 
 	it('should create RUNNER_RESULT_SELECTED action', () => {
 		var rowIndex = 47,
+			record = {name: 'Jimmy'},
 			expectedAction = {
 				type: actions.RUNNER_RESULT_SELECTED,
-				rowIndex: rowIndex
+				rowIndex: rowIndex,
+				record: record
 			};
-		expect(creators.runnerResultSelected(rowIndex)).toEqual(expectedAction);
+		expect(creators.runnerResultSelected(record, rowIndex)).toEqual(expectedAction);
 	});
 
 	it('should create RUNNER_RESULT_HIGHLIGHTED action', () => {
 		var rowIndex = 44,
+			record = {name: 'Jimmy'},
 			expectedAction = {
 				type: actions.RUNNER_RESULT_HIGHLIGHTED,
+				record: record,
 				rowIndex: rowIndex
 			};
-		expect(creators.runnerResultHighlighted(rowIndex)).toEqual(expectedAction);
+		expect(creators.runnerResultHighlighted(record, rowIndex)).toEqual(expectedAction);
 	});
 });

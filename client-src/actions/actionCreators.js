@@ -169,16 +169,18 @@ export function calculateSelectedRaceStats(allResults, visibleResults) {
 	}
 };
 
-export function runnerResultSelected(rowIndex) {
+export function runnerResultSelected(record, rowIndex) {
 	return {
 		type: actions.RUNNER_RESULT_SELECTED,
+		record: record,
 		rowIndex: rowIndex
 	}
 };
 
-export function runnerResultHighlighted(rowIndex) {
+export function runnerResultHighlighted(record, rowIndex) {
 	return {
 		type: actions.RUNNER_RESULT_HIGHLIGHTED,
+		record: record,
 		rowIndex: rowIndex
 	}
 };

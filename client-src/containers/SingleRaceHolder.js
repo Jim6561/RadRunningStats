@@ -41,7 +41,7 @@ const mapDispatchToProps = dispatch => {
 			dispatch(calculateSelectedRaceStats(allResults, selectedRecords));
 		},
 		onResultSelected: (record, rowIndex) => {
-			dispatch(runnerResultSelected(rowIndex));
+			dispatch(runnerResultSelected(record, rowIndex));
 		}
 	}
 }
