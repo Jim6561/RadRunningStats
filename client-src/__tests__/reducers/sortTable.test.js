@@ -1,4 +1,4 @@
-import { sortTable, makeTable } from '../../reducers/sortTable'
+import { sortTable, makeTable, selectRow } from '../../reducers/sortTable'
 
 describe('sortTable', () => {
 	describe('makeTable method', () => {
@@ -73,4 +73,31 @@ describe('sortTable', () => {
 			expect(sortTable(input, 'distance').rows).toEqual(expectedData);
 		})
 	});
+
+	describe('selectRow method', () => {
+		var data = [
+			{name: 'Nate'},
+			{name: 'Alice'},
+			{name: 'Teag'}
+		];
+		it('marks the indicated row as selected', () => {
+			var input = makeTable(data),
+				output1 = selectRow(input, 1);
+			expect(output1.rows[0].selected).not.toBe(true);
+			expect(output1.rows[1].selected).toBe(true);
+			expect(output1.rows[2].selected).not.toBe(true);
+
+			//Select a different row
+			var output2 = selectRow(output1, 0);
+			expect(output2.rows[0].selected).toBe(true);
+			expect(output2.rows[1].selected).not.toBe(true);
+			expect(output2.rows[2].selected).not.toBe(true);
+
+			//Unselect the row
+			var output3 = selectRow(output2, 0);
+			expect(output3.rows[0].selected).not.toBe(true);
+			expect(output3.rows[1].selected).not.toBe(true);
+			expect(output3.rows[2].selected).not.toBe(true);
+		});
+	})
 });

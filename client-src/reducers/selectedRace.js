@@ -1,7 +1,7 @@
 import stats from 'statsjs';
 
 import * as actions from '../actions/actions'
-import { sortTable, makeTable, filter } from './sortTable'
+import { sortTable, makeTable, filter, selectRow } from './sortTable'
 import { combineReducers } from 'redux'
 
 const DIV_EVERYONE = 'Everyone';
@@ -45,6 +45,8 @@ function tableReducer(state = makeTable(), action) {
 	    	return sortTable(state, action.column);
 	    case actions.DIVISION_SELECTED:
 	    	return filter(state, 'div', action.division);
+	    case actions.RUNNER_RESULT_SELECTED:
+	    	return selectRow(state, action.rowIndex);
 	   	default:
 	     	return state;
 	}

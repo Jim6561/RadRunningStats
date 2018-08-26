@@ -142,6 +142,21 @@ describe('selectedRace reducer', () => {
 				expect(selectedRace(initialState, action).table.rows).toEqual(expected.rows);
 			});
 		});
+		it('should handle RUNNER_RESULT_SELECTED', () => {
+			var initialState = {
+				raceId: null,
+				table: makeTable([{name: 'Nate'}, {name: 'Alice'}, {name: 'Teag'}])
+			},
+			action = {
+				type: actions.RUNNER_RESULT_SELECTED,
+				rowIndex: 0
+			},
+			expected = makeTable([
+				{name: 'Nate', selected: true},
+				{name: 'Alice', selected: false},
+				{name: 'Teag', selected: false}]);
+			expect(selectedRace(initialState, action).table.rows).toEqual(expected.rows);
+		});
 	});
 
 	describe('showLocations', () => {
