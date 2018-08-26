@@ -5,7 +5,8 @@ import {
 	showSingleRaceLocationsClicked, 
 	returnToRacesClicked, 
 	divisionSelected,
-	calculateSelectedRaceStats
+	calculateSelectedRaceStats,
+	runnerResultSelected
  } 
 from '../actions/actionCreators';
 
@@ -38,6 +39,9 @@ const mapDispatchToProps = dispatch => {
 		},
 		onRecordsChanged: (allResults, selectedRecords) => {
 			dispatch(calculateSelectedRaceStats(allResults, selectedRecords));
+		},
+		onResultSelected: (record, rowIndex) => {
+			dispatch(runnerResultSelected(rowIndex));
 		}
 	}
 }

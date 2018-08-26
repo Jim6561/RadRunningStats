@@ -8,10 +8,10 @@ import RaceStatsHolder from '../containers/RaceStatsHolder';
 class SingleRace extends React.Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleBackClick = this.handleBackClick.bind(this);
   }
 
-  handleClick() {
+  handleBackClick() {
     this.props.onReturnToRacesClicked();
   }
 
@@ -30,7 +30,7 @@ class SingleRace extends React.Component {
           <span
               id='backToRaces'
               className='mediumButton'
-              onClick={this.handleClick}
+              onClick={this.handleBackClick}
            >Back</span>
         </div>
         <div className='propertiesSection'>
@@ -52,7 +52,9 @@ class SingleRace extends React.Component {
           data={this.props.results}
           onSortTable={this.props.onSortTable}
           showLocations={this.props.showLocations}
-          showRace={false}/>
+          showRace={false}
+          onResultSelected={this.props.onResultSelected}
+          />
       </div>
     )
   }
@@ -69,7 +71,8 @@ SingleRace.propTypes = {
   onShowLocationChange: PropTypes.func.isRequired,
   onReturnToRacesClicked: PropTypes.func.isRequired,
   onDivisionSelected: PropTypes.func.isRequired,
-  onRecordsChanged: PropTypes.func.isRequired
+  onRecordsChanged: PropTypes.func.isRequired,
+  onResultSelected: PropTypes.func.isRequired
 }
 
 export default SingleRace;

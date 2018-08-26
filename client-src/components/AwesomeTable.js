@@ -6,10 +6,15 @@ class AwesomeTable extends React.Component {
   constructor(props) {
     super(props);
     this.handleSortClick = this.handleSortClick.bind(this);
+    this.handleRowClick = this.handleRowClick.bind(this);
   }
 
   handleSortClick(whichColumn) {
       this.props.onSortTable(whichColumn.dataProp);
+  }
+
+  handleRowClick(record, rowIndex) {
+    this.props.onRowClicked(record, rowIndex);
   }
 
   render() {
@@ -28,7 +33,7 @@ class AwesomeTable extends React.Component {
         </thead>
         <tbody>
           {this.props.data.map((record, i) => 
-              <TableRow key={i} rowdata={record} columns={this.props.columns} onRowClicked={this.props.onRowClicked} />
+              <TableRow key={i} rowdata={record} columns={this.props.columns} onRowClicked={(e) => this.handleRowClick(e, i)} />
           )}
         </tbody>
       </table>

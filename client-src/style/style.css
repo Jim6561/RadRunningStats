@@ -31,6 +31,10 @@ tr.dataRow:hover {
 	background-color: lightgreen;
 }
 
+tr.selected {
+	font-weight: bold;
+}
+
 .giantButton {
 	padding: 1em 5em 1em 5em;
 	background-color: #E0FFF0;

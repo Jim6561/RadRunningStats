@@ -17,7 +17,8 @@ class TableRow extends React.Component {
 	render() {
 		let className = classNames({
 			'dataRow': true,
-			'clickable': this.props.onRowClicked !== undefined
+			'clickable': this.props.onRowClicked !== undefined,
+			'selected': this.props.rowdata.selected
 		});
 		return (
 			<tr className={className} onClick={this.handleRowClick}>
