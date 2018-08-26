@@ -90,12 +90,23 @@ function selectedDivision(state = null, action) {
 	}
 }
 
+const extractTimes = (inputRows) => {
+	let retval = [];
+	inputRows.map(e => {
+		if (e.gun_time) {
+			retval.push(e.gun_time)
+		}
+	});
+	return retval;
+};
+
 function quartiles(state = {filtered: false}, action) {
 	switch (action.type) {
 		case actions.CALCULATE_SELECTED_RACE_STATS:
-			let times = [], selectedTimes = [];
-			action.allResults.map(e => {times.push(e.gun_time)});
-			action.visibleResults.map(e => {selectedTimes.push(e.gun_time)});
+			let times = extractTimes(action.allResults);
+			let selectedTimes = extractTimes(action.visibleResults);
+
+
 			var timeStats = stats(times);
 			var selectedTimeStats = stats(selectedTimes);
 			return {

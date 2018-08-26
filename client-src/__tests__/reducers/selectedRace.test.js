@@ -270,6 +270,29 @@ describe('selectedRace reducer', () => {
 			expect(actualState.complete).toEqual(expectedComplete);
 		});
 
+		it('should handle CALCULATE_SELECTED_RACE_STATS and ignore nulls', () => {
+			
+			var numbers = [3, null, 1];
+			var results = [];
+			numbers.map(e => {results.push({gun_time: e})});
+
+			var action = {
+				type: actions.CALCULATE_SELECTED_RACE_STATS,
+				allResults: results,
+				visibleResults: results
+			},
+			expected = {
+				min: 1,
+				max: 3,
+				median: 2,
+				q1: 1,
+				q3: 3
+			};
+			let actualState = selectedRace(undefined, action).quartiles;
+			expect(actualState.selected).toEqual(expected);
+			expect(actualState.complete).toEqual(expected);
+		});
+
 		describe('it handling DIVISION_SELECTED', () => {
 			it('should not filter when divions is Everyone', () => {
 				var action = {
