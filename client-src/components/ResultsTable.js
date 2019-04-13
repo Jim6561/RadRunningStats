@@ -79,7 +79,7 @@ ResultsTable.propTypes = {
   onSortTable: PropTypes.func.isRequired,
   showLocations: PropTypes.bool.isRequired,
   showRace: PropTypes.bool.isRequired,
-  onResultSelected: PropTypes.func.isRequired
+  onResultSelected: PropTypes.func
 }
 
 export default ResultsTable;

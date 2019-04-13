@@ -32,7 +32,7 @@ class BoxPlot extends React.Component {
             .range([padding, chartWidth-padding]);
 
          select(node)
-            .selectAll('.quartileBox, .whisker, .joinLine, .medLine')
+            .selectAll('.quartileBox, .whisker, .joinLine, .medLine, .selectedTime')
             .remove();
 
         select(node)
@@ -94,7 +94,18 @@ class BoxPlot extends React.Component {
         	.attr('y1', 0)
         	.attr('x2', xScale(this.props.data.median))
         	.attr('y2', chartHeight);
-        
+
+        if (this.props.selectedTime) {
+            select(node)
+                .append('line')
+                .classed('whisker', true)
+                .style('stroke', 'black')
+                .style('stroke-width', '3')
+                .attr('x1', xScale(this.props.selectedTime))
+                .attr('y1', 0)
+                .attr('x2', xScale(this.props.selectedTime))
+                .attr('y2', chartHeight);
+        }
     }
 
     render() {
@@ -108,7 +119,8 @@ BoxPlot.propTypes = {
   chartMin: PropTypes.number.isRequired,
   chartMax: PropTypes.number.isRequired,
   data: PropTypes.object.isRequired, //An object of the five points, min, q1, median, q3, max
-  size: PropTypes.array.isRequired //How big to render the output
+  size: PropTypes.array.isRequired, //How big to render the output
+  selectedTime: PropTypes.number
 }
 
 export default BoxPlot

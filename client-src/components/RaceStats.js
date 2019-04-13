@@ -30,6 +30,7 @@ const RaceStats = ({quartiles}) => {
 							chartMax = {quartiles.complete.max}
 							data = {quartiles.complete}
 							size = {[400, 50]}
+							selectedTime = {quartiles.selectedTime}
 						/></td>
 					</tr>
 				}
@@ -46,6 +47,7 @@ const RaceStats = ({quartiles}) => {
 							chartMax = {quartiles.complete.max}
 							data = {quartiles.selected}
 							size = {[400, 50]}
+							selectedTime = {quartiles.selectedTime}
 						/></td>
 					</tr>
 				}

@@ -14,7 +14,9 @@ class AwesomeTable extends React.Component {
   }
 
   handleRowClick(record, rowIndex) {
-    this.props.onRowClicked(record, rowIndex);
+    if (this.props.onRowClicked) {
+      this.props.onRowClicked(record, rowIndex);
+    }
   }
 
   render() {
@@ -33,7 +35,15 @@ class AwesomeTable extends React.Component {
         </thead>
         <tbody>
           {this.props.data.map((record, i) => 
-              <TableRow key={i} rowdata={record} columns={this.props.columns} onRowClicked={(e) => this.handleRowClick(e, i)} />
+              <TableRow 
+                key={i} 
+                rowdata={record} 
+                columns={this.props.columns} 
+                onRowClicked={this.props.onRowClicked
+                  ? 
+                  (e) => this.handleRowClick(e, i)
+                  :
+                  undefined }/>
           )}
         </tbody>
       </table>

@@ -135,6 +135,11 @@ function quartiles(state = {filtered: false}, action) {
 			return {
 				filtered: false
 			}
+		case actions.RUNNER_RESULT_SELECTED:
+			return {
+				...state,
+				selectedTime: action.record.gun_time
+			}
 		default:
 			return state;
 	}
