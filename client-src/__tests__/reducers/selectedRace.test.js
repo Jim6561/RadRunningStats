@@ -149,7 +149,10 @@ describe('selectedRace reducer', () => {
 			},
 			action = {
 				type: actions.RUNNER_RESULT_SELECTED,
-				rowIndex: 0
+				rowIndex: 0,
+				record: {
+					gun_time: 12
+				}
 			},
 			expected = makeTable([
 				{name: 'Nate', selected: true},
@@ -293,12 +296,12 @@ describe('selectedRace reducer', () => {
 			expect(actualState.complete).toEqual(expected);
 		});
 
-		describe('it handling DIVISION_SELECTED', () => {
+		describe('handling DIVISION_SELECTED', () => {
 			it('should not filter when divions is Everyone', () => {
 				var action = {
 					type: actions.DIVISION_SELECTED,
 					division: 'Everyone'
-				}
+				};
 				expect(selectedRace(undefined, action).quartiles).toEqual({filtered: false});
 			});
 
@@ -306,9 +309,28 @@ describe('selectedRace reducer', () => {
 				var action = {
 					type: actions.DIVISION_SELECTED,
 					division: 'M50-55'
-				}
-				expect(selectedRace(undefined, action).quartiles).toEqual({filtered: true});
+				},
+				expected = {
+					filtered: true,
+					selectedTime: null
+				};
+				expect(selectedRace(undefined, action).quartiles).toEqual(expected);
 			});	
+
+			if('should keep selectedTime when filter changes to everyone', () => {
+				var action = {
+					type: actions.DIVISION_SELECTED,
+					division: 'Everyone'
+				},
+				initialState = {
+					selectedTime: 713
+				},
+				expected = {
+					filtered: false,
+					selectedTime: 713
+				}
+				expect(selectedRace(initialState, action).quartiles).toEqual(expected);
+			});
 		});
 		
 		it('should handle SINGLE_RACE_CLICKED and set filtered to false', () => {

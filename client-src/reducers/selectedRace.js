@@ -129,7 +129,8 @@ function quartiles(state = {filtered: false}, action) {
 		case actions.DIVISION_SELECTED:
 			return {
 				...state, 
-				filtered: action.division !== DIV_EVERYONE
+				filtered: action.division !== DIV_EVERYONE,
+				selectedTime: action.division === DIV_EVERYONE ? state.selectedTime : null
 			};
 		case actions.SINGLE_RACE_CLICKED:
 			return {
