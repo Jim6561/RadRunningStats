@@ -4,12 +4,16 @@ import {
 	singleRaceTableSortClicked, 
 	showSingleRaceLocationsClicked, 
 	returnToRacesClicked, 
-	divisionSelected } 
+	divisionSelected,
+	calculateSelectedRaceStats,
+	runnerResultSelected
+ } 
 from '../actions/actionCreators';
 
 const mapStateToProps = state => {
 	return {
 		results: state.selectedRace.table.rows,
+		allResults: state.selectedRace.table.allRows,
 		divisions: state.selectedRace.divisions,
 		raceId: state.selectedRace.raceId,
 		raceName: state.selectedRace.raceDetails.raceName,
@@ -32,6 +36,12 @@ const mapDispatchToProps = dispatch => {
 		},
 		onDivisionSelected: (division) => {
 			dispatch(divisionSelected(division));
+		},
+		onRecordsChanged: (allResults, selectedRecords) => {
+			dispatch(calculateSelectedRaceStats(allResults, selectedRecords));
+		},
+		onResultSelected: (record, rowIndex) => {
+			dispatch(runnerResultSelected(record, rowIndex));
 		}
 	}
 }

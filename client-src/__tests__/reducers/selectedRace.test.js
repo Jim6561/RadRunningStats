@@ -142,6 +142,24 @@ describe('selectedRace reducer', () => {
 				expect(selectedRace(initialState, action).table.rows).toEqual(expected.rows);
 			});
 		});
+		it('should handle RUNNER_RESULT_SELECTED', () => {
+			var initialState = {
+				raceId: null,
+				table: makeTable([{name: 'Nate'}, {name: 'Alice'}, {name: 'Teag'}])
+			},
+			action = {
+				type: actions.RUNNER_RESULT_SELECTED,
+				rowIndex: 0,
+				record: {
+					gun_time: 12
+				}
+			},
+			expected = makeTable([
+				{name: 'Nate', selected: true},
+				{name: 'Alice', selected: false},
+				{name: 'Teag', selected: false}]);
+			expect(selectedRace(initialState, action).table.rows).toEqual(expected.rows);
+		});
 	});
 
 	describe('showLocations', () => {
@@ -216,6 +234,111 @@ describe('selectedRace reducer', () => {
 			};
 
 			expect(selectedRace({}, action).selectedDivision).toBe(myDivision);
+		});
+	});
+
+	describe('quartiles', () => {
+		it('should start with nothing', () => {
+			expect(selectedRace(undefined, {}).quartiles).toEqual({filtered: false});
+		});
+
+		it('should handle CALCULATE_SELECTED_RACE_STATS', () => {
+			var allNumbers = [1, 5, 3, 7, 5, 5, 100, 5, 8, 7];
+			var numbers = [1, 5, 3, 7, 5, 5, 100, 5];
+			var allResults = [], visibleResults = [];
+			allNumbers.map(e => {allResults.push({gun_time: e})});
+			numbers.map(e => {visibleResults.push({gun_time: e})});
+
+			var action = {
+				type: actions.CALCULATE_SELECTED_RACE_STATS,
+				allResults: allResults,
+				visibleResults: visibleResults
+			},
+			expectedSelected = {
+				min: 1,
+				max: 100,
+				median: 5,
+				q1: 4,
+				q3: 6
+			},
+			expectedComplete = {
+				min: 1,
+				max: 100,
+				median: 5,
+				q1: 5,
+				q3: 7
+			};
+			let actualState = selectedRace(undefined, action).quartiles;
+			expect(actualState.selected).toEqual(expectedSelected);
+			expect(actualState.complete).toEqual(expectedComplete);
+		});
+
+		it('should handle CALCULATE_SELECTED_RACE_STATS and ignore nulls', () => {
+			
+			var numbers = [3, null, 1];
+			var results = [];
+			numbers.map(e => {results.push({gun_time: e})});
+
+			var action = {
+				type: actions.CALCULATE_SELECTED_RACE_STATS,
+				allResults: results,
+				visibleResults: results
+			},
+			expected = {
+				min: 1,
+				max: 3,
+				median: 2,
+				q1: 1,
+				q3: 3
+			};
+			let actualState = selectedRace(undefined, action).quartiles;
+			expect(actualState.selected).toEqual(expected);
+			expect(actualState.complete).toEqual(expected);
+		});
+
+		describe('handling DIVISION_SELECTED', () => {
+			it('should not filter when divions is Everyone', () => {
+				var action = {
+					type: actions.DIVISION_SELECTED,
+					division: 'Everyone'
+				};
+				expect(selectedRace(undefined, action).quartiles).toEqual({filtered: false});
+			});
+
+			it('should filter when divions is not Everyone', () => {
+				var action = {
+					type: actions.DIVISION_SELECTED,
+					division: 'M50-55'
+				},
+				expected = {
+					filtered: true,
+					selectedTime: null
+				};
+				expect(selectedRace(undefined, action).quartiles).toEqual(expected);
+			});	
+
+			if('should keep selectedTime when filter changes to everyone', () => {
+				var action = {
+					type: actions.DIVISION_SELECTED,
+					division: 'Everyone'
+				},
+				initialState = {
+					selectedTime: 713
+				},
+				expected = {
+					filtered: false,
+					selectedTime: 713
+				}
+				expect(selectedRace(initialState, action).quartiles).toEqual(expected);
+			});
+		});
+		
+		it('should handle SINGLE_RACE_CLICKED and set filtered to false', () => {
+			var action = {
+				type: actions.SINGLE_RACE_CLICKED,
+				raceId: 8
+			};
+			expect(selectedRace(undefined, action).quartiles.filtered).toBe(false);
 		});
 	});
 });

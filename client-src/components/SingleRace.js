@@ -3,15 +3,20 @@ import PropTypes from 'prop-types';
 import CheckBox from './CheckBox';
 import Select from './Select';
 import ResultsTable from './ResultsTable';
+import RaceStatsHolder from '../containers/RaceStatsHolder';
 
 class SingleRace extends React.Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleBackClick = this.handleBackClick.bind(this);
   }
 
-  handleClick() {
+  handleBackClick() {
     this.props.onReturnToRacesClicked();
+  }
+
+  componentDidUpdate(prevProps) {
+    this.props.onRecordsChanged(this.props.allResults, this.props.results);
   }
 
   render() {
@@ -25,7 +30,7 @@ class SingleRace extends React.Component {
           <span
               id='backToRaces'
               className='mediumButton'
-              onClick={this.handleClick}
+              onClick={this.handleBackClick}
            >Back</span>
         </div>
         <div className='propertiesSection'>
@@ -39,13 +44,17 @@ class SingleRace extends React.Component {
             onChange={this.props.onShowLocationChange}/>
           <span className={divisionSelectorClass}>
             <Select visible={showDivisionSelector} onChange={this.props.onDivisionSelected} options={this.props.divisions}/>
-            </span>
+          </span>
+          <RaceStatsHolder/>
         </div>
+        
         <ResultsTable
           data={this.props.results}
           onSortTable={this.props.onSortTable}
           showLocations={this.props.showLocations}
-          showRace={false}/>
+          showRace={false}
+          onResultSelected={this.props.onResultSelected}
+          />
       </div>
     )
   }
@@ -60,7 +69,10 @@ SingleRace.propTypes = {
   showLocations: PropTypes.bool.isRequired,
   onSortTable: PropTypes.func.isRequired, 
   onShowLocationChange: PropTypes.func.isRequired,
-  onReturnToRacesClicked: PropTypes.func.isRequired
+  onReturnToRacesClicked: PropTypes.func.isRequired,
+  onDivisionSelected: PropTypes.func.isRequired,
+  onRecordsChanged: PropTypes.func.isRequired,
+  onResultSelected: PropTypes.func.isRequired
 }
 
 export default SingleRace;

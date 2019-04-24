@@ -160,3 +160,27 @@ export function divisionSelected(division) {
 		division: division
 	}
 };
+
+export function calculateSelectedRaceStats(allResults, visibleResults) {
+	return {
+		type: actions.CALCULATE_SELECTED_RACE_STATS,
+		allResults: allResults,
+		visibleResults: visibleResults
+	}
+};
+
+export function runnerResultSelected(record, rowIndex) {
+	return {
+		type: actions.RUNNER_RESULT_SELECTED,
+		record: record,
+		rowIndex: rowIndex
+	}
+};
+
+export function runnerResultHighlighted(record, rowIndex) {
+	return {
+		type: actions.RUNNER_RESULT_HIGHLIGHTED,
+		record: record,
+		rowIndex: rowIndex
+	}
+};

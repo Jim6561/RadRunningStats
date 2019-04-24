@@ -66,11 +66,11 @@ const columns = [
   }
 ];
 
-const ResultsTable = ({data, onSortTable, showLocations, showRace}) => {
+const ResultsTable = ({data, onSortTable, showLocations, showRace, onResultSelected}) => {
   let actualColumns = doUpdateColumnGroup(columns, 'location', showLocations);
   actualColumns = doUpdateColumnGroup(actualColumns, 'race', showRace)
   return (
-    <AwesomeTable data={data} columns={actualColumns} onSortTable={onSortTable}/>
+    <AwesomeTable data={data} columns={actualColumns} onSortTable={onSortTable} onRowClicked={onResultSelected}/>
   );
 }
 
@@ -78,7 +78,8 @@ ResultsTable.propTypes = {
   data: PropTypes.array.isRequired,
   onSortTable: PropTypes.func.isRequired,
   showLocations: PropTypes.bool.isRequired,
-  showRace: PropTypes.bool.isRequired
+  showRace: PropTypes.bool.isRequired,
+  onResultSelected: PropTypes.func
 }
 
 export default ResultsTable;

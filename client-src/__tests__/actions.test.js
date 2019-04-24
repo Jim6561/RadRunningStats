@@ -209,4 +209,37 @@ describe('actions', () => {
 			};
 		expect(creators.divisionSelected(division)).toEqual(expectedAction);
 	});	
+
+	it('should create CALCULATE_SELECTED_RACE_STATS action', () => {
+		var records1 = {data: 'testData'},
+			records2 = {data: 'otherTestData'},
+			expectedAction = {
+				type: actions.CALCULATE_SELECTED_RACE_STATS,
+				allResults: records1,
+				visibleResults: records2
+			};
+		expect(creators.calculateSelectedRaceStats(records1, records2)).toEqual(expectedAction);
+	});	
+
+	it('should create RUNNER_RESULT_SELECTED action', () => {
+		var rowIndex = 47,
+			record = {name: 'Jimmy'},
+			expectedAction = {
+				type: actions.RUNNER_RESULT_SELECTED,
+				rowIndex: rowIndex,
+				record: record
+			};
+		expect(creators.runnerResultSelected(record, rowIndex)).toEqual(expectedAction);
+	});
+
+	it('should create RUNNER_RESULT_HIGHLIGHTED action', () => {
+		var rowIndex = 44,
+			record = {name: 'Jimmy'},
+			expectedAction = {
+				type: actions.RUNNER_RESULT_HIGHLIGHTED,
+				record: record,
+				rowIndex: rowIndex
+			};
+		expect(creators.runnerResultHighlighted(record, rowIndex)).toEqual(expectedAction);
+	});
 });

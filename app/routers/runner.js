@@ -30,6 +30,7 @@ router.get('/', function(req, response) {
 	}
 	
 	var query = 'SELECT'
+				 + ' runner.runner_result_id,'
 				 + ' r.race_name,'
 				 + ' r.distance,'
 				 + ' r.event_date,'

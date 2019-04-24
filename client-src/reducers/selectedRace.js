@@ -1,5 +1,7 @@
+import stats from 'statsjs';
+
 import * as actions from '../actions/actions'
-import { sortTable, makeTable, filter } from './sortTable'
+import { sortTable, makeTable, filter, selectRow } from './sortTable'
 import { combineReducers } from 'redux'
 
 const DIV_EVERYONE = 'Everyone';
@@ -43,6 +45,8 @@ function tableReducer(state = makeTable(), action) {
 	    	return sortTable(state, action.column);
 	    case actions.DIVISION_SELECTED:
 	    	return filter(state, 'div', action.division);
+	    case actions.RUNNER_RESULT_SELECTED:
+	    	return selectRow(state, action.rowIndex);
 	   	default:
 	     	return state;
 	}
@@ -86,13 +90,70 @@ function selectedDivision(state = null, action) {
 	}
 }
 
+const extractTimes = (inputRows) => {
+	let retval = [];
+	inputRows.map(e => {
+		if (e.gun_time) {
+			retval.push(e.gun_time)
+		}
+	});
+	return retval;
+};
+
+function quartiles(state = {filtered: false}, action) {
+	switch (action.type) {
+		case actions.CALCULATE_SELECTED_RACE_STATS:
+			let times = extractTimes(action.allResults);
+			let selectedTimes = extractTimes(action.visibleResults);
+
+
+			var timeStats = stats(times);
+			var selectedTimeStats = stats(selectedTimes);
+			return {
+				...state,
+				selected: {
+					min: selectedTimeStats.min(),
+					q1: selectedTimeStats.q1(),
+					median: selectedTimeStats.median(),
+					q3: selectedTimeStats.q3(),
+					max: selectedTimeStats.max()
+				},
+				complete: {
+					min: timeStats.min(),
+					q1: timeStats.q1(),
+					median: timeStats.median(),
+					q3: timeStats.q3(),
+					max: timeStats.max()
+				}
+			};
+		case actions.DIVISION_SELECTED:
+			return {
+				...state, 
+				filtered: action.division !== DIV_EVERYONE,
+				selectedTime: action.division === DIV_EVERYONE ? state.selectedTime : null
+			};
+		case actions.SINGLE_RACE_CLICKED:
+			return {
+				filtered: false
+			}
+		case actions.RUNNER_RESULT_SELECTED:
+			return {
+				...state,
+				selectedTime: action.record.gun_time
+			}
+		default:
+			return state;
+	}
+}
+
 const selectedRace = combineReducers({
 	raceId: raceId,
 	raceDetails: raceDetails,
 	table: tableReducer,
 	showLocations: showLocations,
 	divisions: divisions,
-	selectedDivision: selectedDivision
+	selectedDivision: selectedDivision,
+	quartiles: quartiles
 });
 
 export default selectedRace;

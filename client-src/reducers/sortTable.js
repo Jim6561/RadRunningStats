@@ -53,6 +53,23 @@ export const filter = (state, column, value) => {
 	
 	return {
 		...state,
-		rows: visibleRows
+		rows: visibleRows,
+		selected: null
 	};
+}
+
+export const selectRow = (state, index) => {
+	let previousSelectedValue = state.rows[index].selected;
+	let newSelectedValue = !previousSelectedValue
+	
+	var data = [];
+	state.rows.map((row, i) => {
+		row.selected = (i == index) ? newSelectedValue : false;
+		data.push(row);
+	});
+
+	return {
+		...state,
+		rows: data
+	}
 }
